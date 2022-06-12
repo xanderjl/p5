@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
 import { Container, Heading } from '@chakra-ui/react'
-import { HomePageTypes } from 'types/Pages'
 import FuseSearch from 'components/FuseSearch'
+import React, { FC } from 'react'
+import { HomePageTypes } from 'types/Pages'
 
 const HomePage: FC<HomePageTypes> = ({ data }) => {
   const { sketches } = data

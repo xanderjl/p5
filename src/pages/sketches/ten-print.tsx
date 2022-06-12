@@ -1,7 +1,7 @@
-import type { Sketch } from 'react-p5-wrapper'
-import type { Graphics } from 'p5'
-import type { NextPage } from 'next'
 import SketchWrapper from 'components/SketchWrapper'
+import type { NextPage } from 'next'
+import type { Graphics } from 'p5'
+import type { Sketch } from 'react-p5-wrapper'
 
 const sketch: Sketch = p5 => {
   let spacing = p5.windowWidth / 40

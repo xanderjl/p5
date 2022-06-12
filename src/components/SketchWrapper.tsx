@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
-import { FC } from 'react'
-import type { Sketch, P5WrapperProps } from 'react-p5-wrapper'
+import type { FC } from 'react'
+import type { P5WrapperProps, Sketch } from 'react-p5-wrapper'
 const ReactP5Wrapper = dynamic<P5WrapperProps>(
   () => import('react-p5-wrapper').then(mod => mod.ReactP5Wrapper),
   { ssr: false }

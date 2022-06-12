@@ -1,8 +1,7 @@
 import { Input, InputProps, List, ListItem } from '@chakra-ui/react'
-import Fuse from 'fuse.js'
 import { Link } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { FC } from 'react'
+import Fuse from 'fuse.js'
+import React, { FC, useState } from 'react'
 
 export interface FuseSearchProps extends InputProps {
   sketches: string[]

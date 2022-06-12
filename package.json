@@ -9,9 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.2.1",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "framer-motion": "^6",
+    "fuse.js": "^6.6.2",
     "next": "12.1.6",
+    "p5": "^1.4.1",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "react-p5-wrapper": "^3.3.0"
   },
   "devDependencies": {
     "@types/node": "17.0.42",

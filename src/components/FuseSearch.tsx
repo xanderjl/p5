@@ -20,14 +20,14 @@ const FuseSearch: FC<FuseSearchProps> = ({ sketches }) => {
           ? filteredSketches.map(({ item }, i) => {
               return (
                 <Link key={item + i} href={`/sketches/${item}`}>
-                  <ListItem>{item.replace('-', ' ')}</ListItem>
+                  <ListItem>{item.replaceAll('-', ' ')}</ListItem>
                 </Link>
               )
             })
           : sketches.map((sketch, i) => {
               return (
                 <Link key={sketch + i} href={`/sketches/${sketch}`}>
-                  <ListItem>{sketch.replace('-', ' ')}</ListItem>
+                  <ListItem>{sketch.replaceAll('-', ' ')}</ListItem>
                 </Link>
               )
             })}

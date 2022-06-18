@@ -29,10 +29,10 @@ const sketch: Sketch = p5 => {
     saveButton.mouseClicked(() => p5.saveCanvas('perlin-noise'))
 
     redrawButton.style(`
-    background: #00df8f;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 8px;
+      background: #00df8f;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
     `)
     redrawButton.position(80, 10)
     redrawButton.mouseClicked(() => {
@@ -54,10 +54,13 @@ const sketch: Sketch = p5 => {
       const y3 = p5.height * p5.noise(t + 125)
       const y4 = p5.height * p5.noise(t + 150)
 
+      // draw bezier curve
       p5.bezier(x1, y1, x2, y2, x3, y3, x4, y4)
 
       // speed of time
       t += 0.0045
+
+      // increment step
       step++
     }
   }

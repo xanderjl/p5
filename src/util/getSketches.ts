@@ -1,5 +1,5 @@
-import path from 'path'
 import fs from 'fs/promises'
+import path from 'path'
 
 const getSketches = async () => {
   const sketchesDir = path.join(process.cwd(), '/src/pages/sketches')

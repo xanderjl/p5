@@ -1,6 +1,5 @@
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
-import React from 'react'
 import { Sketch } from 'react-p5-wrapper'
 
 const sketch: Sketch = p5 => {

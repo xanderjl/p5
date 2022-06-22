@@ -6,12 +6,12 @@ const theme = extendTheme({
     body: "'IBM Plex Mono', 'monospace'",
   },
   shadows: {
-    outline: '0 0 0 3px red.400',
+    outline: '0 0 0 3px red.100',
   },
   components: {
     Input: {
       defaultProps: {
-        focusBorderColor: 'red.400',
+        focusBorderColor: 'red.100',
       },
     },
   },

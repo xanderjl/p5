@@ -9,6 +9,7 @@ const sketch: Sketch = p5 => {
 
   p5.setup = () => {
     p5.createCanvas(p5.windowWidth, p5.windowHeight)
+    p5.pixelDensity(1)
     p5.background(255)
     p5.noFill()
     p5.stroke(0, 18, 0)

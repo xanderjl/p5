@@ -20,6 +20,7 @@
       "hooks/*": ["src/hooks/*"],
       "pages/*": ["src/pages/*"],
       "sketches/*": ["src/sketches/*"],
+      "theme/*": ["src/theme/*"],
       "types/*": ["src/types/*"],
       "util/*": ["src/util/*"]
     }

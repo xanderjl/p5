@@ -8,7 +8,7 @@ const HomePage: FC<HomePageTypes> = ({ data }) => {
 
   return (
     <Container maxW="container.lg">
-      <Heading>Xandy's p5 Playground</Heading>
+      <Heading pb={4}>Xandy's p5 Playground</Heading>
       <FuseSearch sketches={sketches} />
     </Container>
   )

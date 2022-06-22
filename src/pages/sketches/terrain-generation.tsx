@@ -4,17 +4,18 @@ import { Sketch } from 'react-p5-wrapper'
 
 const sketch: Sketch = p5 => {
   // let scale: number = 20
-  // let w: number = 1400
-  // let h: number = 1000
+  // let w: number = 1920
+  // let h: number = 1080
   // let cols: number = w / scale
   // let rows: number = h / scale
   // let colsArray: number[] = Array.from(Array(cols).keys())
   // let rowsArray: number[] = Array.from(Array(rows).keys())
   // let terrain: number[][] = colsArray.map(() => rowsArray.fill(0))
   // let flying: number = 0
+
   // console.log({ terrain })
 
-  // p5.setup = () => p5.createCanvas(600, 600, p5.WEBGL)
+  // p5.setup = () => p5.createCanvas(p5.windowWidth, p5.windowHeight, p5.WEBGL)
 
   // p5.draw = () => {
   //   flying -= 0.01
@@ -54,8 +55,8 @@ const sketch: Sketch = p5 => {
 
   var cols: number, rows: number
   var scl = 20
-  var w = 1400
-  var h = 1000
+  var w = 1920
+  var h = 1080
 
   var flying = 0
 
@@ -70,7 +71,7 @@ const sketch: Sketch = p5 => {
   }
   console.log({ terrain })
 
-  p5.setup = () => p5.createCanvas(600, 600, p5.WEBGL)
+  p5.setup = () => p5.createCanvas(p5.windowWidth, p5.windowHeight, p5.WEBGL)
 
   p5.draw = () => {
     flying -= 0.01

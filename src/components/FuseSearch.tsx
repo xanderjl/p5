@@ -14,20 +14,29 @@ const FuseSearch: FC<FuseSearchProps> = ({ sketches }) => {
 
   return (
     <>
-      <Input value={value} onChange={e => setValue(e.target.value)} />
+      <Input
+        mb={4}
+        borderColor="black"
+        value={value}
+        onChange={e => setValue(e.target.value)}
+      />
       <List>
         {value !== ''
           ? filteredSketches.map(({ item }, i) => {
               return (
                 <Link key={item + i} href={`/sketches/${item}`}>
-                  <ListItem>{item.replaceAll('-', ' ')}</ListItem>
+                  <ListItem fontSize="2xl">
+                    {item.replaceAll('-', ' ')}
+                  </ListItem>
                 </Link>
               )
             })
           : sketches.map((sketch, i) => {
               return (
                 <Link key={sketch + i} href={`/sketches/${sketch}`}>
-                  <ListItem>{sketch.replaceAll('-', ' ')}</ListItem>
+                  <ListItem fontSize="2xl">
+                    {sketch.replaceAll('-', ' ')}
+                  </ListItem>
                 </Link>
               )
             })}

@@ -40,7 +40,7 @@ export class Particle {
   show = () => {
     const r = this.p5.random(60, 140)
     const b = this.p5.random(0, 140)
-    this.p5.stroke(r, 0, b, 4)
+    this.p5.stroke(r, 0, b, 5)
     this.p5.strokeWeight(2)
     this.p5.line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y)
     this.updatePrev()

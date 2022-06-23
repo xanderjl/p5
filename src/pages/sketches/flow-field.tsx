@@ -22,6 +22,7 @@ const sketch: Sketch = async p5 => {
     p5.background(255)
   }
   p5.draw = () => {
+    p5.background(255, 255, 255, 1)
     particles.forEach(particle => {
       const { pos, follow, update, edges, show } = particle
       const x = Math.floor(pos.x / scale)
@@ -32,7 +33,7 @@ const sketch: Sketch = async p5 => {
 
       const angle = p5.noise(xoff, yoff, zoff) * p5.TWO_PI * 4
       const vector = Dector.fromAngle(angle)
-      vector.setMag(0.3)
+      vector.setMag(0.28)
 
       follow(vector)
       update()

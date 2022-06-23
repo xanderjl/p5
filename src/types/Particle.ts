@@ -1,4 +1,4 @@
-import type { Vector } from 'p5'
+import { Vector } from 'p5'
 import type { P5CanvasInstance } from 'react-p5-wrapper'
 
 export class Particle {
@@ -18,15 +18,11 @@ export class Particle {
     // @ts-ignore
     this.vel = vector.random2D()
     this.acc = this.p5.createVector(0, 0)
-    this.maxSpeed = 4
+    this.maxSpeed = 5.5
     this.prevPos = this.pos.copy()
   }
 
-  follow = (vectors: Vector[], scale: number, cols: number) => {
-    const x = Math.floor(this.pos.x / scale)
-    const y = Math.floor(this.pos.y / scale)
-    const index = x + y * cols
-    const force = vectors[index]
+  follow = (force: Vector) => {
     this.useTheForce(force)
   }
 
@@ -41,12 +37,15 @@ export class Particle {
     this.acc.add(force)
   }
 
+  // visualization of drawn lines
   show = () => {
-    this.p5.stroke(0, 5)
-    this.p5.strokeWeight(1)
+    const r = this.p5.random(0, 255)
+    const g = this.p5.random(0, 255)
+    const b = this.p5.random(0, 255)
+    this.p5.stroke(r, g, b, 5)
+    this.p5.strokeWeight(2)
     this.p5.line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y)
     this.updatePrev()
-    // this.p5.point(this.pos.x, this.pos.y)
   }
 
   updatePrev = () => {

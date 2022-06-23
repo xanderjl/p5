@@ -5,7 +5,7 @@ import { Sketch } from 'react-p5-wrapper'
 import { Particle } from 'types/Particle'
 
 const sketch: Sketch = async p5 => {
-  const Dector = await import('p5').then(mod => mod.default.Vector)
+  const P5Vector = await import('p5').then(mod => mod.default.Vector)
 
   let scale: number = 10
   let inc: number = 0.08
@@ -13,8 +13,8 @@ const sketch: Sketch = async p5 => {
   const width: number = p5.windowWidth
   const height: number = p5.windowHeight
   const particles: Particle[] = Array.from(
-    { length: 8000 },
-    () => new Particle(p5, Dector as unknown as Vector)
+    { length: Math.floor((p5.windowWidth * p5.windowHeight) / 800) },
+    () => new Particle(p5, P5Vector as unknown as Vector)
   )
 
   p5.setup = () => {
@@ -32,7 +32,7 @@ const sketch: Sketch = async p5 => {
       const zoff = y * zinc
 
       const angle = p5.noise(xoff, yoff, zoff) * p5.TWO_PI * 4
-      const vector = Dector.fromAngle(angle)
+      const vector = P5Vector.fromAngle(angle)
       vector.setMag(0.28)
 
       follow(vector)

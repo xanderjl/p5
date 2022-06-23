@@ -7,9 +7,9 @@ import { Particle } from 'types/Particle'
 const sketch: Sketch = async p5 => {
   const P5Vector = await import('p5').then(mod => mod.default.Vector)
 
-  let scale: number = 10
-  let inc: number = 0.08
-  let zinc: number = 0.05
+  const scale: number = 10
+  const inc: number = 0.08
+  const zinc: number = 0.05
   const width: number = p5.windowWidth
   const height: number = p5.windowHeight
   const particles: Particle[] = Array.from(

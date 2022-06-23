@@ -7,13 +7,13 @@ import { Particle } from 'types/Particle'
 const sketch: Sketch = async p5 => {
   const Dector = await import('p5').then(mod => mod.default.Vector)
 
-  let scale: number = 20
-  let inc: number = 0.1
-  let zinc: number = 0.0005
+  let scale: number = 10
+  let inc: number = 0.08
+  let zinc: number = 0.05
   const width: number = p5.windowWidth
   const height: number = p5.windowHeight
   const particles: Particle[] = Array.from(
-    { length: 5000 },
+    { length: 8000 },
     () => new Particle(p5, Dector as unknown as Vector)
   )
 
@@ -32,7 +32,7 @@ const sketch: Sketch = async p5 => {
 
       const angle = p5.noise(xoff, yoff, zoff) * p5.TWO_PI * 4
       const vector = Dector.fromAngle(angle)
-      vector.setMag(0.45)
+      vector.setMag(0.3)
 
       follow(vector)
       update()

@@ -18,7 +18,7 @@ export class Particle {
     // @ts-ignore
     this.vel = vector.random2D()
     this.acc = this.p5.createVector(0, 0)
-    this.maxSpeed = 5.5
+    this.maxSpeed = 3.5
     this.prevPos = this.pos.copy()
   }
 
@@ -33,16 +33,14 @@ export class Particle {
     this.acc.mult(0)
   }
 
-  useTheForce = (force: any) => {
+  useTheForce = (force: Vector) => {
     this.acc.add(force)
   }
-
   // visualization of drawn lines
   show = () => {
-    const r = this.p5.random(0, 255)
-    const g = this.p5.random(0, 255)
-    const b = this.p5.random(0, 255)
-    this.p5.stroke(r, g, b, 5)
+    const r = this.p5.random(60, 140)
+    const b = this.p5.random(0, 140)
+    this.p5.stroke(r, 0, b, 4)
     this.p5.strokeWeight(2)
     this.p5.line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y)
     this.updatePrev()

@@ -4,15 +4,17 @@ import { Sketch } from 'react-p5-wrapper'
 
 const sketch: Sketch = p5 => {
   const noiseMax = 3
-  const bounds = Boolean(p5.windowWidth > p5.windowHeight)
+  const delta = 0.2
+  let bounds = Boolean(p5.windowWidth > p5.windowHeight)
     ? p5.windowHeight
     : p5.windowWidth
-  const rMin = bounds * 0.25
-  const rMax = bounds * 0.5
-  const delta = 0.2
+  let rMin = bounds * 0.25
+  let rMax = bounds * 0.5
   let zoff = 0
 
-  p5.setup = () => p5.createCanvas(p5.windowWidth, p5.windowHeight)
+  p5.setup = () => {
+    p5.createCanvas(p5.windowWidth, p5.windowHeight)
+  }
 
   p5.draw = () => {
     p5.background(0)
@@ -34,8 +36,21 @@ const sketch: Sketch = p5 => {
 
     zoff += 0.012
   }
+
+  p5.windowResized = () => {
+    p5.resizeCanvas(p5.windowWidth, p5.windowHeight)
+    bounds = Boolean(p5.windowWidth > p5.windowHeight)
+      ? p5.windowHeight
+      : p5.windowWidth
+    rMin = bounds * 0.25
+    rMax = bounds * 0.5
+    p5.clear(0, 0, 0, 0)
+    p5.redraw()
+  }
 }
 
-const PerlinNoiseLoopsPartOne: NextPage = () => <SketchWrapper sketch={sketch} />
+const PerlinNoiseLoopsPartOne: NextPage = () => (
+  <SketchWrapper sketch={sketch} />
+)
 
 export default PerlinNoiseLoopsPartOne

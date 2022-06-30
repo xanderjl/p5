@@ -10,36 +10,41 @@ interface Circle {
 
 const sketch: Sketch = p5 => {
   const circles: Circle[] = []
-  let padding = 20
+  const maxR: number = 90
 
   p5.setup = () => {
     p5.createCanvas(p5.windowWidth, p5.windowHeight)
-    p5.background(255)
-    let protection = 0
+    p5.colorMode(p5.HSB)
+    p5.background(260, 200, 20)
 
-    while (circles.length < 800) {
+    Array.from({ length: p5.windowWidth * 2 }).forEach((_, i) => {
       const circle: Circle = {
         x: p5.random(p5.width),
         y: p5.random(p5.height),
         r: p5.random(12, 128),
       }
-
-      let overlapping = circles.find(other => {
+      const overlapping = circles.find(other => {
+        const radii = circle.r + other.r
         const d = p5.dist(circle.x, circle.y, other.x, other.y)
-        if (d < circle.r + other.r + padding) {
+        if (d < radii + radii * 0.2) {
           return true
         }
       })
 
-      !overlapping && circles.push(circle)
-      protection++
-      if (protection > 10000) {
-        break
-      }
-    }
+      !overlapping && circle.r < maxR && circles.push(circle)
+    })
 
     circles.forEach(({ x, y, r }) => {
-      p5.fill(p5.random(0, 255), p5.random(0, 255), p5.random(0, 255))
+      const rand: number = Math.random()
+      const h =
+        rand < 0.25
+          ? p5.random(10, 40)
+          : rand > 0.25 && rand < 0.5
+          ? p5.random(120, 200)
+          : rand > 0.5 && rand < 0.75
+          ? p5.random(60, 100)
+          : p5.random(280, 300)
+      p5.fill(h, p5.random(20, 40), p5.random(100, 150))
       p5.noStroke()
       p5.ellipse(x, y, r * 2, r * 2)
     })

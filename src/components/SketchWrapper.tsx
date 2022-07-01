@@ -26,11 +26,11 @@ const SketchWrapper: FC<SketchWrapperProps> = ({ sketch }) => {
           e.preventDefault()
           p5.saveCanvas('bimbim', 'png')
         }
-      }
-
-      if (e.key === 's' && e.ctrlKey) {
-        e.preventDefault()
-        p5.saveCanvas('bimbim', 'png')
+      } else {
+        if (e.key === 's' && e.ctrlKey) {
+          e.preventDefault()
+          p5.saveCanvas('bimbim', 'png')
+        }
       }
     }
     return sketch(p5)

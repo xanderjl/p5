@@ -1,6 +1,7 @@
 import SketchWrapper from 'components/SketchWrapper'
 import _ from 'lodash'
 import { NextPage } from 'next'
+import palettes from 'nice-color-palettes'
 import { Sketch } from 'react-p5-wrapper'
 
 interface Circle {
@@ -28,7 +29,7 @@ const sketch: Sketch = p5 => {
       const overlapping = circles.find(other => {
         const radii = circle.r + other.r
         const d = p5.dist(circle.x, circle.y, other.x, other.y)
-        if (d < radii + radii * 0.2) {
+        if (d < radii) {
           return true
         }
       })
@@ -91,6 +92,6 @@ const sketch: Sketch = p5 => {
   }, 100)
 }
 
-const Circles: NextPage = () => <SketchWrapper sketch={sketch} padding={20} />
+const CirclesTwo: NextPage = () => <SketchWrapper sketch={sketch} />
 
-export default Circles
+export default CirclesTwo

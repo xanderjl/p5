@@ -25,6 +25,8 @@ const sketch: Sketch = p5 => {
   }
 }
 
-const FormBasedGridSystem: NextPage = () => <SketchWrapper sketch={sketch} />
+const FormBasedGridSystem: NextPage = () => (
+  <SketchWrapper sketch={sketch} padding="2rem" />
+)
 
 export default FormBasedGridSystem

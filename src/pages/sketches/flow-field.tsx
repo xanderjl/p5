@@ -3,6 +3,7 @@ import { NextPage } from 'next'
 import type { Vector } from 'p5'
 import { Sketch } from 'react-p5-wrapper'
 import { Particle } from 'types/Particle'
+import setup from 'util/setup'
 
 const sketch: Sketch = async p5 => {
   const P5Vector = await import('p5').then(mod => mod.default.Vector)
@@ -17,10 +18,8 @@ const sketch: Sketch = async p5 => {
     () => new Particle(p5, P5Vector as unknown as Vector)
   )
 
-  p5.setup = () => {
-    p5.createCanvas(width, height, p5.P2D)
-    p5.background(255)
-  }
+  p5.setup = () => setup(p5, width, height, undefined, [255], 'p2d')
+
   p5.draw = () => {
     p5.background(255, 255, 255, 1)
     particles.forEach(particle => {

@@ -91,6 +91,6 @@ const sketch: Sketch = p5 => {
   }, 100)
 }
 
-const Circles: NextPage = () => <SketchWrapper sketch={sketch} padding={20} />
+const Circles: NextPage = () => <SketchWrapper sketch={sketch} />
 
 export default Circles

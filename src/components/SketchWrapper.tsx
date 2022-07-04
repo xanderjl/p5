@@ -65,7 +65,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({ sketch, suffix, padding }) => {
         },
       }}
     >
-      <ReactP5Wrapper id="penis" sketch={sketchGlobals} />
+      <ReactP5Wrapper id="test" sketch={sketchGlobals} />
     </Flex>
   )
 }

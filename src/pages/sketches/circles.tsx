@@ -1,5 +1,4 @@
 import SketchWrapper from 'components/SketchWrapper'
-import _ from 'lodash'
 import { NextPage } from 'next'
 import { Sketch } from 'react-p5-wrapper'
 
@@ -52,7 +51,7 @@ const sketch: Sketch = p5 => {
     })
   }
 
-  p5.windowResized = _.debounce(() => {
+  p5.windowResized = () => {
     p5.resizeCanvas(p5.windowWidth, p5.windowHeight)
     background()
     circles = []
@@ -88,7 +87,7 @@ const sketch: Sketch = p5 => {
       p5.noStroke()
       p5.ellipse(x, y, r * 2, r * 2)
     })
-  }, 100)
+  }
 }
 
 const Circles: NextPage = () => <SketchWrapper sketch={sketch} />

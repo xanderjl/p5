@@ -13,8 +13,6 @@ const sketch: Sketch = p5 => {
   )
   let flying: number = 0
 
-  p5.setup = () => p5.createCanvas(p5.windowWidth, p5.windowHeight, p5.WEBGL)
-
   p5.draw = () => {
     flying -= 0.01
     let yoff = flying
@@ -46,6 +44,8 @@ const sketch: Sketch = p5 => {
   }
 }
 
-const TerrainGeneration: NextPage = () => <SketchWrapper sketch={sketch} />
+const TerrainGeneration: NextPage = () => (
+  <SketchWrapper sketch={sketch} renderer="webgl" />
+)
 
 export default TerrainGeneration

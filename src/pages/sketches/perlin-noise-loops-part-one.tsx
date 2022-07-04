@@ -12,10 +12,6 @@ const sketch: Sketch = p5 => {
   let rMax = bounds * 0.5
   let zoff = 0
 
-  p5.setup = () => {
-    p5.createCanvas(p5.windowWidth, p5.windowHeight)
-  }
-
   p5.draw = () => {
     p5.background(0)
     p5.translate(p5.width / 2, p5.height / 2)

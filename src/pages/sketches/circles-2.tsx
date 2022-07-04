@@ -12,15 +12,17 @@ interface Circle {
 
 const sketch: Sketch = p5 => {
   let circles: Circle[] = []
+  const minR: number = 10
   const maxR: number = 90
-  const background = () => p5.background(260, 200, 20)
+  const palette = _.sample(palettes)
+  const smallerPalette = palette!.slice(1)
+  const background = () => p5.background(p5.color(palette![0]))
 
   p5.setup = () => {
     p5.createCanvas(p5.windowWidth, p5.windowHeight)
-    p5.colorMode(p5.HSB)
     background()
 
-    Array.from({ length: p5.windowWidth * 2 }).forEach(() => {
+    Array.from({ length: p5.windowWidth * 10 }).forEach(() => {
       const circle: Circle = {
         x: p5.random(p5.width),
         y: p5.random(p5.height),
@@ -34,20 +36,16 @@ const sketch: Sketch = p5 => {
         }
       })
 
-      !overlapping && circle.r < maxR && circles.push(circle)
+      !overlapping &&
+        circle.r <= maxR &&
+        circle.r >= minR &&
+        circles.push(circle)
     })
 
     circles.forEach(({ x, y, r }) => {
-      const rand: number = Math.random()
-      const h =
-        rand < 0.25
-          ? p5.random(10, 40)
-          : rand > 0.25 && rand < 0.5
-          ? p5.random(120, 200)
-          : rand > 0.5 && rand < 0.75
-          ? p5.random(60, 100)
-          : p5.random(280, 300)
-      p5.fill(h, p5.random(20, 40), p5.random(100, 150))
+      const color = _.sample(smallerPalette)!
+
+      p5.fill(p5.color(color))
       p5.noStroke()
       p5.ellipse(x, y, r * 2, r * 2)
     })
@@ -58,7 +56,7 @@ const sketch: Sketch = p5 => {
     background()
     circles = []
 
-    Array.from({ length: p5.windowWidth * 2 }).forEach(() => {
+    Array.from({ length: p5.windowWidth * 10 }).forEach(() => {
       const circle: Circle = {
         x: p5.random(p5.width),
         y: p5.random(p5.height),
@@ -72,20 +70,16 @@ const sketch: Sketch = p5 => {
         }
       })
 
-      !overlapping && circle.r < maxR && circles.push(circle)
+      !overlapping &&
+        circle.r <= maxR &&
+        circle.r >= minR &&
+        circles.push(circle)
     })
 
     circles.forEach(({ x, y, r }) => {
-      const rand: number = Math.random()
-      const h =
-        rand < 0.25
-          ? p5.random(10, 40)
-          : rand > 0.25 && rand < 0.5
-          ? p5.random(120, 200)
-          : rand > 0.5 && rand < 0.75
-          ? p5.random(60, 100)
-          : p5.random(280, 300)
-      p5.fill(h, p5.random(20, 40), p5.random(100, 150))
+      const color = _.sample(smallerPalette)!
+
+      p5.fill(p5.color(color))
       p5.noStroke()
       p5.ellipse(x, y, r * 2, r * 2)
     })

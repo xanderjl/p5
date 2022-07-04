@@ -17,11 +17,6 @@ const sketch: Sketch = async p5 => {
     Array.from({ length: numRows }, () => defaultAngle)
   )
 
-  p5.setup = () => {
-    p5.createCanvas(p5.windowWidth, p5.windowHeight)
-    p5.background(0)
-  }
-
   p5.draw = () => {
     p5.stroke(255)
     p5.strokeWeight(2)
@@ -52,6 +47,8 @@ const sketch: Sketch = async p5 => {
   }
 }
 
-const LearningMoreFlowFields: NextPage = () => <SketchWrapper sketch={sketch} />
+const LearningMoreFlowFields: NextPage = () => (
+  <SketchWrapper sketch={sketch} background={[0]} />
+)
 
 export default LearningMoreFlowFields

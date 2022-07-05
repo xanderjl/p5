@@ -14,6 +14,7 @@ interface Point {
 
 const width = 2048
 const height = 2048
+const dimensions = [width, height]
 const padding = [40]
 const background = [255]
 const palette = _.sample(palettes)!
@@ -48,7 +49,7 @@ const sketch: Sketch = p5 => {
 
   p5.setup = () => {
     p5.randomSeed(seed)
-    setup(p5, width, height, padding, background)
+    setup({ p5, dimensions, padding, background })
     points = createGrid().filter(() => p5.random() > 0.5)
     margin = (p5.width - padding[0] * 2) * 0.125
   }
@@ -67,7 +68,7 @@ const sketch: Sketch = p5 => {
 
   p5.windowResized = () => {
     p5.randomSeed(seed)
-    windowResized(p5, width, height, padding, background)
+    windowResized({ p5, dimensions, padding, background })
     points = []
     points = createGrid().filter(() => p5.random() > 0.5)
     margin = (p5.width - padding[0] * 2) * 0.125

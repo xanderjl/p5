@@ -15,10 +15,11 @@ const ReactP5Wrapper = dynamic<P5WrapperProps>(
 
 export interface SketchWrapperProps extends SketchProps {
   sketch: Sketch<SketchProps>
-  suffix?: string
+  suffix?: string | number
   padding?: number[]
   width?: number
   height?: number
+  dimensions?: number[]
   renderer?: RENDERER
   background?: number[]
   pixelDensity?: number
@@ -30,6 +31,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   padding,
   width,
   height,
+  dimensions,
   renderer,
   background,
   pixelDensity,
@@ -37,15 +39,33 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   const os = useGetOs()
 
   const sketchGlobals: Sketch = p5 => {
+    const usedWidth = dimensions ? dimensions[0] : width
+    const usedHeight = dimensions ? dimensions[1] : height
     p5.setup = () =>
-      setup(p5, width, height, padding, background, renderer, pixelDensity)
+      setup({
+        p5,
+        width: usedWidth,
+        height: usedHeight,
+        dimensions: [usedWidth!, usedHeight!],
+        padding,
+        background,
+        renderer,
+        pixelDensity,
+      })
 
     p5.windowResized = () =>
-      windowResized(p5, width, height, padding, background)
+      windowResized({
+        p5,
+        width: usedWidth,
+        height: usedHeight,
+        dimensions: [usedWidth!, usedHeight!],
+        padding,
+        background,
+      })
 
     const fileName = [
       format(new Date(), 'yyyy.MM.dd-kk.mm.ss'),
-      suffix ? suffix : '',
+      suffix ? suffix.toString() : '',
     ].join()
 
     p5.keyPressed = (e: KeyboardEvent) => {

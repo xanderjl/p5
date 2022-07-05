@@ -2,8 +2,8 @@ import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
 import { Sketch } from 'react-p5-wrapper'
 
-const width: number = 800
-const height: number = 800
+const width: number = 2048
+const height: number = 2048
 const padding: number[] = [40, 20]
 const cols: number = 8
 const rows: number = 8

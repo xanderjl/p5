@@ -4,7 +4,8 @@ const windowResized = (
   p5: P5CanvasInstance,
   width?: number,
   height?: number,
-  padding?: number[]
+  padding?: number[],
+  background?: number[]
 ) => {
   const usedWidth = width ? width : p5.windowWidth
   const usedHeight = height ? height : p5.windowHeight
@@ -31,6 +32,8 @@ const windowResized = (
   } else {
     p5.resizeCanvas(usedWidth, usedHeight)
   }
+
+  background && p5.background(background)
 }
 
 export default windowResized

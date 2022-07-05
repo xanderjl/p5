@@ -6,6 +6,7 @@ import { RENDERER } from 'p5'
 import { FC } from 'react'
 import type { P5WrapperProps, Sketch, SketchProps } from 'react-p5-wrapper'
 import setup from 'util/setup'
+import windowResized from 'util/windowResized'
 
 const ReactP5Wrapper = dynamic<P5WrapperProps>(
   () => import('react-p5-wrapper').then(mod => mod.ReactP5Wrapper),
@@ -37,35 +38,10 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
 
   const sketchGlobals: Sketch = p5 => {
     p5.setup = () =>
-      setup(p5, width, height, padding, renderer, pixelDensity, background)
+      setup(p5, width, height, padding, background, renderer, pixelDensity)
 
-    p5.windowResized = () => {
-      const usedWidth = width ? width : p5.windowWidth
-      const usedHeight = height ? height : p5.windowHeight
-      const aspectRatio = usedWidth / usedHeight
-      const windowRatio = p5.windowWidth / p5.windowHeight
-      const paddingWidth = padding && padding.length > 0 ? padding[0] * 2 : 0
-      const paddingHeight =
-        padding && padding.length === 2
-          ? padding[1] * 2
-          : padding && padding.length === 1
-          ? padding[0] * 2
-          : 0
-      const maxWidth = Math.round(p5.windowWidth - paddingWidth)
-      const maxHeight = Math.round(p5.windowHeight - paddingHeight)
-
-      if (usedWidth > p5.windowWidth || usedHeight > p5.windowHeight) {
-        if (aspectRatio > windowRatio) {
-          const newHeight = Math.round(maxWidth / aspectRatio)
-          p5.resizeCanvas(maxWidth, newHeight)
-        } else {
-          const newWidth = Math.round(maxHeight * aspectRatio)
-          p5.resizeCanvas(newWidth, maxHeight)
-        }
-      } else {
-        p5.resizeCanvas(usedWidth, usedHeight)
-      }
-    }
+    p5.windowResized = () =>
+      windowResized(p5, width, height, padding, background)
 
     const fileName = [
       format(new Date(), 'yyyy.MM.dd-kk.mm.ss'),

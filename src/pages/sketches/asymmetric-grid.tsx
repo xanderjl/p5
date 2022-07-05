@@ -88,6 +88,7 @@ const AsymmetricGrid: NextPage = () => (
     height={height}
     padding={padding}
     background={background}
+    suffix={seed.toString()}
   />
 )
 

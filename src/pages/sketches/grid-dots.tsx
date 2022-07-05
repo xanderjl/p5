@@ -37,7 +37,7 @@ const sketch: Sketch = p5 => {
   const margin: number = 100
 
   p5.setup = () => {
-    setup(p5, width, height, padding, background)
+    setup({ p5, width, height, padding, background })
 
     points.forEach(({ position }) => {
       const [u, v] = position
@@ -51,7 +51,7 @@ const sketch: Sketch = p5 => {
   }
 
   p5.windowResized = () => {
-    windowResized(p5, width, height, padding)
+    windowResized({ p5, width, height, padding })
     p5.background(background)
     points.forEach(({ position }) => {
       const [u, v] = position

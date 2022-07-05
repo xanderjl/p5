@@ -13,12 +13,14 @@ const sketch: Sketch = async p5 => {
   const zinc: number = 0.05
   const width: number = p5.windowWidth
   const height: number = p5.windowHeight
+  const dimensions: number[] = [width, height]
+  const background: number[] = [255]
   const particles: Particle[] = Array.from(
     { length: Math.floor((p5.windowWidth * p5.windowHeight) / 800) },
     () => new Particle(p5, P5Vector as unknown as Vector)
   )
 
-  p5.setup = () => setup(p5, width, height, undefined, [255], 'p2d')
+  p5.setup = () => setup({ p5, dimensions, background, renderer: 'p2d' })
 
   p5.draw = () => {
     p5.background(255, 255, 255, 1)

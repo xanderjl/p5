@@ -1,7 +1,6 @@
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
 import { Sketch } from 'react-p5-wrapper'
-import setup from 'util/setup'
 
 const width: number = 640
 const height: number = 260

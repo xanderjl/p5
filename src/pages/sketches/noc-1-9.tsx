@@ -2,7 +2,6 @@ import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
 import { Sketch } from 'react-p5-wrapper'
 import { Background } from 'types/CustomP5'
-import { Mover2 } from 'types/Mover'
 
 const width: number = 640
 const height: number = 360
@@ -12,6 +11,7 @@ const background: Background = [255]
 
 const sketch: Sketch = async p5 => {
   const PVector = await import('p5').then(mod => mod.default.Vector)
+  const Mover2 = await import('types/Mover').then(mod => mod.Mover2)
   const location = p5.createVector(p5.width / 2, p5.height / 2)
   const velocity = p5.createVector(0, 0)
   const acceleration = PVector.random2D()

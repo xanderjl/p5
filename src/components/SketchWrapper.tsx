@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import { RENDERER } from 'p5'
 import { FC } from 'react'
 import type { P5WrapperProps, Sketch, SketchProps } from 'react-p5-wrapper'
+import { Background } from 'types/CustomP5'
 import setup from 'util/setup'
 import windowResized from 'util/windowResized'
 
@@ -13,7 +14,7 @@ const ReactP5Wrapper = dynamic<P5WrapperProps>(
   { ssr: false }
 )
 
-export interface SketchWrapperProps extends SketchProps {
+export interface SketchWrapperProps {
   sketch: Sketch<SketchProps>
   suffix?: string | number
   padding?: number[]
@@ -21,7 +22,7 @@ export interface SketchWrapperProps extends SketchProps {
   height?: number
   dimensions?: number[]
   renderer?: RENDERER
-  background?: number[]
+  background?: Background
   pixelDensity?: number
 }
 

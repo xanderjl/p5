@@ -1,15 +1,10 @@
-import { RENDERER } from 'p5'
+import { SketchWrapperProps } from 'components/SketchWrapper'
+import { Color, RENDERER } from 'p5'
 import { P5CanvasInstance } from 'react-p5-wrapper'
 
-interface Setup {
+interface Setup extends Omit<SketchWrapperProps, 'sketch'> {
   p5: P5CanvasInstance
-  width?: number
-  height?: number
-  dimensions?: number[]
-  padding?: number[]
-  background?: number[]
   renderer?: RENDERER
-  pixelDensity?: number
 }
 
 const setup = ({
@@ -55,7 +50,7 @@ const setup = ({
 
   canvas.style('box-shadow', '1px 3px 6px -1px rgba(0, 0, 0, 0.5)')
   pixelDensity && p5.pixelDensity(pixelDensity)
-  background && p5.background(background)
+  background && p5.background(background as unknown as Color)
 }
 
 export default setup

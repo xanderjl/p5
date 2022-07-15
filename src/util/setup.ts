@@ -16,6 +16,7 @@ const setup = ({
   background,
   renderer,
   pixelDensity,
+  seed,
 }: Setup): void => {
   const usedWidth = dimensions ? dimensions[0] : width ? width : p5.windowWidth
   const usedHeight = dimensions
@@ -34,6 +35,9 @@ const setup = ({
       : 0
   const maxWidth = Math.round(p5.windowWidth - paddingWidth)
   const maxHeight = Math.round(p5.windowHeight - paddingHeight)
+
+  seed && p5.randomSeed(seed)
+  seed && p5.noiseSeed(seed)
 
   let canvas
   if (usedWidth > p5.windowWidth || usedHeight > p5.windowHeight) {

@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { RENDERER } from 'p5'
 import { FC } from 'react'
 import type { P5WrapperProps, Sketch, SketchProps } from 'react-p5-wrapper'
-import { Background } from 'types/CustomP5'
+import { ColorValue } from 'types/CustomP5'
 import setup from 'util/setup'
 import windowResized from 'util/windowResized'
 
@@ -22,8 +22,9 @@ export interface SketchWrapperProps {
   height?: number
   dimensions?: number[]
   renderer?: RENDERER
-  background?: Background
+  background?: ColorValue
   pixelDensity?: number
+  seed?: number
 }
 
 const SketchWrapper: FC<SketchWrapperProps> = ({
@@ -36,22 +37,33 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   renderer,
   background,
   pixelDensity,
+  seed,
 }) => {
   const os = useGetOs()
 
   const sketchGlobals: Sketch = p5 => {
-    const usedWidth = dimensions ? dimensions[0] : width
-    const usedHeight = dimensions ? dimensions[1] : height
+    const usedWidth = dimensions
+      ? dimensions[0]
+      : width && height
+      ? width
+      : p5.width
+    const usedHeight = dimensions
+      ? dimensions[1]
+      : width && height
+      ? height
+      : p5.height
+
     p5.setup = () =>
       setup({
         p5,
         width: usedWidth,
         height: usedHeight,
-        dimensions: [usedWidth!, usedHeight!],
+        dimensions: [usedWidth, usedHeight],
         padding,
         background,
         renderer,
         pixelDensity,
+        seed,
       })
 
     p5.windowResized = () =>
@@ -59,9 +71,10 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
         p5,
         width: usedWidth,
         height: usedHeight,
-        dimensions: [usedWidth!, usedHeight!],
+        dimensions: [usedWidth, usedHeight],
         padding,
         background,
+        seed,
       })
 
     const fileName = [
@@ -73,12 +86,22 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       if (os === 'mac') {
         if (e.key === 's' && e.metaKey) {
           e.preventDefault()
+          seed && p5.randomSeed(seed)
+          seed && p5.noiseSeed(seed)
+          p5.resizeCanvas(usedWidth, usedHeight)
           p5.saveCanvas(fileName, 'png')
+          p5.loop()
+          p5.draw()
         }
       } else {
         if (e.key === 's' && e.ctrlKey) {
           e.preventDefault()
+          seed && p5.randomSeed(seed)
+          seed && p5.noiseSeed(seed)
+          p5.resizeCanvas(usedWidth, usedHeight)
           p5.saveCanvas(fileName, 'png')
+          p5.loop()
+          p5.draw()
         }
       }
     }

@@ -1,13 +1,13 @@
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
 import { Sketch } from 'react-p5-wrapper'
-import { Background } from 'types/CustomP5'
+import { ColorValue } from 'types/CustomP5'
 
 const width: number = 640
 const height: number = 360
 const dimensions: number[] = [width, height]
 const padding: number[] = [40]
-const background: Background = [255]
+const background: ColorValue = [255]
 
 const sketch: Sketch = async p5 => {
   const Mover2 = await import('types/Mover').then(mod => mod.Mover2)

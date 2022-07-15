@@ -14,7 +14,7 @@ export const createWeightedSelector = (
   return () => weightedArray[Math.floor(p5.random() * weightedArray.length)]
 }
 
-export const victoriaIsland: WeightedColor[] = [
+export const vancouverIsland: WeightedColor[] = [
   {
     weight: 40,
     value: '#222C2F',

@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 import { Color } from 'p5'
 import { Sketch } from 'react-p5-wrapper'
 import { ColorValue } from 'types/CustomP5'
-import { createWeightedSelector, victoriaIsland } from 'util/colorPalettes'
+import { createWeightedSelector, vancouverIsland } from 'util/colorPalettes'
 
 let seed: number = 0
 const width: number = 2048
@@ -13,7 +13,7 @@ const padding: number[] = [40]
 const background: ColorValue = [255]
 
 const sketch: Sketch = p5 => {
-  const colorPicker = createWeightedSelector(p5, victoriaIsland)
+  const colorPicker = createWeightedSelector(p5, vancouverIsland)
 
   p5.draw = () => {
     p5.noLoop()

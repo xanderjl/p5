@@ -46,12 +46,12 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       ? dimensions[0]
       : width && height
       ? width
-      : p5.width
+      : p5.windowWidth
     const usedHeight = dimensions
       ? dimensions[1]
       : width && height
       ? height
-      : p5.height
+      : p5.windowHeight
 
     p5.setup = () =>
       setup({

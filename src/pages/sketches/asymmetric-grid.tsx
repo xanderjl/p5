@@ -55,6 +55,7 @@ const sketch: Sketch = p5 => {
   }
 
   p5.draw = () => {
+    p5.background(background)
     points.forEach(({ position, diameter, color }) => {
       const [u, v] = position
       const x = p5.lerp(margin, p5.width - margin, u)
@@ -67,8 +68,7 @@ const sketch: Sketch = p5 => {
   }
 
   p5.windowResized = () => {
-    p5.randomSeed(seed)
-    windowResized({ p5, dimensions, padding, background })
+    windowResized({ p5, dimensions, padding, background, seed })
     points = []
     points = createGrid().filter(() => p5.random() > 0.5)
     margin = (p5.width - padding[0] * 2) * 0.125

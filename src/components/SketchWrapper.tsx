@@ -88,20 +88,22 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
           e.preventDefault()
           seed && p5.randomSeed(seed)
           seed && p5.noiseSeed(seed)
-          p5.resizeCanvas(usedWidth, usedHeight)
-          p5.saveCanvas(fileName, 'png')
-          p5.loop()
+          const ratio =
+            ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
+          p5.pixelDensity(ratio)
           p5.draw()
+          p5.saveCanvas(fileName, 'png')
         }
       } else {
         if (e.key === 's' && e.ctrlKey) {
           e.preventDefault()
           seed && p5.randomSeed(seed)
           seed && p5.noiseSeed(seed)
-          p5.resizeCanvas(usedWidth, usedHeight)
-          p5.saveCanvas(fileName, 'png')
-          p5.loop()
+          const ratio =
+            ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
+          p5.pixelDensity(ratio)
           p5.draw()
+          p5.saveCanvas(fileName, 'png')
         }
       }
     }

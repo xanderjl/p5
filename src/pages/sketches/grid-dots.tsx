@@ -36,9 +36,9 @@ const sketch: Sketch = p5 => {
   const points: Point[] = createGrid().filter(() => Math.random() > 0.5)
   const margin: number = 100
 
-  p5.setup = () => {
-    setup({ p5, width, height, padding, background })
-
+  p5.draw = () => {
+    p5.noLoop()
+    p5.background(background)
     points.forEach(({ position }) => {
       const [u, v] = position
       const x = p5.lerp(margin, p5.width - margin, u)

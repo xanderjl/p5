@@ -15,24 +15,49 @@ export const createWeightedSelector = (
 }
 
 export const vancouverIsland: WeightedColor[] = [
+  // midnight
   {
-    weight: 40,
+    weight: 15,
     value: '#222C2F',
   },
-  {
-    weight: 20,
-    value: '#55709E',
-  },
-  {
-    weight: 25,
-    value: '#976444',
-  },
+  // navy
   {
     weight: 10,
+    value: '#283D68',
+  },
+  // heron blue
+  {
+    weight: 8,
+    value: '#6389BE',
+  },
+  // grey
+  {
+    weight: 12,
+    value: '#B9C3CD',
+  },
+  // peach
+  {
+    weight: 8,
+    value: '#EFB38D',
+  },
+  // sand
+  {
+    weight: 14,
     value: '#DFC5B1',
   },
+  // bone
   {
-    weight: 5,
-    value: '#FFF4D7',
+    weight: 15,
+    value: '#EFE4D0',
+  },
+  // walnut
+  {
+    weight: 10,
+    value: '#725B46',
+  },
+  // bronze
+  {
+    weight: 8,
+    value: '#976444',
   },
 ]

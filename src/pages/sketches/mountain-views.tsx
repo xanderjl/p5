@@ -16,7 +16,7 @@ const sketch: Sketch = p5 => {
   const colorPicker = createWeightedSelector(p5, vancouverIsland)
 
   p5.draw = () => {
-    const count = p5.width / 25
+    const count = Math.floor(p5.width / 25)
     const fidelity = 200
     const range = 2
     const margin = p5.width / 10

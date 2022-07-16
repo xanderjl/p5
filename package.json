@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "new:sketch": "npx hygen sketch new --name",
-    "new:sketch:one-to-one": "npx hygen one-to-one new --name",
+    "new:sketch:fullscreen": "npx hygen sketch new --name",
+    "new:sketch:square": "npx hygen square new --name",
     "lint": "next lint",
     "lint:fix": "next lint --fix"
   },

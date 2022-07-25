@@ -1,9 +1,9 @@
 import { SketchWrapperProps } from 'components/SketchWrapper'
 import { Color, RENDERER } from 'p5'
-import { P5CanvasInstance } from 'react-p5-wrapper'
+import P5 from 'p5'
 
 interface Setup extends Omit<SketchWrapperProps, 'sketch'> {
-  p5: P5CanvasInstance
+  p5: P5
   renderer?: RENDERER
 }
 

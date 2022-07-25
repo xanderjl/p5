@@ -2,20 +2,23 @@ import { Flex } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import useGetOs from 'hooks/useGetOs'
 import dynamic from 'next/dynamic'
+import type P5 from 'p5'
+import p5 from 'p5'
 import { RENDERER } from 'p5'
 import { FC } from 'react'
-import type { P5WrapperProps, Sketch, SketchProps } from 'react-p5-wrapper'
+import { SketchProps } from 'react-p5'
 import { ColorValue } from 'types/CustomP5'
 import setup from 'util/setup'
 import windowResized from 'util/windowResized'
 
-const ReactP5Wrapper = dynamic<P5WrapperProps>(
-  () => import('react-p5-wrapper').then(mod => mod.ReactP5Wrapper),
-  { ssr: false }
+const Sketch = dynamic<SketchProps>(
+  () => import('react-p5').then(mod => mod.default),
+  {
+    ssr: false,
+  }
 )
 
 export interface SketchWrapperProps {
-  sketch: Sketch<SketchProps>
   suffix?: string | number
   padding?: number[]
   width?: number
@@ -28,7 +31,6 @@ export interface SketchWrapperProps {
 }
 
 const SketchWrapper: FC<SketchWrapperProps> = ({
-  sketch,
   suffix,
   padding,
   width,
@@ -41,79 +43,74 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
 }) => {
   const os = useGetOs()
 
-  const sketchGlobals: Sketch = p5 => {
-    const usedWidth = dimensions
-      ? dimensions[0]
-      : width && height
-      ? width
-      : p5.windowWidth
-    const usedHeight = dimensions
-      ? dimensions[1]
-      : width && height
-      ? height
-      : p5.windowHeight
+  const usedWidth = dimensions
+    ? dimensions[0]
+    : width && height
+    ? width
+    : p5.windowWidth
+  const usedHeight = dimensions
+    ? dimensions[1]
+    : width && height
+    ? height
+    : p5.windowHeight
 
-    p5.setup = () =>
-      setup({
-        p5,
-        width: usedWidth,
-        height: usedHeight,
-        dimensions: [usedWidth, usedHeight],
-        padding,
-        background,
-        renderer,
-        pixelDensity,
-        seed,
-      })
+  setup({
+    p5,
+    width: usedWidth,
+    height: usedHeight,
+    dimensions: [usedWidth, usedHeight],
+    padding,
+    background,
+    renderer,
+    pixelDensity,
+    seed,
+  })
 
-    p5.windowResized = () =>
-      windowResized({
-        p5,
-        width: usedWidth,
-        height: usedHeight,
-        dimensions: [usedWidth, usedHeight],
-        padding,
-        background,
-        seed,
-      })
+  const fileName = [
+    format(new Date(), 'yyyy.MM.dd-kk.mm.ss'),
+    suffix ? suffix.toString() : '',
+  ].join()
 
-    const fileName = [
-      format(new Date(), 'yyyy.MM.dd-kk.mm.ss'),
-      suffix ? suffix.toString() : '',
-    ].join()
-
-    p5.keyPressed = (e: KeyboardEvent) => {
-      if (os === 'mac') {
-        if (e.key === 's' && e.metaKey) {
-          e.preventDefault()
-          seed && p5.randomSeed(seed)
-          seed && p5.noiseSeed(seed)
-          const ratio =
-            ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
-          p5.pixelDensity(ratio)
-          p5.draw()
-          p5.saveCanvas(fileName, 'png')
-        }
-      } else {
-        if (e.key === 's' && e.ctrlKey) {
-          e.preventDefault()
-          seed && p5.randomSeed(seed)
-          seed && p5.noiseSeed(seed)
-          const ratio =
-            ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
-          p5.pixelDensity(ratio)
-          p5.draw()
-          p5.saveCanvas(fileName, 'png')
-        }
+  const keyPressed = (p5: P5, e: any) => {
+    console.log({ e })
+    if (os === 'mac') {
+      if (p5.key === 's' && p5.keyCode === p5.CONTROL) {
+        seed && p5.randomSeed(seed)
+        seed && p5.noiseSeed(seed)
+        const ratio =
+          ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
+        p5.pixelDensity(ratio)
+        p5.draw()
+        p5.saveCanvas(fileName, 'png')
+      }
+    } else {
+      if (p5.key === 's' && p5.keyCode === p5.CONTROL) {
+        seed && p5.randomSeed(seed)
+        seed && p5.noiseSeed(seed)
+        const ratio =
+          ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
+        p5.pixelDensity(ratio)
+        p5.draw()
+        p5.saveCanvas(fileName, 'png')
       }
     }
-
-    return sketch(p5)
   }
 
   return (
     <Flex flex={1} align="center" justify="center">
-      <ReactP5Wrapper id="test" sketch={sketchGlobals} />
+      <Sketch
+        setup={setup}
+        keyPressed={keyPressed}
+        windowResized={windowResized({
+          p5,
+          width: usedWidth,
+          height: usedHeight,
+          dimensions: [usedWidth, usedHeight],
+          padding,
+          background,
+          seed,
+        })}
+      />
     </Flex>
   )
 }

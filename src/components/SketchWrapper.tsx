@@ -4,15 +4,15 @@ import dynamic from 'next/dynamic'
 import { RENDERER } from 'p5'
 import { ComponentClass, FC, KeyboardEvent } from 'react'
 import { SketchProps } from 'react-p5'
-import { ColorValue, P5 } from 'types/CustomP5'
+import { ColorValue, KeyPressed, P5, Setup } from 'types/CustomP5'
 import keyPressed from 'util/keyPressed'
 import setupDefault from 'util/setup'
 import windowResized from 'util/windowResized'
 
 export interface SketchWrapperProps
   extends Omit<SketchProps, 'keyPressed' | 'setup'> {
-  setup?: (p5: P5, canvasParentRef: Element) => void
-  keyPressed?: (p5: P5, e: KeyboardEvent) => void
+  setup?: Setup
+  keyPressed?: KeyPressed
   suffix?: string | number
   padding?: number[]
   width?: number

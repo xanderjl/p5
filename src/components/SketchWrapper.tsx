@@ -51,27 +51,6 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
 }) => {
   const os = useGetOs()
 
-  // const usedWidth = dimensions
-  //   ? dimensions[0]
-  //   : width && height
-  //   ? width
-  //   : p5.windowWidth
-  // const usedHeight = dimensions
-  //   ? dimensions[1]
-  //   : width && height
-  //   ? height
-  //   : p5.windowHeight
-
-  // windowResized({
-  //   p5,
-  //   width: usedWidth,
-  //   height: usedHeight,
-  //   dimensions: [usedWidth, usedHeight],
-  //   padding,
-  //   background,
-  //   seed,
-  // })
-
   const defaultSetup = (p5: P5, canvasParentRef: Element) => {
     const usedWidth = dimensions
       ? dimensions[0]

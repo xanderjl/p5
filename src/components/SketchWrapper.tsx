@@ -186,7 +186,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
           ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
         p5.pixelDensity(ratio)
         p5.draw()
-        renderSVG ? p5.save(fileName + 'svg') : p5.saveCanvas(fileName, 'png')
+        renderSVG ? p5.save(fileName) : p5.saveCanvas(fileName, 'png')
       }
     } else {
       if (e.key === 's' && e.ctrlKey) {
@@ -198,8 +198,6 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
         p5.pixelDensity(ratio)
         p5.draw()
         renderSVG ? p5.save(fileName) : p5.saveCanvas(fileName, 'png')
-
-        p5.save(fileName)
       }
     }
   }

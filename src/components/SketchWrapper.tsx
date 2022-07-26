@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react'
 import useGetOs from 'hooks/useGetOs'
 import dynamic from 'next/dynamic'
 import { RENDERER } from 'p5'
-import { ComponentClass, FC, KeyboardEvent } from 'react'
+import { ComponentClass, FC } from 'react'
 import { SketchProps } from 'react-p5'
 import { ColorValue, KeyPressed, P5, Setup } from 'types/CustomP5'
 import keyPressed from 'util/keyPressed'
@@ -53,7 +53,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
 }) => {
   const os = useGetOs()
 
-  const defaultSetup = (p5: P5, canvasParentRef: Element) =>
+  const defaultSetup: Setup = (p5, canvasParentRef) =>
     setupDefault({
       p5,
       canvasParentRef,
@@ -90,7 +90,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   })
   const fileName = date + (suffix ? `-${suffix}` : '')
 
-  const defaultKeyPressed = (p5: P5, event: KeyboardEvent) =>
+  const defaultKeyPressed: KeyPressed = (p5, event) =>
     keyPressed({
       p5,
       event,

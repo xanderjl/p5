@@ -1,4 +1,5 @@
 import type P5Types from 'p5'
+import { KeyboardEvent } from 'react'
 
 export type ColorValue = string | number | number[]
 

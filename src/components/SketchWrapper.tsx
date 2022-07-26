@@ -164,6 +164,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
         const ratio =
           ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
         p5.pixelDensity(ratio)
+        background && p5.background(background as unknown as Color)
         p5.draw()
         renderSVG ? p5.save(fileName) : p5.saveCanvas(fileName, 'png')
       }
@@ -175,6 +176,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
         const ratio =
           ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
         p5.pixelDensity(ratio)
+        background && p5.background(background as unknown as Color)
         p5.draw()
         renderSVG ? p5.save(fileName) : p5.saveCanvas(fileName, 'png')
       }

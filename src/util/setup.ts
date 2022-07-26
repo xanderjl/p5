@@ -2,7 +2,6 @@ import { Color, RENDERER } from 'p5'
 import { ColorValue, P5 } from 'types/CustomP5'
 
 interface Setup {
-  setup?: (p5: P5, canvasParentRef: Element) => void
   p5: P5
   canvasParentRef: Element
   padding?: number[]
@@ -17,7 +16,6 @@ interface Setup {
 }
 
 const setup = ({
-  setup,
   p5,
   canvasParentRef,
   width,
@@ -51,29 +49,32 @@ const setup = ({
   seed && p5.randomSeed(seed)
   seed && p5.noiseSeed(seed)
 
-  let canvas
   if (usedWidth > p5.windowWidth || usedHeight > p5.windowHeight) {
     if (aspectRatio > windowRatio) {
       const newHeight = Math.round(maxWidth / aspectRatio)
-      canvas = p5
-        .createCanvas(maxWidth, newHeight, renderSVG ? p5.SVG : renderer)
-        .parent(canvasParentRef)
+      p5.createCanvas(
+        maxWidth,
+        newHeight,
+        renderSVG ? p5.SVG : renderer
+      ).parent(canvasParentRef)
     } else {
       const newWidth = Math.round(maxHeight * aspectRatio)
-      canvas = p5
-        .createCanvas(newWidth, maxHeight, renderSVG ? p5.SVG : renderer)
-        .parent(canvasParentRef)
+      p5.createCanvas(
+        newWidth,
+        maxHeight,
+        renderSVG ? p5.SVG : renderer
+      ).parent(canvasParentRef)
     }
   } else {
-    canvas = p5
-      .createCanvas(usedWidth, usedHeight, renderSVG ? p5.SVG : renderer)
-      .parent(canvasParentRef)
+    p5.createCanvas(
+      usedWidth,
+      usedHeight,
+      renderSVG ? p5.SVG : renderer
+    ).parent(canvasParentRef)
   }
 
   pixelDensity && p5.pixelDensity(pixelDensity)
   background && p5.background(background as unknown as Color)
-
-  setup && setup(p5, canvasParentRef)
 }
 
 export default setup

@@ -1,9 +1,14 @@
-import { SketchWrapperProps } from 'components/SketchWrapper'
 import { Color } from 'p5'
-import { P5CanvasInstance } from 'react-p5-wrapper'
+import { ColorValue, P5 } from 'types/CustomP5'
 
-interface WindowResized extends Omit<SketchWrapperProps, 'sketch'> {
-  p5: P5CanvasInstance
+interface WindowResized {
+  p5: P5
+  width?: number
+  height?: number
+  dimensions?: number[]
+  padding?: number[]
+  background?: ColorValue
+  seed?: number
 }
 
 const windowResized = ({

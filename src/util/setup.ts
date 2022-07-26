@@ -1,8 +1,8 @@
-import type P5 from 'p5'
 import { Color, RENDERER } from 'p5'
-import { ColorValue } from 'types/CustomP5'
+import { ColorValue, P5 } from 'types/CustomP5'
 
 interface Setup {
+  setup?: (p5: P5, canvasParentRef: Element) => void
   p5: P5
   canvasParentRef: Element
   padding?: number[]
@@ -17,6 +17,7 @@ interface Setup {
 }
 
 const setup = ({
+  setup,
   p5,
   canvasParentRef,
   width,
@@ -69,10 +70,10 @@ const setup = ({
       .parent(canvasParentRef)
   }
 
-  !renderSVG &&
-    canvas.style('box-shadow', '1px 3px 6px -1px rgba(0, 0, 0, 0.5)')
   pixelDensity && p5.pixelDensity(pixelDensity)
   background && p5.background(background as unknown as Color)
+
+  setup && setup(p5, canvasParentRef)
 }
 
 export default setup

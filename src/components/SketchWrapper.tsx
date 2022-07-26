@@ -1,16 +1,15 @@
 import { Box } from '@chakra-ui/react'
-import { format } from 'date-fns'
 import useGetOs from 'hooks/useGetOs'
 import dynamic from 'next/dynamic'
-import { RENDERER } from 'p5'
-import { ComponentClass, FC, KeyboardEvent, useMemo } from 'react'
+import { Color, RENDERER } from 'p5'
+import { ComponentClass, FC, KeyboardEvent } from 'react'
 import { SketchProps } from 'react-p5'
 import { ColorValue, P5 } from 'types/CustomP5'
 import setupDefault from 'util/setup'
 
 export interface SketchWrapperProps
   extends Omit<SketchProps, 'keyPressed' | 'setup'> {
-  setup?: (p5: P5, CanvasParentRef: Element) => void
+  setup?: (p5: P5, canvasParentRef: Element) => void
   keyPressed?: (p5: P5, e: KeyboardEvent) => void
   suffix?: string | number
   padding?: number[]
@@ -73,10 +72,98 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   //   seed,
   // })
 
-  // const fileName: string = [
-  //   format(new Date(), 'yyyy.MM.dd-kk.mm.ss'),
-  //   suffix ? `-${suffix.toString()}` : '',
-  // ].join('')
+  const defaultSetup = (p5: P5, canvasParentRef: Element) => {
+    const usedWidth = dimensions
+      ? dimensions[0]
+      : width
+      ? width
+      : p5.windowWidth
+    const usedHeight = dimensions
+      ? dimensions[1]
+      : height
+      ? height
+      : p5.windowHeight
+    const aspectRatio = usedWidth / usedHeight
+    const windowRatio = p5.windowWidth / p5.windowHeight
+    const paddingWidth = padding && padding.length > 0 ? padding[0] * 2 : 0
+    const paddingHeight =
+      padding && padding.length === 2
+        ? padding[1] * 2
+        : padding && padding.length === 1
+        ? padding[0] * 2
+        : 0
+    const maxWidth = Math.round(p5.windowWidth - paddingWidth)
+    const maxHeight = Math.round(p5.windowHeight - paddingHeight)
+
+    seed && p5.randomSeed(seed)
+    seed && p5.noiseSeed(seed)
+
+    if (usedWidth > p5.windowWidth || usedHeight > p5.windowHeight) {
+      if (aspectRatio > windowRatio) {
+        const newHeight = Math.round(maxWidth / aspectRatio)
+        p5.createCanvas(
+          maxWidth,
+          newHeight,
+          renderSVG ? p5.SVG : renderer
+        ).parent(canvasParentRef)
+      } else {
+        const newWidth = Math.round(maxHeight * aspectRatio)
+        p5.createCanvas(
+          newWidth,
+          maxHeight,
+          renderSVG ? p5.SVG : renderer
+        ).parent(canvasParentRef)
+      }
+    } else {
+      p5.createCanvas(
+        usedWidth,
+        usedHeight,
+        renderSVG ? p5.SVG : renderer
+      ).parent(canvasParentRef)
+    }
+
+    pixelDensity && p5.pixelDensity(pixelDensity)
+    background && p5.background(background as unknown as Color)
+  }
+
+  const windowResized = (p5: P5) => {
+    const usedWidth = dimensions
+      ? dimensions[0]
+      : width
+      ? width
+      : p5.windowWidth
+    const usedHeight = dimensions
+      ? dimensions[1]
+      : height
+      ? height
+      : p5.windowHeight
+    const aspectRatio = usedWidth / usedHeight
+    const windowRatio = p5.windowWidth / p5.windowHeight
+    const paddingWidth = padding && padding.length > 0 ? padding[0] * 2 : 0
+    const paddingHeight =
+      padding && padding.length === 2
+        ? padding[1] * 2
+        : padding && padding.length === 1
+        ? padding[0] * 2
+        : 0
+    const maxWidth = Math.round(p5.windowWidth - paddingWidth)
+    const maxHeight = Math.round(p5.windowHeight - paddingHeight)
+
+    if (usedWidth > p5.windowWidth || usedHeight > p5.windowHeight) {
+      if (aspectRatio > windowRatio) {
+        const newHeight = Math.round(maxWidth / aspectRatio)
+        p5.resizeCanvas(maxWidth, newHeight)
+      } else {
+        const newWidth = Math.round(maxHeight * aspectRatio)
+        p5.resizeCanvas(newWidth, maxHeight)
+      }
+    } else {
+      p5.resizeCanvas(usedWidth, usedHeight)
+    }
+
+    background && p5.background(background as unknown as Color)
+    p5.loop()
+  }
 
   const date = new Date().toLocaleString('en-US', {
     month: '2-digit',
@@ -132,7 +219,12 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
         },
       }}
     >
-      <Sketch setup={setup} keyPressed={keyPressed} {...rest} />
+      <Sketch
+        setup={setup ? setup : defaultSetup}
+        windowResized={windowResized}
+        keyPressed={keyPressed}
+        {...rest}
+      />
     </Box>
   )
 }

@@ -22,7 +22,7 @@ const TestSketch_2: NextPage = () => (
     dimensions={dimensions}
     padding={padding}
     draw={draw}
-    // renderSVG
+    renderSVG
   />
 )
 

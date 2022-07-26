@@ -1,14 +1,24 @@
-import { SketchWrapperProps } from 'components/SketchWrapper'
+import type P5 from 'p5'
 import { Color, RENDERER } from 'p5'
-import P5 from 'p5'
+import { ColorValue } from 'types/CustomP5'
 
-interface Setup extends Omit<SketchWrapperProps, 'sketch'> {
+interface Setup {
   p5: P5
+  canvasParentRef: Element
+  padding?: number[]
+  width?: number
+  height?: number
+  dimensions?: number[]
   renderer?: RENDERER
+  background?: ColorValue
+  pixelDensity?: number
+  seed?: number
+  renderSVG?: boolean
 }
 
 const setup = ({
   p5,
+  canvasParentRef,
   width,
   height,
   dimensions,
@@ -17,6 +27,7 @@ const setup = ({
   renderer,
   pixelDensity,
   seed,
+  renderSVG,
 }: Setup): void => {
   const usedWidth = dimensions ? dimensions[0] : width ? width : p5.windowWidth
   const usedHeight = dimensions
@@ -43,16 +54,23 @@ const setup = ({
   if (usedWidth > p5.windowWidth || usedHeight > p5.windowHeight) {
     if (aspectRatio > windowRatio) {
       const newHeight = Math.round(maxWidth / aspectRatio)
-      canvas = p5.createCanvas(maxWidth, newHeight, renderer)
+      canvas = p5
+        .createCanvas(maxWidth, newHeight, renderSVG ? p5.SVG : renderer)
+        .parent(canvasParentRef)
     } else {
       const newWidth = Math.round(maxHeight * aspectRatio)
-      canvas = p5.createCanvas(newWidth, maxHeight, renderer)
+      canvas = p5
+        .createCanvas(newWidth, maxHeight, renderSVG ? p5.SVG : renderer)
+        .parent(canvasParentRef)
     }
   } else {
-    canvas = p5.createCanvas(usedWidth, usedHeight, renderer)
+    canvas = p5
+      .createCanvas(usedWidth, usedHeight, renderSVG ? p5.SVG : renderer)
+      .parent(canvasParentRef)
   }
 
-  canvas.style('box-shadow', '1px 3px 6px -1px rgba(0, 0, 0, 0.5)')
+  !renderSVG &&
+    canvas.style('box-shadow', '1px 3px 6px -1px rgba(0, 0, 0, 0.5)')
   pixelDensity && p5.pixelDensity(pixelDensity)
   background && p5.background(background as unknown as Color)
 }

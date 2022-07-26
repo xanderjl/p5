@@ -1,12 +1,11 @@
-import { Flex } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import useGetOs from 'hooks/useGetOs'
 import dynamic from 'next/dynamic'
-import type P5 from 'p5'
 import { RENDERER } from 'p5'
 import { ComponentClass, FC, KeyboardEvent, useMemo } from 'react'
 import { SketchProps } from 'react-p5'
-import { ColorValue } from 'types/CustomP5'
+import { ColorValue, P5 } from 'types/CustomP5'
 import setupDefault from 'util/setup'
 
 export interface SketchWrapperProps
@@ -26,16 +25,6 @@ export interface SketchWrapperProps
 }
 
 const Sketch = dynamic<SketchWrapperProps>(
-  () =>
-    import('react-p5').then(mod => mod.default) as Promise<
-      ComponentClass<SketchWrapperProps, any>
-    >,
-  {
-    ssr: false,
-  }
-)
-
-const SketchSVG = dynamic<SketchWrapperProps>(
   () =>
     import('react-p5').then(mod => {
       require('p5.js-svg')
@@ -84,10 +73,21 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   //   seed,
   // })
 
-  const fileName = [
-    format(new Date(), 'yyyy.MM.dd-kk.mm.ss'),
-    suffix ? suffix.toString() : '',
-  ].join()
+  // const fileName: string = [
+  //   format(new Date(), 'yyyy.MM.dd-kk.mm.ss'),
+  //   suffix ? `-${suffix.toString()}` : '',
+  // ].join('')
+
+  const date = new Date().toLocaleString('en-US', {
+    month: '2-digit',
+    day: '2-digit',
+    year: 'numeric',
+    hour12: false,
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  })
+  const fileName = date + (suffix ? `-${suffix}` : '')
 
   const keyPressed = (p5: P5, e: KeyboardEvent) => {
     if (os === 'mac') {
@@ -99,7 +99,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
           ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
         p5.pixelDensity(ratio)
         p5.draw()
-        p5.saveCanvas(fileName, 'png')
+        renderSVG ? p5.save(fileName + 'svg') : p5.saveCanvas(fileName, 'png')
       }
     } else {
       if (e.key === 's' && e.ctrlKey) {
@@ -110,60 +110,30 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
           ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
         p5.pixelDensity(ratio)
         p5.draw()
-        p5.saveCanvas(fileName, 'png')
+        renderSVG ? p5.save(fileName) : p5.saveCanvas(fileName, 'png')
+
+        p5.save(fileName)
       }
     }
   }
 
   return (
-    <Flex flex={1} align="center" justify="center">
-      {/* {renderSVG ? ( */}
-      <SketchSVG
-        setup={(p5, canvasParentRef) => {
-          p5.createCanvas(2048, 2048, p5.SVG).parent(canvasParentRef)
-        }}
-        // setup={
-        //   (p5, canvasParentRef) => {
-        //     p5.createCanvas(dimensions[0], dimensions[1], p5.SVG)
-        //   }
-        //   // setupDefault({
-        //   //   p5,
-        //   //   canvasParentRef,
-        //   //   padding,
-        //   //   width,
-        //   //   height,
-        //   //   dimensions,
-        //   //   renderer,
-        //   //   background,
-        //   //   pixelDensity,
-        //   //   seed,
-        //   //   renderSVG,
-        //   // })
-        // }
-        keyPressed={keyPressed}
-        {...rest}
-      />
-      {/* ) : (
-        <Sketch
-          setup={(p5, canvasParentRef) =>
-            setupDefault({
-              p5,
-              canvasParentRef,
-              padding,
-              width,
-              height,
-              dimensions,
-              renderer,
-              background,
-              pixelDensity,
-              seed,
-            })
-          }
-          keyPressed={keyPressed}
-          {...rest}
-        />
-      )} */}
-    </Flex>
+    <Box
+      css={{
+        '&:first-of-type': {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex: 1,
+          minHeight: '100vh',
+        },
+        '.p5Canvas': {
+          boxShadow: '1px 3px 6px -1px rgba(0, 0, 0, 0.5)',
+        },
+      }}
+    >
+      <Sketch setup={setup} keyPressed={keyPressed} {...rest} />
+    </Box>
   )
 }
 

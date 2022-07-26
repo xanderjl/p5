@@ -1,12 +1,13 @@
 import { Box } from '@chakra-ui/react'
 import useGetOs from 'hooks/useGetOs'
 import dynamic from 'next/dynamic'
-import { Color, RENDERER } from 'p5'
+import { RENDERER } from 'p5'
 import { ComponentClass, FC, KeyboardEvent } from 'react'
 import { SketchProps } from 'react-p5'
 import { ColorValue, P5 } from 'types/CustomP5'
+import keyPressed from 'util/keyPressed'
 import setupDefault from 'util/setup'
-import windowResizedDefault from 'util/windowResized'
+import windowResized from 'util/windowResized'
 
 export interface SketchWrapperProps
   extends Omit<SketchProps, 'keyPressed' | 'setup'> {
@@ -67,8 +68,8 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       pixelDensity,
     })
 
-  const windowResized = (p5: P5) =>
-    windowResizedDefault({
+  const defaultWindowResized = (p5: P5) =>
+    windowResized({
       p5,
       width,
       height,
@@ -89,33 +90,18 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   })
   const fileName = date + (suffix ? `-${suffix}` : '')
 
-  const keyPressed = (p5: P5, e: KeyboardEvent) => {
-    if (os === 'mac') {
-      if (e.key === 's' && e.metaKey) {
-        e.preventDefault()
-        seed && p5.randomSeed(seed)
-        seed && p5.noiseSeed(seed)
-        const ratio =
-          ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
-        p5.pixelDensity(ratio)
-        background && p5.background(background as unknown as Color)
-        p5.draw()
-        renderSVG ? p5.save(fileName) : p5.saveCanvas(fileName, 'png')
-      }
-    } else {
-      if (e.key === 's' && e.ctrlKey) {
-        e.preventDefault()
-        seed && p5.randomSeed(seed)
-        seed && p5.noiseSeed(seed)
-        const ratio =
-          ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
-        p5.pixelDensity(ratio)
-        background && p5.background(background as unknown as Color)
-        p5.draw()
-        renderSVG ? p5.save(fileName) : p5.saveCanvas(fileName, 'png')
-      }
-    }
-  }
+  const defaultKeyPressed = (p5: P5, event: KeyboardEvent) =>
+    keyPressed({
+      p5,
+      event,
+      os,
+      fileName,
+      seed,
+      width,
+      dimensions,
+      background,
+      renderSVG,
+    })
 
   return (
     <Box
@@ -134,8 +120,8 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
     >
       <Sketch
         setup={setup ? setup : defaultSetup}
-        windowResized={windowResized}
-        keyPressed={keyPressed}
+        windowResized={defaultWindowResized}
+        keyPressed={defaultKeyPressed}
         {...rest}
       />
     </Box>

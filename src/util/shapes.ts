@@ -1,10 +1,6 @@
-import { P5CanvasInstance } from 'react-p5-wrapper'
+import { P5 } from 'types/CustomP5'
 
-export const redGrid = (
-  p5: P5CanvasInstance,
-  array: number[][],
-  scale: number
-) => {
+export const redGrid = (p5: P5, array: number[][], scale: number) => {
   p5.noFill()
   p5.stroke(255, 0, 0)
   array.forEach(([u, v]) => {

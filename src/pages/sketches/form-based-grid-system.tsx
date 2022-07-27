@@ -1,6 +1,6 @@
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
-import { Sketch } from 'react-p5-wrapper'
+import { Draw } from 'types/CustomP5'
 import createGrid from 'util/createGrid'
 import { redGrid } from 'util/shapes'
 
@@ -15,24 +15,22 @@ const vertices: number[][] = [
   [count, count],
 ]
 
-const sketch: Sketch = p5 => {
-  p5.draw = () => {
-    const scale = p5.width / count
+const draw: Draw = p5 => {
+  const scale = p5.width / count
 
-    p5.fill(255)
-    p5.beginShape()
-    vertices.forEach(([x, y]) => {
-      p5.vertex(x * scale, y * scale)
-    })
-    p5.endShape()
+  p5.fill(255)
+  p5.beginShape()
+  vertices.forEach(([x, y]) => {
+    p5.vertex(x * scale, y * scale)
+  })
+  p5.endShape()
 
-    redGrid(p5, points, scale)
-  }
+  redGrid(p5, points, scale)
 }
 
 const FormBasedGridSystem: NextPage = () => (
   <SketchWrapper
-    sketch={sketch}
+    draw={draw}
     width={width}
     height={height}
     padding={padding}

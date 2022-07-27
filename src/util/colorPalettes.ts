@@ -1,10 +1,6 @@
-import { P5CanvasInstance } from 'react-p5-wrapper'
-import { WeightedColor } from 'types/CustomP5'
+import { P5, WeightedColor } from 'types/CustomP5'
 
-export const createWeightedSelector = (
-  p5: P5CanvasInstance,
-  colors: WeightedColor[]
-) => {
+export const createWeightedSelector = (p5: P5, colors: WeightedColor[]) => {
   const weightedArray: WeightedColor['value'][] = []
 
   colors.forEach(({ weight, value }) =>

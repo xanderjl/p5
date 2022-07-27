@@ -1,15 +1,16 @@
-import { Vector } from 'p5'
-import type { P5CanvasInstance } from 'react-p5-wrapper'
+import type { Vector } from 'p5'
+
+import { P5 } from './CustomP5'
 
 export class Particle {
-  p5: P5CanvasInstance
+  p5: P5
   pos: Vector
   vel: Vector
   acc: Vector
   maxSpeed: number
   prevPos: Vector
 
-  constructor(p5: P5CanvasInstance, vector: Vector) {
+  constructor(p5: P5, vector: Vector) {
     this.p5 = p5
     this.pos = p5.createVector(
       p5.random(p5.windowWidth),

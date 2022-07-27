@@ -1,12 +1,13 @@
-import { Vector } from 'p5'
-import { P5CanvasInstance } from 'react-p5-wrapper'
+import type { Vector } from 'p5'
+
+import { P5 } from './CustomP5'
 
 export class Mover {
-  p5: P5CanvasInstance
+  p5: P5
   location: Vector
   velocity: Vector
 
-  constructor(p5: P5CanvasInstance, location: Vector, velocity: Vector) {
+  constructor(p5: P5, location: Vector, velocity: Vector) {
     this.p5 = p5
     this.location = location
     this.velocity = velocity
@@ -38,14 +39,14 @@ export class Mover {
 }
 
 export class Mover2 {
-  p5: P5CanvasInstance
+  p5: P5
   location: Vector
   velocity: Vector
   acceleration: Vector
   topSpeed: number
 
   constructor(
-    p5: P5CanvasInstance,
+    p5: P5,
     location: Vector,
     velocity: Vector,
     acceleration: Vector
@@ -85,14 +86,14 @@ export class Mover2 {
 }
 
 export class Mover3 {
-  p5: P5CanvasInstance
+  p5: P5
   location: Vector
   velocity: Vector
   acceleration: Vector
   topSpeed: number
 
   constructor(
-    p5: P5CanvasInstance,
+    p5: P5,
     location: Vector,
     velocity: Vector,
     acceleration: Vector
@@ -106,7 +107,7 @@ export class Mover3 {
 
   update = () => {
     const mouse = this.p5.createVector(this.p5.mouseX, this.p5.mouseY)
-    const dir = Vector.sub(mouse, this.location)
+    const dir = this.p5.constructor.Vector.sub(mouse, this.location)
 
     dir.normalize()
     dir.mult(0.5)
@@ -139,23 +140,23 @@ export class Mover3 {
   }
 }
 export class Mover4 {
-  p5: P5CanvasInstance
+  p5: P5
   location: Vector
   velocity: Vector
   acceleration: Vector
   topSpeed: number
 
-  constructor(p5: P5CanvasInstance, location: Vector, velocity: Vector) {
+  constructor(p5: P5, location: Vector, velocity: Vector) {
     this.p5 = p5
     this.location = location
     this.velocity = velocity
-    this.acceleration = new Vector()
+    this.acceleration = new p5.constructor.Vector()
     this.topSpeed = 4
   }
 
   update = () => {
     const mouse = this.p5.createVector(this.p5.mouseX, this.p5.mouseY)
-    const dir = Vector.sub(mouse, this.location)
+    const dir = this.p5.constructor.Vector.sub(mouse, this.location)
 
     dir.normalize()
     dir.mult(0.2)

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "new:sketch:fullscreen": "npx hygen sketch new --name",
+    "new:sketch:fullscreen": "npx hygen fullscreen new --name",
     "new:sketch:square": "npx hygen square new --name",
     "lint": "next lint",
     "lint:fix": "next lint --fix"

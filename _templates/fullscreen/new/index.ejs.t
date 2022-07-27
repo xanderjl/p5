@@ -3,12 +3,10 @@ to: src/pages/sketches/<%= name %>.tsx
 ---
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
-import { Sketch } from 'react-p5-wrapper'
+import { Draw } from 'types/CustomP5'
 
-const sketch: Sketch = p5 => {
-  p5.draw = () => {}
-}
+const draw: Draw = p5 => {}
 
-const <%= h.changeCase.pascal(name) %>: NextPage = () => <SketchWrapper sketch={sketch} />
+const <%= h.changeCase.pascal(name) %>: NextPage = () => <SketchWrapper draw={draw} />
 
 export default <%= h.changeCase.pascal(name) %>

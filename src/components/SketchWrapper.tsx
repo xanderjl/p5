@@ -4,15 +4,18 @@ import dynamic from 'next/dynamic'
 import { RENDERER } from 'p5'
 import { ComponentClass, FC } from 'react'
 import { SketchProps } from 'react-p5'
-import { ColorValue, KeyPressed, P5, Setup } from 'types/CustomP5'
-import keyPressed from 'util/keyPressed'
-import setupDefault from 'util/setup'
-import windowResized from 'util/windowResized'
+import { ColorValue, KeyPressed, MouseClicked, P5, Setup } from 'types/CustomP5'
+import {
+  keyPressedDefaults,
+  setupDefaults,
+  windowResizedDefaults,
+} from 'util/defaults'
 
 export interface SketchWrapperProps
-  extends Omit<SketchProps, 'keyPressed' | 'setup'> {
+  extends Omit<SketchProps, 'keyPressed' | 'mouseClicked' | 'setup'> {
   setup?: Setup
   keyPressed?: KeyPressed
+  mouseClicked?: MouseClicked
   suffix?: string | number
   padding?: number[]
   width?: number
@@ -54,7 +57,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   const os = useGetOs()
 
   const defaultSetup: Setup = (p5, canvasParentRef) =>
-    setupDefault({
+    setupDefaults({
       p5,
       canvasParentRef,
       width,
@@ -69,7 +72,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
     })
 
   const defaultWindowResized = (p5: P5) =>
-    windowResized({
+    windowResizedDefaults({
       p5,
       width,
       height,
@@ -91,7 +94,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   const fileName = date + (suffix ? `-${suffix}` : '')
 
   const defaultKeyPressed: KeyPressed = (p5, event) =>
-    keyPressed({
+    keyPressedDefaults({
       p5,
       event,
       os,

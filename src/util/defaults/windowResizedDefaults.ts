@@ -1,33 +1,25 @@
-import { Color, RENDERER } from 'p5'
+import { Color } from 'p5'
 import { ColorValue, P5 } from 'types/CustomP5'
 
-interface Setup {
+interface WindowResized {
   p5: P5
-  canvasParentRef: Element
-  padding?: number[]
   width?: number
   height?: number
   dimensions?: number[]
-  renderer?: RENDERER
+  padding?: number[]
   background?: ColorValue
-  pixelDensity?: number
   seed?: number
-  renderSVG?: boolean
 }
 
-const setup = ({
+const windowResizedDefaults = ({
   p5,
-  canvasParentRef,
   width,
   height,
   dimensions,
   padding,
   background,
-  renderer,
-  pixelDensity,
   seed,
-  renderSVG,
-}: Setup): void => {
+}: WindowResized) => {
   const usedWidth = dimensions ? dimensions[0] : width ? width : p5.windowWidth
   const usedHeight = dimensions
     ? dimensions[1]
@@ -52,29 +44,17 @@ const setup = ({
   if (usedWidth > p5.windowWidth || usedHeight > p5.windowHeight) {
     if (aspectRatio > windowRatio) {
       const newHeight = Math.round(maxWidth / aspectRatio)
-      p5.createCanvas(
-        maxWidth,
-        newHeight,
-        renderSVG ? p5.SVG : renderer
-      ).parent(canvasParentRef)
+      p5.resizeCanvas(maxWidth, newHeight)
     } else {
       const newWidth = Math.round(maxHeight * aspectRatio)
-      p5.createCanvas(
-        newWidth,
-        maxHeight,
-        renderSVG ? p5.SVG : renderer
-      ).parent(canvasParentRef)
+      p5.resizeCanvas(newWidth, maxHeight)
     }
   } else {
-    p5.createCanvas(
-      usedWidth,
-      usedHeight,
-      renderSVG ? p5.SVG : renderer
-    ).parent(canvasParentRef)
+    p5.resizeCanvas(usedWidth, usedHeight)
   }
 
-  pixelDensity && p5.pixelDensity(pixelDensity)
   background && p5.background(background as unknown as Color)
+  p5.loop()
 }
 
-export default setup
+export default windowResizedDefaults

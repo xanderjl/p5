@@ -1,6 +1,6 @@
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
-import { Sketch } from 'react-p5-wrapper'
+import { Draw } from 'types/CustomP5'
 import createGrid from 'util/createGrid'
 import { redGrid } from 'util/shapes'
 
@@ -17,30 +17,28 @@ const vertices: number[][] = [
   [count, count],
 ]
 
-const sketch: Sketch = p5 => {
-  p5.draw = () => {
-    const scale: number = p5.width / 8
-    p5.background(0)
-    p5.frameRate(1)
+const draw: Draw = p5 => {
+  const scale: number = p5.width / 8
+  p5.background(0)
+  p5.frameRate(1)
 
-    p5.fill(255, 251, 245)
-    p5.beginShape()
-    vertices.forEach((ver, i) => {
-      if (ver[0] === vertices.length && ver[1] !== vertices.length) {
-        ver[1] = ver[1] - 2
-      }
+  p5.fill(255, 251, 245)
+  p5.beginShape()
+  vertices.forEach((ver, i) => {
+    if (ver[0] === vertices.length && ver[1] !== vertices.length) {
+      ver[1] = ver[1] - 2
+    }
 
-      p5.vertex(ver[0] * scale, ver[1] * scale)
-    })
-    p5.endShape()
+    p5.vertex(ver[0] * scale, ver[1] * scale)
+  })
+  p5.endShape()
 
-    redGrid(p5, points, scale)
-  }
+  redGrid(p5, points, scale)
 }
 
 const TriangleShifting: NextPage = () => (
   <SketchWrapper
-    sketch={sketch}
+    draw={draw}
     dimensions={dimensions}
     padding={padding}
     background={background}

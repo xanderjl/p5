@@ -22,13 +22,14 @@ const draw: Draw = p5 => {
   const palette =
     palettes[Math.floor(p5.map(p5.random(), 0, 1, 0, palettes.length))]
   const n = Math.floor(p5.width * 0.5)
+  const degree = p5.map(p5.random(), 0, 1, 137.3, 137.8)
 
   p5.background(background)
 
   p5.push()
   p5.translate(p5.width / 2, p5.height / 2)
   Array.from({ length: n }).forEach((_, i) => {
-    const a = i * 137.8
+    const a = i * degree
     const r = i * 0.1 * Math.sqrt(i)
     const x = r * Math.cos(a)
     const y = r * Math.sin(a)
@@ -54,8 +55,12 @@ const draw: Draw = p5 => {
   p5.pop()
 }
 
-const mouseClicked: MouseClicked = p5 => {
-  seed++
+const mouseClicked: MouseClicked = (p5, e) => {
+  if (e.shiftKey) {
+    seed--
+  } else {
+    seed++
+  }
   p5.loop()
   p5.noLoop()
 }

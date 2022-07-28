@@ -4,7 +4,14 @@ import dynamic from 'next/dynamic'
 import { RENDERER } from 'p5'
 import { ComponentClass, FC } from 'react'
 import { SketchProps } from 'react-p5'
-import { ColorValue, KeyPressed, MouseClicked, P5, Setup } from 'types/CustomP5'
+import {
+  ColorValue,
+  KeyPressed,
+  MouseClicked,
+  P5,
+  Setup,
+  WindowResized,
+} from 'types/CustomP5'
 import {
   keyPressedDefaults,
   setupDefaults,
@@ -16,6 +23,7 @@ export interface SketchWrapperProps
   setup?: Setup
   keyPressed?: KeyPressed
   mouseClicked?: MouseClicked
+  windowResized?: WindowResized
   suffix?: string | number
   padding?: number[]
   width?: number
@@ -42,6 +50,8 @@ const Sketch = dynamic<SketchWrapperProps>(
 
 const SketchWrapper: FC<SketchWrapperProps> = ({
   setup,
+  windowResized,
+  keyPressed,
   suffix,
   padding,
   width,
@@ -56,7 +66,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
 }) => {
   const os = useGetOs()
 
-  const defaultSetup: Setup = (p5, canvasParentRef) =>
+  const defaultSetup: Setup = (p5, canvasParentRef) => {
     setupDefaults({
       p5,
       canvasParentRef,
@@ -70,8 +80,10 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       seed,
       pixelDensity,
     })
+    setup && setup(p5, canvasParentRef)
+  }
 
-  const defaultWindowResized = (p5: P5) =>
+  const defaultWindowResized = (p5: P5) => {
     windowResizedDefaults({
       p5,
       width,
@@ -81,7 +93,8 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       background,
       seed,
     })
-
+    windowResized && windowResized(p5)
+  }
   const date = new Date().toLocaleString('en-US', {
     month: '2-digit',
     day: '2-digit',
@@ -93,7 +106,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   })
   const fileName = date + (suffix ? `-${suffix}` : '')
 
-  const defaultKeyPressed: KeyPressed = (p5, event) =>
+  const defaultKeyPressed: KeyPressed = (p5, event) => {
     keyPressedDefaults({
       p5,
       event,
@@ -105,7 +118,8 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       background,
       renderSVG,
     })
-
+    keyPressed && keyPressed(p5, event)
+  }
   return (
     <Box
       css={{
@@ -122,7 +136,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       }}
     >
       <Sketch
-        setup={setup ? setup : defaultSetup}
+        setup={defaultSetup}
         windowResized={defaultWindowResized}
         keyPressed={defaultKeyPressed}
         {...rest}

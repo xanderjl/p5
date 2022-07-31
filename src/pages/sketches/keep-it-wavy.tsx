@@ -61,10 +61,10 @@ const draw: Draw = p5 => {
     })
   })
 
+  // draw curve
   let xStart = p5.map(p5.noise(seed, seed), 0, 1, 0, numColumns)
   let yStart = p5.map(p5.noise(seed, seed), 0, 1, 0, numRows)
   let stepLength = 4
-  // draw curve
 
   p5.stroke('red')
   p5.strokeWeight(3)

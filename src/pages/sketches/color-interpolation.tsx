@@ -1,4 +1,4 @@
-import Agent from 'classes/Agent'
+import CircleAgent from 'classes/CircleAgent'
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
 import { ColorValue, Draw } from 'types/CustomP5'
@@ -9,13 +9,13 @@ const height: number = 2048
 const dimensions: number[] = [width, height]
 const padding: number[] = [40]
 const background: ColorValue = [255, 253, 252]
-let agents: Agent[] = []
+let agents: CircleAgent[] = []
 let maxCount: number
 
 const draw: Draw = p5 => {
   maxCount = Math.floor(p5.width * 0.02)
   p5.background(background)
-  agents.length < maxCount && agents.push(new Agent(p5))
+  agents.length < maxCount && agents.push(new CircleAgent(p5))
 
   // TODO: fix collision logic bug
   // agents.forEach((_, i) => {

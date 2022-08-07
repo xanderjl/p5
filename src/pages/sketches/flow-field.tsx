@@ -2,29 +2,22 @@ import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
 import { Draw, Setup } from 'types/CustomP5'
 import { Particle } from 'types/Particle'
-import { setupDefaults } from 'util/defaults'
 
 const scale: number = 10
 const inc: number = 0.08
 const zinc: number = 0.05
 const background: number[] = [255]
 let particles: Particle[]
+let dimensions: number[]
 
-const setup: Setup = (p5, canvasParentRef) => {
+const setup: Setup = p5 => {
   const width: number = p5.windowWidth
   const height: number = p5.windowHeight
-  const dimensions: number[] = [width, height]
+  dimensions = [width, height]
   particles = Array.from(
     { length: Math.floor((p5.windowWidth * p5.windowHeight) / 800) },
     () => new Particle(p5, p5.constructor.Vector)
   )
-  setupDefaults({
-    p5,
-    canvasParentRef,
-    dimensions,
-    background,
-    renderer: 'p2d',
-  })
 }
 
 const draw: Draw = p5 => {
@@ -48,6 +41,13 @@ const draw: Draw = p5 => {
   })
 }
 
-const FlowField: NextPage = () => <SketchWrapper setup={setup} draw={draw} />
+const FlowField: NextPage = () => (
+  <SketchWrapper
+    setup={setup}
+    draw={draw}
+    dimensions={dimensions}
+    background={background}
+  />
+)
 
 export default FlowField

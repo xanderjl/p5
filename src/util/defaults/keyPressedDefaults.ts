@@ -27,9 +27,9 @@ const keyPressed = ({
 }: KeyPressed) => {
   if (os === 'mac') {
     if (event.key === 's' && event.metaKey) {
-      event.preventDefault()
       seed && p5.randomSeed(seed)
       seed && p5.noiseSeed(seed)
+      event.preventDefault()
       const ratio =
         ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
       p5.pixelDensity(ratio)
@@ -39,9 +39,9 @@ const keyPressed = ({
     }
   } else {
     if (event.key === 's' && event.ctrlKey) {
-      event.preventDefault()
       seed && p5.randomSeed(seed)
       seed && p5.noiseSeed(seed)
+      event.preventDefault()
       const ratio =
         ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
       p5.pixelDensity(ratio)

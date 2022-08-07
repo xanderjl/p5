@@ -1,110 +1,145 @@
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
-import { ColorValue, Draw, MouseClicked, Setup } from 'types/CustomP5'
+import { Graphics } from 'p5'
+import { useState } from 'react'
+import {
+  ColorValue,
+  Draw,
+  KeyPressed,
+  MouseClicked,
+  P5,
+  Setup,
+  WindowResized,
+} from 'types/CustomP5'
+import signature from 'util/signature'
 
-const width: number = 1000
-const height: number = 1000
+type Line = (p5: P5) => {
+  display: () => void
+}
+
+const width: number = 2048
+const height: number = 2048
 const dimensions: number[] = [width, height]
 const padding: number[] = [40]
 const background: ColorValue = [255, 253, 252]
+const nScl: number = 3000
+const nStr: number = 40
+let margin: number
+let overlay: Graphics
+let grain: Graphics
 
-let xLeft: number
-let xRight: number
-let yTop: number
-let yBottom: number
-let resolution: number
-let numColumns: number
-let numRows: number
-let grid: number[][]
-let angle: number
-let seed: number = 0
+const KeepItWavy: NextPage = () => {
+  const [seed, setSeed] = useState<number>(0)
 
-const setup: Setup = p5 => {
-  xLeft = p5.width * -0.5
-  xRight = p5.width * 1.5
-  yTop = p5.height * -0.5
-  yBottom = p5.height * 1.5
-  resolution = p5.width * 0.01
-  numColumns = (xRight - xLeft) / resolution
-  numRows = (yBottom - yTop) / resolution
-}
-
-const draw: Draw = p5 => {
-  grid = Array.from({ length: numColumns }, () =>
-    Array.from({ length: numRows })
-  )
-  p5.noiseSeed(seed)
-  p5.randomSeed(seed)
-  p5.noLoop()
-  p5.background(background)
-
-  // show flow field
-  grid = grid.map((_, x) => {
-    return _.map((_, y) => {
-      const xScaled = x * 0.005
-      const yScaled = y * 0.005
-      const noiseVal = p5.noise(xScaled, yScaled)
-      angle = p5.map(noiseVal, 0, 1, 0, p5.TWO_PI)
-      const vec = p5.constructor.Vector.fromAngle(angle)
-      vec.setMag(0.25)
-
-      p5.stroke(0)
-      p5.strokeWeight(1)
-      p5.push()
-      p5.translate(x * resolution, y * resolution)
-      p5.rotate(vec.heading())
-      p5.ellipse(0, 0, 2)
-      p5.line(0, 0, resolution, 0)
-      p5.pop()
-
-      return angle
+  const setup: Setup = p5 => {
+    grain = p5.createGraphics(p5.width, p5.height)
+    grain.loadPixels()
+    Array.from({ length: p5.width }, (_, i) => {
+      Array.from({ length: p5.height }, (_, j) => {
+        grain.set(i, j, p5.color(p5.random(255), 10))
+      })
     })
-  })
-
-  // draw curve
-  let xStart = p5.map(p5.noise(seed, seed), 0, 1, 0, numColumns)
-  let yStart = p5.map(p5.noise(seed, seed), 0, 1, 0, numRows)
-  let stepLength = 4
-
-  p5.stroke('red')
-  p5.strokeWeight(3)
-  p5.noFill()
-  p5.beginShape()
-  Array.from({ length: 100 }).forEach(() => {
-    p5.vertex(xStart, yStart)
-    let xOff = xStart - xLeft
-    let yOff = yStart - yTop
-    let colIndex = Math.floor(xOff / resolution)
-    let rowIndex = Math.floor(yOff / resolution)
-    angle = grid[colIndex][rowIndex]
-    let xStep = stepLength * Math.cos(angle)
-    let yStep = stepLength * Math.sin(angle)
-
-    xStart = xStart + xStep
-    yStart = yStart + yStep
-  })
-  p5.endShape()
-}
-
-const mouseClicked: MouseClicked = (p5, e) => {
-  if (e.shiftKey) {
-    seed--
-  } else {
-    seed++
+    grain.updatePixels()
   }
-  p5.loop()
-  p5.noLoop()
-}
 
-const KeepItWavy: NextPage = () => (
-  <SketchWrapper
-    setup={setup}
-    draw={draw}
-    mouseClicked={mouseClicked}
-    dimensions={dimensions}
-    padding={padding}
-    background={background}
-  />
-)
+  const draw: Draw = p5 => {
+    margin = p5.width * 0.15
+    overlay = p5.createGraphics(p5.width, p5.height)
+    overlay.background(background)
+    overlay.erase()
+    overlay.rect(margin, margin, p5.width - margin * 2, p5.height - margin * 2)
+    overlay.noErase()
+
+    p5.noLoop()
+    p5.background(background)
+
+    Array.from({ length: 1000 }).forEach(() => {
+      line(p5).display()
+    })
+
+    p5.image(overlay, 0, 0)
+    p5.image(grain, 0, 0)
+
+    signature(p5)
+  }
+
+  const line: Line = p5 => {
+    let x = p5.random(margin, p5.width - margin)
+    let y = p5.random(margin, p5.height - margin)
+    const speed = p5.random(-2, 2)
+    const length = p5.width * 0.05
+    const stroke =
+      p5.random(1) > 0.8
+        ? [255, 137, 137, p5.random(230, 255)]
+        : [10, 40, 10, p5.random(60, 255)]
+
+    const display = () => {
+      p5.push()
+      p5.noFill()
+      p5.stroke(stroke)
+      p5.strokeCap(p5.SQUARE)
+      p5.strokeJoin(p5.BEVEL)
+      p5.strokeWeight(
+        p5.map(
+          p5.noise(p5.random(1), p5.random(5), p5.random(4)),
+          0,
+          1,
+          1,
+          p5.width * 0.0065
+        )
+      )
+      p5.beginShape()
+      Array.from({ length }).forEach(() => {
+        update()
+      })
+      p5.endShape()
+      p5.pop()
+    }
+
+    const update = () => {
+      const angle = p5.noise(x / nScl, y / nScl) * nStr
+
+      x += Math.cos(angle) * speed
+      y += Math.sin(angle) * speed
+      p5.curveVertex(x, y)
+    }
+
+    return { display }
+  }
+
+  const windowResized: WindowResized = p5 => {
+    overlay.resizeCanvas(p5.width, p5.height)
+    grain.resizeCanvas(p5.width, p5.height)
+  }
+
+  const keyPressed: KeyPressed = () => {
+    setSeed(seed - 1)
+  }
+
+  const mouseClicked: MouseClicked = (p5, e) => {
+    if (e.shiftKey) {
+      setSeed(seed - 1)
+    } else {
+      setSeed(seed + 1)
+    }
+    p5.loop()
+    p5.noLoop()
+  }
+
+  return (
+    <SketchWrapper
+      setup={setup}
+      draw={draw}
+      keyPressed={keyPressed}
+      windowResized={windowResized}
+      mouseClicked={mouseClicked}
+      dimensions={dimensions}
+      padding={padding}
+      background={background}
+      seed={seed}
+      suffix={seed}
+    />
+  )
+}
 
 export default KeepItWavy

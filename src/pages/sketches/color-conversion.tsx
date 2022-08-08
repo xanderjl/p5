@@ -14,21 +14,20 @@ let margin: number
 const draw: Draw = p5 => {
   margin = p5.width * 0.1
 
-  // p5.noLoop()
   p5.frameRate(24)
 
   Array.from({ length: p5.width * 0.2 }).forEach((_, i) => {
     const x = p5.random(margin, p5.width - margin)
     const y = p5.random(margin, p5.height - margin)
     const d = p5.width * 0.05
-    const stroke = p5.lerpColor(
+    const color = p5.lerpColor(
       p5.color(cols[Math.floor(p5.random(cols.length))]),
       p5.color(cols[Math.floor(p5.random(cols.length))]),
       0.5
     )
 
-    p5.fill(stroke)
-    p5.stroke(stroke)
+    p5.fill(color)
+    p5.stroke(color)
 
     p5.ellipse(x, y, d)
   })

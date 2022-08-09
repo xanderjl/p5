@@ -58,7 +58,6 @@ const particle = (
     const a = p5.noise(x / nScl, y / nScl, length) * nStr
     const d =
       p5.map(
-        // p5.noise(x / nScl, y / nScl) * nStr * (dMod || p5.width * 0.000375),
         p5.noise(x / nScl, y / nScl, dMod) * nStr,
         0,
         1,

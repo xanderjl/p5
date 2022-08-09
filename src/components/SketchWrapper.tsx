@@ -86,7 +86,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   }
 
   const defaultDraw: P5Function = p5 => {
-    if (seed) {
+    if (typeof seed !== 'undefined') {
       p5.noiseSeed(seed)
       p5.randomSeed(seed)
     }

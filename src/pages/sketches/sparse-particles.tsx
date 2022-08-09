@@ -67,7 +67,6 @@ const particle = (
 
     p5.stroke(stroke)
     p5.strokeWeight(p5.random(2))
-    console.log({ bounds: bounds() })
 
     bounds() && p5.ellipse(x, y, d)
     x += Math.cos(a) * speed

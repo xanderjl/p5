@@ -33,6 +33,7 @@ const KeepItWavy: NextPage = () => {
 
   const setup: Setup = p5 => {
     grain = p5.createGraphics(p5.width, p5.height)
+
     grain.loadPixels()
     Array.from({ length: p5.width }, (_, i) => {
       Array.from({ length: p5.height }, (_, j) => {

@@ -1,7 +1,7 @@
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
-import p5, { Graphics } from 'p5'
-import { ColorValue, Draw, P5, Setup, WindowResized } from 'types/CustomP5'
+import type { Graphics } from 'p5'
+import { ColorValue, Draw, P5, Setup } from 'types/CustomP5'
 import linearGradient from 'util/linearGradient'
 import signature from 'util/signature'
 
@@ -11,6 +11,7 @@ const dimensions: number[] = [width, height]
 const padding: number[] = [40]
 const background: ColorValue = [255, 253, 252]
 let grain: Graphics
+let margin: number
 
 const gradientArc = (
   p5: P5,
@@ -46,9 +47,13 @@ const setup: Setup = p5 => {
 }
 
 const draw: Draw = p5 => {
+  margin = p5.width * 0.1
   const cx: number = p5.width * 0.5
   const cy: number = p5.height * 0.5
-  p5.noLoop()
+  const scale: number = 120
+  const ellipseUnit: number = p5.width * 0.175
+
+  p5.background(background)
 
   Array.from({ length: 10 }, (_, i) => {
     const unit: number = p5.width * 0.05 * (10 - i)
@@ -79,20 +84,54 @@ const draw: Draw = p5 => {
     )
   })
 
-  p5.image(grain, 0, 0)
+  p5.push()
+  p5.ellipseMode(p5.CORNERS)
+  const e1x1 = margin
+  const e1y1 = p5.height - margin
+  const e1x2 = margin + ellipseUnit
+  const e1y2 = p5.height - margin - ellipseUnit
+  linearGradient(
+    p5,
+    e1x2 + scale,
+    e1y2 - scale,
+    e1x1,
+    e1y1,
+    [255, 0, 0],
+    background
+  )
+  p5.stroke(20, 10)
+  p5.strokeWeight(5)
+  p5.ellipse(e1x1, e1y1, e1x2, e1y2)
+  p5.pop()
 
+  p5.push()
+  p5.ellipseMode(p5.CORNERS)
+  const e2x1 = p5.width - margin
+  const e2y1 = margin
+  const e2x2 = p5.width - margin - ellipseUnit
+  const e2y2 = margin + ellipseUnit
+  linearGradient(
+    p5,
+    e2x1,
+    e2y1,
+    e2x2 - scale * 1.3,
+    e2y2 + scale * 1.3,
+    background,
+    0
+  )
+  p5.stroke(255, 0, 0, 10)
+  p5.strokeWeight(5)
+  p5.ellipse(e2x1, e2y1, e2x2, e2y2)
+  p5.pop()
+
+  p5.image(grain, 0, 0, p5.width, p5.height)
   signature(p5)
-}
-
-const windowResized: WindowResized = p5 => {
-  grain.resizeCanvas(p5.width, p5.height)
 }
 
 const AlternatingArcs: NextPage = () => (
   <SketchWrapper
     setup={setup}
     draw={draw}
-    windowResized={windowResized}
     dimensions={dimensions}
     padding={padding}
     background={background}

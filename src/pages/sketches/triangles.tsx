@@ -1,6 +1,13 @@
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
-import { ColorValue, Draw, P5, Setup, WindowResized } from 'types/CustomP5'
+import {
+  ColorValue,
+  Draw,
+  MouseClicked,
+  P5,
+  Setup,
+  WindowResized,
+} from 'types/CustomP5'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
@@ -58,6 +65,9 @@ const setup: Setup = p5 => {
 }
 
 const draw: Draw = p5 => {
+  p5.noiseSeed(seed)
+  p5.randomSeed(seed)
+
   margin = p5.width * 0.1
   const cx: number = p5.width * 0.5
   const cy: number = p5.height * 0.5
@@ -151,11 +161,22 @@ const windowResized: WindowResized = p5 => {
   })
 }
 
+const mouseClicked: MouseClicked = (p5, e) => {
+  if (e.shiftKey) {
+    seed--
+  } else {
+    seed++
+  }
+  console.log({ seed })
+  p5.draw()
+}
+
 const Triangles: NextPage = () => (
   <SketchWrapper
     setup={setup}
     draw={draw}
     windowResized={windowResized}
+    mouseClicked={mouseClicked}
     dimensions={dimensions}
     padding={padding}
     background={background}

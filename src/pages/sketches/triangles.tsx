@@ -1,5 +1,6 @@
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
+import { Graphics } from 'p5'
 import {
   ColorValue,
   Draw,
@@ -8,6 +9,7 @@ import {
   Setup,
   WindowResized,
 } from 'types/CustomP5'
+import createGrain from 'util/createGrain'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
@@ -24,6 +26,7 @@ let margin: number
 let particleGrid: number[][]
 let guideGrid: number[][]
 let seed: number = 0
+let grain: Graphics
 
 const equilateralTriangle = (
   p5: P5,
@@ -62,6 +65,7 @@ const setup: Setup = p5 => {
 
     return [x, y]
   })
+  grain = createGrain(p5)
 }
 
 const draw: Draw = p5 => {
@@ -139,6 +143,8 @@ const draw: Draw = p5 => {
 
   equilateralTriangle(p5, cx + offset, cy + offset * 0.7, p5.width * 0.2)
   equilateralTriangle(p5, cx, cy, p5.width * 0.2, undefined, primary)
+
+  p5.image(grain, 0, 0, p5.width, p5.height)
 
   signature(p5)
 }

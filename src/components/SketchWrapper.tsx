@@ -134,7 +134,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   return (
     <Box
       css={{
-        '&:first-of-type': {
+        '.canvas-wrapper': {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -147,6 +147,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       }}
     >
       <Sketch
+        className="canvas-wrapper"
         setup={defaultSetup}
         draw={defaultDraw}
         windowResized={defaultWindowResized}

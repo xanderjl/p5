@@ -3,7 +3,7 @@ import UI, { UIValue } from 'components/UI'
 import { NextPage } from 'next'
 import { Graphics } from 'p5'
 import { useState } from 'react'
-import { ColorValue, Draw, P5, Setup, WindowResized } from 'types/CustomP5'
+import { ColorValue, Draw, Setup, WindowResized } from 'types/CustomP5'
 import createGrain from 'util/createGrain'
 import createGrid from 'util/createGrid'
 import createOverlay from 'util/createOverlay'
@@ -77,7 +77,7 @@ const KeepItWavyMorganDavy: NextPage = () => {
 
     p5.background(background)
     p5.strokeWeight(2.5)
-    p5.frameRate(12)
+    p5.frameRate(1)
 
     grid.forEach(([x, y]) => {
       const a: number = p5.noise(x / nScl, y / nScl) * nStr
@@ -109,21 +109,9 @@ const KeepItWavyMorganDavy: NextPage = () => {
       createGrid(gridDensity).map(([u, v]) => {
         const x = p5.lerp(0, p5.width, u)
         const y = p5.lerp(0, p5.height, v)
-
         return [x, y]
       })
     )
-  }
-
-  const particle = (p5: P5, x: number, y: number) => {
-    const a: number = p5.noise(x / nScl, y / nScl) * nStr
-    const cos: number = x + Math.cos(a) * speed
-    const sin: number = y + Math.sin(a) * speed
-    const isInBounds: boolean =
-      cos > margin &&
-      cos < p5.width - margin &&
-      sin >= margin &&
-      sin < p5.height - margin
   }
 
   return (
@@ -138,7 +126,6 @@ const KeepItWavyMorganDavy: NextPage = () => {
         background={background}
         seed={seed}
         suffix={suffix}
-        // renderSVG
       />
     </>
   )

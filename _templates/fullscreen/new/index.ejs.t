@@ -6,11 +6,15 @@ import { NextPage } from 'next'
 import { Draw } from 'types/CustomP5'
 import signature from 'util/signature'
 
-const draw: Draw = p5 => {
 
-  signature(p5)
+const <%= h.changeCase.pascal(name) %>: NextPage = () => {
+
+  const draw: Draw = p5 => {
+
+    signature(p5)
+  }
+
+  return <SketchWrapper draw={draw} />
 }
-
-const <%= h.changeCase.pascal(name) %>: NextPage = () => <SketchWrapper draw={draw} />
 
 export default <%= h.changeCase.pascal(name) %>

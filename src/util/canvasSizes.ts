@@ -4,16 +4,17 @@ export interface PaperSizes {
   [key: string]: number[]
 }
 
+// Sizes are for 96 DPI
 const paperSizes: PaperSizes = {
-  A0: [9933, 14043],
+  A0: [3179, 4494],
 
-  A1: [7016, 9933],
+  A1: [2245, 3179],
 
-  A2: [4961, 7016],
+  A2: [1587, 2245],
 
-  A3: [3508, 4961],
+  A3: [1123, 1587],
 
-  A4: [2480, 3508],
+  A4: [794, 1123],
 }
 
 export const getDimensions = (paperSize: PaperSize) => paperSizes[paperSize]

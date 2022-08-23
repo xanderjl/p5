@@ -3,6 +3,7 @@ import { NextPage } from 'next'
 import { useState } from 'react'
 import { ColorValue, Draw, P5 } from 'types/CustomP5'
 import { getDimensions } from 'util/canvasSizes'
+import convertSeed from 'util/convertSeed'
 import signature from 'util/signature'
 
 const PlotFlowField: NextPage = () => {
@@ -11,7 +12,8 @@ const PlotFlowField: NextPage = () => {
   const background: ColorValue = [255, 253, 252]
   let margin: number
   const numNodes: number = 200
-  const [seed, setSeed] = useState<number>(0)
+  const phrase: string = 'Xander Low'
+  const [seed] = useState<number>(convertSeed(phrase))
 
   const particle = (
     p5: P5,
@@ -28,7 +30,7 @@ const PlotFlowField: NextPage = () => {
     p5.beginShape()
     Array.from({ length }, () => {
       let a: number = p5.noise(x / nScl, y / nScl) * nStr
-      const s: number = p5.random(-speed * 0.5, speed)
+      const s: number = p5.random(speed)
       const inBounds: boolean =
         x >= margin &&
         x <= p5.width - margin &&

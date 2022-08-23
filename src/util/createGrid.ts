@@ -1,10 +1,10 @@
-const createGrid = (count: number) => {
+const createGrid = (rows: number, cols: number = rows) => {
   const points: number[][] = []
 
-  Array.from({ length: count }, (_, u) =>
-    Array.from({ length: count }, (_, v) => {
-      const x = u / (count - 1)
-      const y = v / (count - 1)
+  Array.from({ length: rows }, (_, u) =>
+    Array.from({ length: cols }, (_, v) => {
+      const x = u / (rows - 1)
+      const y = v / (cols - 1)
       points.push([x, y])
     })
   )

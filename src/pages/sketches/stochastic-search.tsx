@@ -1,6 +1,5 @@
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
-import p5 from 'p5'
 import { useState } from 'react'
 import { ColorValue, Draw, P5 } from 'types/CustomP5'
 import { getDimensions } from 'util/canvasSizes'
@@ -21,15 +20,17 @@ class Circle {
     this.r = r
   }
 
-  draw = () => {
+  collides = (c: Circle): boolean => {
+    if (this.p5.dist(this.x, this.y, c.x, c.y) < this.r + c.r) {
+      return true
+    }
+
+    return false
+  }
+
+  draw = (): void => {
     this.p5.ellipse(this.x, this.y, this.r * 2, this.r * 2)
   }
-}
-
-const isValidCircle = (circle: Circle): boolean => {
-  if (circle.x) {
-  }
-  return true
 }
 
 const StochasticSearch: NextPage = () => {
@@ -39,6 +40,16 @@ const StochasticSearch: NextPage = () => {
   const [failedTries, setFailedTries] = useState<number>(0)
   let margin: number
   let circles: Circle[]
+
+  const isValidCircle = (circle: Circle): boolean => {
+    // TODO: refactor to use filter
+    circles.forEach(c => {
+      if (circle.collides(c)) {
+        return false
+      }
+    })
+    return true
+  }
 
   const draw: Draw = p5 => {
     // methods for renderSVG performance

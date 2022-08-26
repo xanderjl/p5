@@ -1,18 +1,44 @@
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
+import p5 from 'p5'
+import { useState } from 'react'
 import { ColorValue, Draw, P5 } from 'types/CustomP5'
 import { getDimensions } from 'util/canvasSizes'
 import signature from 'util/signature'
 
-const circle = (p5: P5, x: number, y: number, r: number) => {
-  p5.ellipse(x, y, r * 2, r * 2)
+// Read More: https://sighack.com/post/circle-packing-using-stochastic-search
+
+class Circle {
+  p5: P5
+  x: number
+  y: number
+  r: number
+
+  constructor(p5: P5, x: number, y: number, r: number) {
+    this.p5 = p5
+    this.x = x
+    this.y = y
+    this.r = r
+  }
+
+  draw = () => {
+    this.p5.ellipse(this.x, this.y, this.r * 2, this.r * 2)
+  }
+}
+
+const isValidCircle = (circle: Circle): boolean => {
+  if (circle.x) {
+  }
+  return true
 }
 
 const StochasticSearch: NextPage = () => {
   const dimensions: number[] = getDimensions('A4')
   const padding: number[] = [40]
   const background: ColorValue = [255, 253, 252]
+  const [failedTries, setFailedTries] = useState<number>(0)
   let margin: number
+  let circles: Circle[]
 
   const draw: Draw = p5 => {
     // methods for renderSVG performance
@@ -24,6 +50,24 @@ const StochasticSearch: NextPage = () => {
 
     // global styles
     p5.noFill()
+
+    // generate array of circles
+    const nc = new Circle(
+      p5,
+      p5.random(p5.width - margin),
+      p5.random(p5.height - margin),
+      16
+    )
+
+    if (isValidCircle(nc)) {
+      nc.draw()
+      circles.push(nc)
+    } else {
+      setFailedTries(failedTries + 1)
+      if (failedTries > 16 * 1024) {
+        p5.noLoop()
+      }
+    }
 
     // stochastic search
 

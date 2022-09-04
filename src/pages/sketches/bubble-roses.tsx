@@ -8,7 +8,7 @@ import convertSeed from 'util/convertSeed'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
-const PerlinLines: NextPage = () => {
+const BubbleRoses: NextPage = () => {
   const dimensions: number[] = getDimensions('A4')
   const padding: number[] = [40]
   const coral: ColorValue = [255, 141, 161]
@@ -130,4 +130,4 @@ const PerlinLines: NextPage = () => {
   )
 }
 
-export default PerlinLines
+export default BubbleRoses

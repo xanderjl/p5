@@ -13,6 +13,7 @@ interface Setup {
   pixelDensity?: number
   seed?: number
   renderSVG?: boolean
+  noLoop?: boolean
 }
 
 const setupDefaults = ({
@@ -27,6 +28,7 @@ const setupDefaults = ({
   pixelDensity,
   seed,
   renderSVG,
+  noLoop,
 }: Setup): void => {
   const usedWidth = dimensions ? dimensions[0] : width ? width : p5.windowWidth
   const usedHeight = dimensions
@@ -48,6 +50,8 @@ const setupDefaults = ({
 
   seed && p5.randomSeed(seed)
   seed && p5.noiseSeed(seed)
+
+  noLoop && p5.noLoop()
 
   if (usedWidth > p5.windowWidth || usedHeight > p5.windowHeight) {
     if (aspectRatio > windowRatio) {

@@ -19,6 +19,8 @@ import {
   windowResizedDefaults,
 } from 'util/defaults'
 
+import UI, { UIValue } from './UI'
+
 export interface SketchWrapperProps
   extends Omit<SketchProps, 'keyPressed' | 'mouseClicked' | 'setup'> {
   setup?: Setup
@@ -35,6 +37,9 @@ export interface SketchWrapperProps
   pixelDensity?: number
   seed?: number
   renderSVG?: boolean
+  enableUI?: boolean
+  UIValues?: UIValue[]
+  noLoop?: boolean
 }
 
 const Sketch = dynamic<SketchWrapperProps>(
@@ -64,6 +69,9 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   pixelDensity,
   seed,
   renderSVG,
+  enableUI,
+  UIValues,
+  noLoop,
   ...rest
 }) => {
   const os = useGetOs()
@@ -81,6 +89,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       renderSVG,
       seed,
       pixelDensity,
+      noLoop,
     })
     setup && setup(p5, canvasParentRef)
   }
@@ -90,6 +99,8 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       p5.noiseSeed(seed)
       p5.randomSeed(seed)
     }
+
+    noLoop && p5.noLoop()
 
     draw && draw(p5)
   }
@@ -103,6 +114,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       padding,
       background,
       seed,
+      noLoop,
     })
     windowResized && windowResized(p5)
   }
@@ -128,33 +140,38 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       dimensions,
       background,
       renderSVG,
+      noLoop,
     })
     keyPressed && keyPressed(p5, event)
   }
   return (
-    <Box
-      css={{
-        '.canvas-wrapper': {
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flex: 1,
-          minHeight: '100vh',
-        },
-        '.p5Canvas': {
-          boxShadow: '1px 3px 6px -1px rgba(0, 0, 0, 0.5)',
-        },
-      }}
-    >
-      <Sketch
-        className="canvas-wrapper"
-        setup={defaultSetup}
-        draw={defaultDraw}
-        windowResized={defaultWindowResized}
-        keyPressed={defaultKeyPressed}
-        {...rest}
-      />
-    </Box>
+    <>
+      {enableUI && <UI values={UIValues} noLoop={noLoop} />}
+      <Box
+        css={{
+          '.canvas-wrapper': {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: 1,
+            minHeight: '100vh',
+          },
+          '.p5Canvas': {
+            boxShadow: '1px 3px 6px -1px rgba(0, 0, 0, 0.5)',
+          },
+        }}
+      >
+        <Sketch
+          className='canvas-wrapper'
+          setup={defaultSetup}
+          draw={defaultDraw}
+          windowResized={defaultWindowResized}
+          keyPressed={defaultKeyPressed}
+          noLoop={noLoop}
+          {...rest}
+        />
+      </Box>
+    </>
   )
 }
 

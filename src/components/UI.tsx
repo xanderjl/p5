@@ -14,6 +14,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import { Dispatch, FC, SetStateAction } from 'react'
 
 export interface UIValue {
@@ -24,9 +25,14 @@ export interface UIValue {
 }
 
 export interface UIProps {
-  values: UIValue[]
+  values?: UIValue[]
+  noLoop?: boolean
 }
-const UI: FC<UIProps> = ({ values }) => {
+const UI: FC<UIProps> = ({ values, noLoop }) => {
+  const { pathname } = useRouter()
+  const splitPath: string[] = pathname.split('/')
+  const title: string = splitPath[splitPath.length - 1]
+
   return (
     <Accordion
       position='absolute'
@@ -45,13 +51,13 @@ const UI: FC<UIProps> = ({ values }) => {
       <AccordionItem border='none'>
         <AccordionButton>
           <Box flex={1} textAlign='left'>
-            UI
+            {title}
           </Box>
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel>
           <VStack align='stretch' spacing={6}>
-            {values.map((v, i) => {
+            {values?.map((v, i) => {
               const { label, value, setValue, max } = v
 
               return (
@@ -73,7 +79,13 @@ const UI: FC<UIProps> = ({ values }) => {
                     defaultValue={value}
                     value={value}
                     max={max}
-                    onChange={v => setValue(v)}
+                    onChange={v => {
+                      setValue(v)
+                      if (typeof window !== 'undefined' && noLoop) {
+                        window.p5.loop()
+                        window.p5.noLoop()
+                      }
+                    }}
                   >
                     <SliderTrack>
                       <SliderFilledTrack />

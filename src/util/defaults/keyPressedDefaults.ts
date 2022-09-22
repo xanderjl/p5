@@ -12,6 +12,7 @@ export interface KeyPressed {
   dimensions?: number[]
   background?: ColorValue
   renderSVG?: boolean
+  noLoop?: boolean
 }
 
 const keyPressed = ({
@@ -24,6 +25,7 @@ const keyPressed = ({
   dimensions,
   background,
   renderSVG,
+  noLoop,
 }: KeyPressed) => {
   if (os === 'mac') {
     if (event.key === 's' && event.metaKey) {
@@ -34,7 +36,7 @@ const keyPressed = ({
         ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
       p5.pixelDensity(ratio)
       background && p5.background(background as unknown as Color)
-      p5.draw()
+      noLoop ? (p5.loop(), p5.noLoop()) : p5.draw()
       renderSVG ? p5.save(fileName) : p5.saveCanvas(fileName, 'png')
     }
   } else {
@@ -46,7 +48,7 @@ const keyPressed = ({
         ((dimensions && dimensions[0]) ?? width ?? p5.width) / p5.width
       p5.pixelDensity(ratio)
       background && p5.background(background as unknown as Color)
-      p5.draw()
+      noLoop ? (p5.loop(), p5.noLoop()) : p5.draw()
       renderSVG ? p5.save(fileName) : p5.saveCanvas(fileName, 'png')
     }
   }

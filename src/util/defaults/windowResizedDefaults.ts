@@ -9,6 +9,7 @@ interface WindowResized {
   padding?: number[]
   background?: ColorValue
   seed?: number
+  noLoop?: boolean
 }
 
 const windowResizedDefaults = ({
@@ -19,6 +20,7 @@ const windowResizedDefaults = ({
   padding,
   background,
   seed,
+  noLoop,
 }: WindowResized) => {
   const usedWidth = dimensions ? dimensions[0] : width ? width : p5.windowWidth
   const usedHeight = dimensions
@@ -54,7 +56,8 @@ const windowResizedDefaults = ({
   }
 
   background && p5.background(background as unknown as Color)
-  p5.loop()
+
+  noLoop ? (p5.loop(), p5.noLoop()) : p5.loop()
 }
 
 export default windowResizedDefaults

@@ -59,6 +59,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   draw,
   windowResized,
   keyPressed,
+  mouseClicked,
   suffix,
   padding,
   width,
@@ -71,7 +72,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   renderSVG,
   enableUI,
   UIValues,
-  noLoop,
+  noLoop = false,
   ...rest
 }) => {
   const os = useGetOs()
@@ -89,7 +90,6 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       renderSVG,
       seed,
       pixelDensity,
-      noLoop,
     })
     setup && setup(p5, canvasParentRef)
   }
@@ -116,8 +116,10 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       seed,
       noLoop,
     })
+
     windowResized && windowResized(p5)
   }
+
   const date = new Date().toLocaleString('en-US', {
     month: '2-digit',
     day: '2-digit',
@@ -142,11 +144,19 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
       renderSVG,
       noLoop,
     })
+
     keyPressed && keyPressed(p5, event)
   }
+
+  const defaultMouseClicked: MouseClicked = (p5, event) => {
+    noLoop && p5.loop(), p5.noLoop
+
+    mouseClicked && mouseClicked(p5, event)
+  }
+
   return (
     <>
-      {enableUI && <UI values={UIValues} noLoop={noLoop} />}
+      {UIValues?.length && <UI values={UIValues} />}
       <Box
         css={{
           '.canvas-wrapper': {
@@ -167,6 +177,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
           draw={defaultDraw}
           windowResized={defaultWindowResized}
           keyPressed={defaultKeyPressed}
+          mouseClicked={defaultMouseClicked}
           noLoop={noLoop}
           {...rest}
         />

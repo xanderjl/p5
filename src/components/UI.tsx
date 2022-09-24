@@ -26,9 +26,8 @@ export interface UIValue {
 
 export interface UIProps {
   values?: UIValue[]
-  noLoop?: boolean
 }
-const UI: FC<UIProps> = ({ values, noLoop }) => {
+const UI: FC<UIProps> = ({ values }) => {
   const { pathname } = useRouter()
   const splitPath: string[] = pathname.split('/')
   const title: string = splitPath[splitPath.length - 1]
@@ -79,13 +78,7 @@ const UI: FC<UIProps> = ({ values, noLoop }) => {
                     defaultValue={value}
                     value={value}
                     max={max}
-                    onChange={v => {
-                      setValue(v)
-                      if (typeof window !== 'undefined' && noLoop) {
-                        window.p5.loop()
-                        window.p5.noLoop()
-                      }
-                    }}
+                    onChange={v => setValue(v)}
                   >
                     <SliderTrack>
                       <SliderFilledTrack />

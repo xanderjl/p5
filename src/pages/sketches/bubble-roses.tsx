@@ -1,5 +1,5 @@
 import SketchWrapper from 'components/SketchWrapper'
-import UI, { UIValue } from 'components/UI'
+import { UIValue } from 'components/UI'
 import { NextPage } from 'next'
 import { useState } from 'react'
 import { ColorValue, Draw, Setup, WindowResized } from 'types/CustomP5'
@@ -112,20 +112,18 @@ const BubbleRoses: NextPage = () => {
   }
 
   return (
-    <>
-      <UI values={values} />
-      <SketchWrapper
-        setup={setup}
-        draw={draw}
-        windowResized={windowResized}
-        dimensions={dimensions}
-        padding={padding}
-        seed={seed}
-        suffix={suffix}
-        renderSVG
-        noLoop
-      />
-    </>
+    <SketchWrapper
+      setup={setup}
+      draw={draw}
+      windowResized={windowResized}
+      dimensions={dimensions}
+      padding={padding}
+      seed={seed}
+      suffix={suffix}
+      UIValues={values}
+      renderSVG
+      noLoop
+    />
   )
 }
 

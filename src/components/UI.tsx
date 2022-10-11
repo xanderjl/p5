@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  forwardRef,
   HStack,
   Input,
   Slider,
@@ -15,7 +16,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { Dispatch, FC, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 export interface UIValue {
   label: string
@@ -26,14 +27,22 @@ export interface UIValue {
 
 export interface UIProps {
   values?: UIValue[]
+  noLoop?: boolean
 }
-const UI: FC<UIProps> = ({ values }) => {
+const UI = forwardRef<UIProps, 'div'>(({ values, noLoop }, ref) => {
   const { pathname } = useRouter()
   const splitPath: string[] = pathname.split('/')
   const title: string = splitPath[splitPath.length - 1]
+  const loop = () => {
+    if (typeof window !== 'undefined' && noLoop) {
+      window.p5.loop()
+      window.p5.noLoop()
+    }
+  }
 
   return (
     <Accordion
+      ref={ref}
       position='absolute'
       maxW='max-content'
       mt={6}
@@ -66,7 +75,10 @@ const UI: FC<UIProps> = ({ values }) => {
                     <Input
                       type='number'
                       value={value}
-                      onChange={e => setValue(parseInt(e.target.value))}
+                      onChange={e => {
+                        setValue(parseInt(e.target.value))
+                        loop()
+                      }}
                       maxW={`${Math.floor(value.toString().length * 2)}ch`}
                       p={0}
                       textAlign='center'
@@ -78,7 +90,10 @@ const UI: FC<UIProps> = ({ values }) => {
                     defaultValue={value}
                     value={value}
                     max={max}
-                    onChange={v => setValue(v)}
+                    onChange={v => {
+                      setValue(v)
+                      loop()
+                    }}
                   >
                     <SliderTrack>
                       <SliderFilledTrack />
@@ -93,6 +108,6 @@ const UI: FC<UIProps> = ({ values }) => {
       </AccordionItem>
     </Accordion>
   )
-}
+})
 
 export default UI

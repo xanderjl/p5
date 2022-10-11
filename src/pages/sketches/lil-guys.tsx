@@ -1,5 +1,5 @@
 import SketchWrapper from 'components/SketchWrapper'
-import UI, { UIValue } from 'components/UI'
+import { UIValue } from 'components/UI'
 import { NextPage } from 'next'
 import { useState } from 'react'
 import { ColorValue, Draw, P5 } from 'types/CustomP5'
@@ -100,16 +100,16 @@ const LilGuys: NextPage = () => {
   }
 
   return (
-    <>
-      <UI values={values} />
-      <SketchWrapper
-        draw={draw}
-        dimensions={dimensions}
-        padding={padding}
-        background={background}
-        seed={seed}
-      />
-    </>
+    <SketchWrapper
+      draw={draw}
+      dimensions={dimensions}
+      padding={padding}
+      background={background}
+      seed={seed}
+      UIValues={values}
+      renderSVG
+      noLoop
+    />
   )
 }
 

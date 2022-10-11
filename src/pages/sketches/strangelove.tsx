@@ -67,7 +67,7 @@ const Strangelove: NextPage = () => {
     } else {
       setSeed(seed + 1)
     }
-    p5.clear()
+    p5.clear(0, 0, 0, 0)
     p5.loop()
     p5.noLoop()
   }

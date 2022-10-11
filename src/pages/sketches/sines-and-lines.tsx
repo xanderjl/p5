@@ -21,7 +21,7 @@ const SinesAndLines: NextPage = () => {
   ]
 
   const draw: Draw = p5 => {
-    p5.clear()
+    p5.clear(0, 0, 0, 0)
 
     Array.from({ length: 200 }, () => {
       p5.ellipse(p5.random(p5.width), p5.random(p5.height), 20, 20)

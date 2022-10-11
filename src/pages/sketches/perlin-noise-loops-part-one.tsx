@@ -47,7 +47,7 @@ const windowResized: WindowResized = p5 => {
     : p5.windowWidth
   rMin = bounds * 0.25
   rMax = bounds * 0.5
-  p5.clear()
+  p5.clear(0, 0, 0, 0)
   p5.redraw()
 }
 

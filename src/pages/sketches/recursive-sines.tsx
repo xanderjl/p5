@@ -13,7 +13,7 @@ const RecursiveSines: NextPage = () => {
 
   const draw: Draw = p5 => {
     // renderSVG
-    p5.clear()
+    p5.clear(0, 0, 0, 0)
     p5.frameRate(1)
 
     // draw global vars
@@ -39,7 +39,7 @@ const RecursiveSines: NextPage = () => {
     Array.from({ length }, (_, i) => {
       // draw circle
       const length: number = 60
-      const r: number = p5.width * 0.1566 + (i * 10)
+      const r: number = p5.width * 0.1566 + i * 10
       const x1: number = cx + r * Math.cos(0)
       const y1: number = cy + r * Math.sin(0)
       const x2: number = cx + r * Math.cos(p5.TWO_PI)

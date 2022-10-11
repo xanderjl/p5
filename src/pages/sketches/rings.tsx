@@ -30,7 +30,7 @@ const Rings: NextPage = () => {
   }
 
   const draw: Draw = p5 => {
-    p5.clear()
+    p5.clear(0, 0, 0, 0)
 
     // global consts
     const resolution: number =

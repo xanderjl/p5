@@ -44,9 +44,7 @@ const BubbleRoses: NextPage = () => {
   const draw: Draw = p5 => {
     const bubbles: number[][] = []
     // render for svg
-    p5.clear()
-    p5.frameRate(1)
-    // p5.noLoop()
+    p5.clear(0, 0, 0, 0)
 
     // global styles
     p5.noFill()
@@ -125,6 +123,7 @@ const BubbleRoses: NextPage = () => {
         seed={seed}
         suffix={suffix}
         renderSVG
+        noLoop
       />
     </>
   )

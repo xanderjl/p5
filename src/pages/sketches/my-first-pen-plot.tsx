@@ -11,7 +11,7 @@ const MyFirstPenPlot: NextPage = () => {
   let margin: number
 
   const draw: Draw = p5 => {
-    p5.clear()
+    p5.clear(0, 0, 0, 0)
 
     // Draw globals
     margin = p5.width * 0.075

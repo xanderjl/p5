@@ -53,7 +53,7 @@ const StochasticSearch: NextPage = () => {
 
   const draw: Draw = p5 => {
     // methods for renderSVG performance
-    p5.clear()
+    p5.clear(0, 0, 0, 0)
     p5.frameRate(1)
 
     // global vars

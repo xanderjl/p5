@@ -66,7 +66,7 @@ const windowResized: WindowResized = p5 => {
   numSteps = 1
   state = 0
   turnCounter = 1
-  p5.clear()
+  p5.clear(0, 0, 0, 0)
   p5.loop()
 }
 

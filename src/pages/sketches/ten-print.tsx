@@ -13,7 +13,7 @@ const setup: Setup = (p5, canvasParentRef) => {
   p5.createCanvas(p5.windowWidth, p5.windowHeight).parent(canvasParentRef)
   backgroundCanvas = p5.createGraphics(p5.windowWidth, p5.windowHeight)
   backgroundCanvas.background(0)
-  backgroundCanvas.clear()
+  backgroundCanvas.clear(0, 0, 0, 0)
 }
 
 const draw: Draw = p5 => {
@@ -43,7 +43,7 @@ const draw: Draw = p5 => {
 
 const windowResized: WindowResized = p5 => {
   p5.resizeCanvas(p5.windowWidth, p5.windowHeight)
-  backgroundCanvas.clear()
+  backgroundCanvas.clear(0, 0, 0, 0)
   x = 0
   y = 0
   p5.isLooping() === false && p5.loop()

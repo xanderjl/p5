@@ -17,7 +17,7 @@ const Orb: NextPage = () => {
 
   const draw: Draw = p5 => {
     // renderSVG defaults
-    p5.clear()
+    p5.clear(0, 0, 0, 0)
     p5.frameRate(1)
     p5.noLoop()
 

@@ -40,7 +40,7 @@ const draw: Draw = p5 => {
   margin = p5.width * 0.1
   img.resize(p5.width, p5.height)
   p5.image(shadows, 0, 0)
-  shadows.clear()
+  shadows.clear(0, 0, 0, 0)
   shadows.noStroke()
   shadows.fill(0, 0, 120, 80)
 

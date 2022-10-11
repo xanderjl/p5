@@ -72,7 +72,7 @@ const KeepItWavyMorganDavy: NextPage = () => {
   }
 
   const draw: Draw = p5 => {
-    p5.clear()
+    p5.clear(0, 0, 0, 0)
     margin = p5.width * 0.1
 
     p5.background(background)

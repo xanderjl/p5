@@ -36,7 +36,7 @@ const setup: Setup = (p5, canvasParentRef) => {
   redrawButton.position(80, 10)
   redrawButton.mouseClicked(() => {
     step = 0
-    p5.clear()
+    p5.clear(0, 0, 0, 0)
     p5.background(255)
     p5.redraw()
   })

@@ -1,4 +1,4 @@
-import type P5Types from 'p5'
+import type P5Types from '@types/p5'
 import { KeyboardEvent, MouseEvent } from 'react'
 
 export type P5Function = (p5: P5) => void

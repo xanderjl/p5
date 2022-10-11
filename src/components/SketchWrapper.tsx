@@ -1,9 +1,9 @@
 import { Box } from '@chakra-ui/react'
+import { SketchProps } from '@react-p5/react-p5'
 import useGetOs from 'hooks/useGetOs'
 import dynamic from 'next/dynamic'
 import { RENDERER } from 'p5'
-import { ComponentClass, FC } from 'react'
-import { SketchProps } from 'react-p5'
+import { ComponentClass, FC, useRef } from 'react'
 import {
   ColorValue,
   KeyPressed,
@@ -44,7 +44,7 @@ export interface SketchWrapperProps
 
 const Sketch = dynamic<SketchWrapperProps>(
   () =>
-    import('react-p5').then(mod => {
+    import('@react-p5/react-p5').then(mod => {
       require('p5.js-svg')
 
       return mod.default
@@ -76,6 +76,7 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
   ...rest
 }) => {
   const os = useGetOs()
+  const uiRef = useRef<HTMLDivElement>(null)
 
   const defaultSetup: Setup = (p5, canvasParentRef) => {
     setupDefaults({
@@ -148,15 +149,9 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
     keyPressed && keyPressed(p5, event)
   }
 
-  const defaultMouseClicked: MouseClicked = (p5, event) => {
-    noLoop && p5.loop(), p5.noLoop
-
-    mouseClicked && mouseClicked(p5, event)
-  }
-
   return (
     <>
-      {UIValues?.length && <UI values={UIValues} />}
+      {UIValues?.length && <UI ref={uiRef} values={UIValues} noLoop={noLoop} />}
       <Box
         css={{
           '.canvas-wrapper': {
@@ -177,7 +172,6 @@ const SketchWrapper: FC<SketchWrapperProps> = ({
           draw={defaultDraw}
           windowResized={defaultWindowResized}
           keyPressed={defaultKeyPressed}
-          mouseClicked={defaultMouseClicked}
           noLoop={noLoop}
           {...rest}
         />

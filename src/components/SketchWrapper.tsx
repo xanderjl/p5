@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import { SketchProps } from '@react-p5/react-p5'
+import { SketchProps } from '@react-p5/core'
 import useGetOs from 'hooks/useGetOs'
 import dynamic from 'next/dynamic'
 import { RENDERER } from 'p5'
@@ -44,7 +44,7 @@ export interface SketchWrapperProps
 
 const Sketch = dynamic<SketchWrapperProps>(
   () =>
-    import('@react-p5/react-p5').then(mod => {
+    import('@react-p5/core').then(mod => {
       require('p5.js-svg')
 
       return mod.default

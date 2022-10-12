@@ -16,7 +16,7 @@
     "@chakra-ui/react": "^2.3.5",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
-    "@react-p5/react-p5": "^0.1.0",
+    "@react-p5/core": "^1.0.0",
     "date-fns": "^2.29.3",
     "framer-motion": "^7.5.3",
     "fuse.js": "^6.6.2",

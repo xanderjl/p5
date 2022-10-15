@@ -1,7 +1,7 @@
+import { convertSeed } from '@react-p5/utils'
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
 import { ColorValue, Draw, P5 } from 'types/CustomP5'
-import convertSeed from 'util/convertSeed'
 import signature from 'util/signature'
 
 type Line = (p5: P5) => {

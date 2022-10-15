@@ -1,9 +1,8 @@
+import { convertSeed, createGrain } from '@react-p5/utils'
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
 import { Graphics } from 'p5'
-import { ColorValue, Draw, Setup, WindowResized } from 'types/CustomP5'
-import convertSeed from 'util/convertSeed'
-import createGrain from 'util/createGrain'
+import { ColorValue, Draw, Setup } from 'types/CustomP5'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 

@@ -1135,6 +1135,15 @@
     react "^18.2.0"
     react-dom "^18.2.0"
 
+"@react-p5/utils@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@react-p5/utils/-/utils-0.1.3.tgz#709b808e1f7edb3f1a0429df5fea9c4cd426000b"
+  integrity sha512-+uj2Tohd4/AUei8buX/PlZGuKUAk6mTihu5PDtfF083SN4Wy6iZjcEACJceoJPo0gZBTUjx3kp7b9JfsP1x+Kg==
+  dependencies:
+    p5 "^1.4.2"
+    react "^18.2.0"
+    react-dom "^18.2.0"
+
 "@rushstack/eslint-patch@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.1.3.tgz#6801033be7ff87a6b7cadaf5b337c9f366a3c4b0"

@@ -1,12 +1,11 @@
+import { createGrain, createOverlay } from '@react-p5/utils'
 import SketchWrapper from 'components/SketchWrapper'
 import UI, { UIValue } from 'components/UI'
 import { NextPage } from 'next'
 import { Graphics } from 'p5'
 import { useState } from 'react'
 import { ColorValue, Draw, Setup, WindowResized } from 'types/CustomP5'
-import createGrain from 'util/createGrain'
 import createGrid from 'util/createGrid'
-import createOverlay from 'util/createOverlay'
 import signature from 'util/signature'
 
 const KeepItWavyMorganDavy: NextPage = () => {

@@ -1,11 +1,10 @@
+import { convertSeed, createGrain } from '@react-p5/utils'
 import SketchWrapper from 'components/SketchWrapper'
 import UI, { UIValue } from 'components/UI'
 import { NextPage } from 'next'
 import { Graphics } from 'p5'
 import { useState } from 'react'
 import { ColorValue, Draw, P5, Setup } from 'types/CustomP5'
-import convertSeed from 'util/convertSeed'
-import createGrain from 'util/createGrain'
 import signature from 'util/signature'
 
 const OnThe_30thDay: NextPage = () => {

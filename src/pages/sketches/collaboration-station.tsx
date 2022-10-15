@@ -1,9 +1,8 @@
+import { convertSeed, createGrain } from '@react-p5/utils'
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
 import type { Color, Graphics } from 'p5'
 import { ColorValue, Draw, P5, Setup } from 'types/CustomP5'
-import convertSeed from 'util/convertSeed'
-import createGrain from 'util/createGrain'
 import createGrid from 'util/createGrid'
 
 const CollaborationStation: NextPage = () => {

@@ -1,10 +1,10 @@
+import { convertSeed } from '@react-p5/utils'
 import SketchWrapper from 'components/SketchWrapper'
 import { UIValue } from 'components/UI'
 import { NextPage } from 'next'
 import { useState } from 'react'
 import { ColorValue, Draw, Setup, WindowResized } from 'types/CustomP5'
 import { getDimensions } from 'util/canvasSizes'
-import convertSeed from 'util/convertSeed'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 

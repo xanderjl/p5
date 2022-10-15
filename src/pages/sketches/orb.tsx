@@ -1,9 +1,9 @@
+import { convertSeed } from '@react-p5/utils'
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
 import { Vector } from 'p5'
 import { ColorValue, Draw } from 'types/CustomP5'
 import { getDimensions } from 'util/canvasSizes'
-import convertSeed from 'util/convertSeed'
 import signature from 'util/signature'
 
 const Orb: NextPage = () => {

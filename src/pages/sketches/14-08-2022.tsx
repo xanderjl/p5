@@ -1,12 +1,14 @@
+import {
+  convertSeed,
+  createGrain,
+  createOverlay,
+  linearGradient,
+} from '@react-p5/utils'
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
 import { Graphics } from 'p5'
 import { ColorValue, Draw, P5, Setup, WindowResized } from 'types/CustomP5'
-import convertSeed from 'util/convertSeed'
-import createGrain from 'util/createGrain'
 import createGrid from 'util/createGrid'
-import createOverlay from 'util/createOverlay'
-import linearGradient from 'util/linearGradient'
 import signature from 'util/signature'
 
 const phrase: string = 'degradation'

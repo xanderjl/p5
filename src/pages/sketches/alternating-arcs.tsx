@@ -1,8 +1,8 @@
+import { linearGradient } from '@react-p5/utils'
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
 import type { Graphics } from 'p5'
 import { ColorValue, Draw, P5, Setup } from 'types/CustomP5'
-import linearGradient from 'util/linearGradient'
 import signature from 'util/signature'
 
 const width: number = 2048

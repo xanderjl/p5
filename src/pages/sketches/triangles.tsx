@@ -1,6 +1,7 @@
+import { createGrain } from '@react-p5/utils'
 import SketchWrapper from 'components/SketchWrapper'
 import { NextPage } from 'next'
-import { Graphics } from 'p5'
+import type { Graphics } from 'p5'
 import {
   ColorValue,
   Draw,
@@ -9,7 +10,6 @@ import {
   Setup,
   WindowResized,
 } from 'types/CustomP5'
-import createGrain from 'util/createGrain'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 

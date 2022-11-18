@@ -1,13 +1,13 @@
+import { ColorValue, Draw, P5, Setup, WindowResized } from '@react-p5/core'
 import {
   convertSeed,
   createGrain,
   createOverlay,
   linearGradient,
 } from '@react-p5/utils'
-import SketchWrapper from 'components/SketchWrapper'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Graphics } from 'p5'
-import { ColorValue, Draw, P5, Setup, WindowResized } from 'types/CustomP5'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
@@ -187,7 +187,7 @@ const windowResized: WindowResized = p5 => {
 }
 
 const _14_08_2022: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     setup={setup}
     draw={draw}
     windowResized={windowResized}

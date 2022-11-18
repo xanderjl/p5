@@ -1,7 +1,3 @@
-import SketchWrapper from 'components/SketchWrapper'
-import { NextPage } from 'next'
-import { Graphics } from 'p5'
-import { useState } from 'react'
 import {
   ColorValue,
   Draw,
@@ -10,7 +6,11 @@ import {
   P5,
   Setup,
   WindowResized,
-} from 'types/CustomP5'
+} from '@react-p5/core'
+import Sketch from 'components/Sketch'
+import { NextPage } from 'next'
+import { Graphics } from 'p5'
+import { useState } from 'react'
 import signature from 'util/signature'
 
 type Line = (p5: P5) => {
@@ -118,7 +118,7 @@ const KeepItWavy: NextPage = () => {
   }
 
   const mouseClicked: MouseClicked = (p5, e) => {
-    if (e.shiftKey) {
+    if (e?.shiftKey) {
       setSeed(seed - 1)
     } else {
       setSeed(seed + 1)
@@ -128,7 +128,7 @@ const KeepItWavy: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       setup={setup}
       draw={draw}
       keyPressed={keyPressed}

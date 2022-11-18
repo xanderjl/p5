@@ -1,8 +1,8 @@
-import SketchWrapper from 'components/SketchWrapper'
-import { UIValue } from 'components/UI'
+import { ColorValue, Draw } from '@react-p5/core'
+import { UIValue } from '@react-p5/sketch'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { useState } from 'react'
-import { ColorValue, Draw } from 'types/CustomP5'
 import { getDimensions } from 'util/canvasSizes'
 import signature from 'util/signature'
 
@@ -31,7 +31,7 @@ const SinesAndLines: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       draw={draw}
       dimensions={dimensions}
       padding={padding}

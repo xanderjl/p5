@@ -1,9 +1,9 @@
+import { ColorValue, Draw, P5, Setup } from '@react-p5/core'
 import { convertSeed, createGrain, linearGradient } from '@react-p5/utils'
 import { createOverlay } from '@react-p5/utils'
-import SketchWrapper from 'components/SketchWrapper'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import type { Graphics } from 'p5'
-import { ColorValue, Draw, P5, Setup } from 'types/CustomP5'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
@@ -127,7 +127,7 @@ const draw: Draw = p5 => {
 }
 
 const ShapesAndColors: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     setup={setup}
     draw={draw}
     dimensions={dimensions}

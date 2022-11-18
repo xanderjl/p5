@@ -1,4 +1,5 @@
-import { P5, WeightedColor } from 'types/CustomP5'
+import { P5 } from '@react-p5/core'
+import { WeightedColor } from 'types/CustomP5'
 
 export const createWeightedSelector = (p5: P5, colors: WeightedColor[]) => {
   const weightedArray: WeightedColor['value'][] = []

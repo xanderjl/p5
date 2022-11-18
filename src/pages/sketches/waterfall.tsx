@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, MouseClicked } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { ColorValue, Draw, MouseClicked } from 'types/CustomP5'
 import signature from 'util/signature'
 
 const width: number = 2048
@@ -59,7 +59,7 @@ const draw: Draw = p5 => {
 }
 
 const mouseClicked: MouseClicked = (p5, e) => {
-  if (e.shiftKey) {
+  if (e?.shiftKey) {
     seed--
   } else {
     seed++
@@ -68,7 +68,7 @@ const mouseClicked: MouseClicked = (p5, e) => {
 }
 
 const Waterfall: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     draw={draw}
     mouseClicked={mouseClicked}
     dimensions={dimensions}

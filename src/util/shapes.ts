@@ -1,4 +1,4 @@
-import { P5 } from 'types/CustomP5'
+import { P5 } from '@react-p5/core'
 
 export const redGrid = (p5: P5, array: number[][], scale: number) => {
   p5.noFill()

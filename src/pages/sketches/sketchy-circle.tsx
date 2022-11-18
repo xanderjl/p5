@@ -1,7 +1,7 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, KeyPressed, MouseClicked } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { useState } from 'react'
-import { ColorValue, Draw, KeyPressed, MouseClicked } from 'types/CustomP5'
 import signature from 'util/signature'
 
 const width: number = 2048
@@ -102,7 +102,7 @@ const SketchyCircle: NextPage = () => {
   }
 
   const mouseClicked: MouseClicked = (p5, e) => {
-    if (e.shiftKey) {
+    if (e?.shiftKey) {
       setSeed(seed - 1)
     } else {
       setSeed(seed + 1)
@@ -116,7 +116,7 @@ const SketchyCircle: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       draw={draw}
       mouseClicked={mouseClicked}
       keyPressed={keyPressed}

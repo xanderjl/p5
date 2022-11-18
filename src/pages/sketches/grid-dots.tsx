@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { Draw, WindowResized } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { Draw, WindowResized } from 'types/CustomP5'
 import { windowResizedDefaults } from 'util/defaults'
 
 interface Point {
@@ -63,7 +63,7 @@ const windowResized: WindowResized = p5 => {
 }
 
 const GridDots: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     draw={draw}
     windowResized={windowResized}
     width={width}

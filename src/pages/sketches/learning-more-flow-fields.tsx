@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { Draw, WindowResized } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { Draw, WindowResized } from 'types/CustomP5'
 
 const draw: Draw = p5 => {
   p5.noLoop()
@@ -45,7 +45,7 @@ const windowResized: WindowResized = p5 => {
 }
 
 const LearningMoreFlowFields: NextPage = () => (
-  <SketchWrapper draw={draw} windowResized={windowResized} background={[0]} />
+  <Sketch draw={draw} windowResized={windowResized} background={[0]} />
 )
 
 export default LearningMoreFlowFields

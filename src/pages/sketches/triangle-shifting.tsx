@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { Draw } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { Draw } from 'types/CustomP5'
 import createGrid from 'util/createGrid'
 import { redGrid } from 'util/shapes'
 
@@ -37,7 +37,7 @@ const draw: Draw = p5 => {
 }
 
 const TriangleShifting: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     draw={draw}
     dimensions={dimensions}
     padding={padding}

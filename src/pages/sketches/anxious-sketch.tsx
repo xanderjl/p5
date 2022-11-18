@@ -1,8 +1,8 @@
+import { ColorValue, Draw, P5, Setup, WindowResized } from '@react-p5/core'
 import { convertSeed } from '@react-p5/utils'
-import SketchWrapper from 'components/SketchWrapper'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import type { Graphics, Vector } from 'p5'
-import { ColorValue, Draw, P5, Setup, WindowResized } from 'types/CustomP5'
 import signature from 'util/signature'
 
 const width: number = 2048
@@ -213,7 +213,7 @@ const windowResized: WindowResized = p5 => {
 }
 
 const AnxiousSketch: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     setup={setup}
     draw={draw}
     windowResized={windowResized}

@@ -1,8 +1,8 @@
+import { ColorValue, Draw, MouseClicked, Setup } from '@react-p5/core'
 import { createGrain } from '@react-p5/utils'
-import SketchWrapper from 'components/SketchWrapper'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Graphics } from 'p5'
-import { ColorValue, Draw, MouseClicked, Setup } from 'types/CustomP5'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
@@ -68,7 +68,7 @@ const draw: Draw = p5 => {
 }
 
 const mouseClicked: MouseClicked = (p5, e) => {
-  if (e.shiftKey) {
+  if (e?.shiftKey) {
     seed--
   } else {
     seed++
@@ -77,7 +77,7 @@ const mouseClicked: MouseClicked = (p5, e) => {
 }
 
 const SinedGrid: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     setup={setup}
     draw={draw}
     mouseClicked={mouseClicked}

@@ -1,7 +1,7 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, MouseClicked } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Color } from 'p5'
-import { ColorValue, Draw, MouseClicked } from 'types/CustomP5'
 import { createWeightedSelector, vancouverIsland } from 'util/colorPalettes'
 
 let seed: number = 0
@@ -76,7 +76,7 @@ const mouseClicked: MouseClicked = p5 => {
 }
 
 const MountainViews: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     draw={draw}
     dimensions={dimensions}
     padding={padding}

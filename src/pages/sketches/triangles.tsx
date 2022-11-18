@@ -1,7 +1,3 @@
-import { createGrain } from '@react-p5/utils'
-import SketchWrapper from 'components/SketchWrapper'
-import { NextPage } from 'next'
-import type { Graphics } from 'p5'
 import {
   ColorValue,
   Draw,
@@ -9,7 +5,11 @@ import {
   P5,
   Setup,
   WindowResized,
-} from 'types/CustomP5'
+} from '@react-p5/core'
+import { createGrain } from '@react-p5/utils'
+import Sketch from 'components/Sketch'
+import { NextPage } from 'next'
+import type { Graphics } from 'p5'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
@@ -168,7 +168,7 @@ const windowResized: WindowResized = p5 => {
 }
 
 const mouseClicked: MouseClicked = (p5, e) => {
-  if (e.shiftKey) {
+  if (e?.shiftKey) {
     seed--
   } else {
     seed++
@@ -178,7 +178,7 @@ const mouseClicked: MouseClicked = (p5, e) => {
 }
 
 const Triangles: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     setup={setup}
     draw={draw}
     windowResized={windowResized}

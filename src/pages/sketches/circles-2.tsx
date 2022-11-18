@@ -1,8 +1,8 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { P5, Setup, WindowResized } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import _ from 'lodash'
 import { NextPage } from 'next'
 import palettes from 'nice-color-palettes'
-import { P5, Setup, WindowResized } from 'types/CustomP5'
 
 interface Circle {
   x: number
@@ -79,7 +79,7 @@ const windowResized: WindowResized = _.debounce((p5: P5) => {
 }, 100)
 
 const CirclesTwo: NextPage = () => (
-  <SketchWrapper setup={setup} windowResized={windowResized} />
+  <Sketch setup={setup} windowResized={windowResized} />
 )
 
 export default CirclesTwo

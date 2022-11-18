@@ -1,7 +1,7 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { Draw, KeyPressed, MouseClicked, P5 } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { useState } from 'react'
-import { Draw, KeyPressed, MouseClicked, P5 } from 'types/CustomP5'
 import createGrid from 'util/createGrid'
 
 const width: number = 2048
@@ -62,7 +62,7 @@ const Strangelove: NextPage = () => {
   const [seed, setSeed] = useState<number>(0)
 
   const mouseClicked: MouseClicked = (p5, e) => {
-    if (e.shiftKey) {
+    if (e?.shiftKey) {
       setSeed(seed - 1)
     } else {
       setSeed(seed + 1)
@@ -77,7 +77,7 @@ const Strangelove: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       draw={draw}
       mouseClicked={mouseClicked}
       keyPressed={keyPressed}

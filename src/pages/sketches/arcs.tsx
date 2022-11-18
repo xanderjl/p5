@@ -1,7 +1,7 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, MouseClicked, P5 } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { useState } from 'react'
-import { ColorValue, Draw, MouseClicked, P5 } from 'types/CustomP5'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
@@ -67,7 +67,7 @@ const Arcs: NextPage = () => {
   const [suffix, setSuffix] = useState<number>()
 
   const mouseClicked: MouseClicked = (p5, e) => {
-    if (e.shiftKey) {
+    if (e?.shiftKey) {
       seed--
     } else {
       seed++
@@ -77,7 +77,7 @@ const Arcs: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       draw={draw}
       mouseClicked={mouseClicked}
       dimensions={dimensions}

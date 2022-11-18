@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { Draw, Setup } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { Draw, Setup } from 'types/CustomP5'
 
 let t: number
 let step: number = 0
@@ -64,6 +64,6 @@ const draw: Draw = p5 => {
   }
 }
 
-const PerlinNoise: NextPage = () => <SketchWrapper setup={setup} draw={draw} />
+const PerlinNoise: NextPage = () => <Sketch setup={setup} draw={draw} />
 
 export default PerlinNoise

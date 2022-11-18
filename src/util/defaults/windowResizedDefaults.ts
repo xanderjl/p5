@@ -1,5 +1,5 @@
+import { ColorValue, P5 } from '@react-p5/core'
 import { Color } from 'p5'
-import { ColorValue, P5 } from 'types/CustomP5'
 
 interface WindowResized {
   p5: P5

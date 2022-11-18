@@ -1,10 +1,10 @@
+import { ColorValue, Draw, P5, Setup } from '@react-p5/core'
+import { UIValue } from '@react-p5/sketch'
 import { convertSeed, createGrain } from '@react-p5/utils'
-import SketchWrapper from 'components/SketchWrapper'
-import UI, { UIValue } from 'components/UI'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Graphics } from 'p5'
 import { useState } from 'react'
-import { ColorValue, Draw, P5, Setup } from 'types/CustomP5'
 import signature from 'util/signature'
 
 const OnThe_30thDay: NextPage = () => {
@@ -146,18 +146,16 @@ const OnThe_30thDay: NextPage = () => {
   }
 
   return (
-    <>
-      <UI values={values} />
-      <SketchWrapper
-        setup={setup}
-        draw={draw}
-        dimensions={dimensions}
-        padding={padding}
-        background={background}
-        seed={seed}
-        suffix={seed}
-      />
-    </>
+    <Sketch
+      setup={setup}
+      draw={draw}
+      dimensions={dimensions}
+      padding={padding}
+      background={background}
+      seed={seed}
+      suffix={seed}
+      UIValues={values}
+    />
   )
 }
 

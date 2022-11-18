@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { ColorValue, Draw } from 'types/CustomP5'
 import { getDimensions } from 'util/canvasSizes'
 import signature from 'util/signature'
 
@@ -61,7 +61,7 @@ const RecursiveSines: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       draw={draw}
       dimensions={dimensions}
       padding={padding}

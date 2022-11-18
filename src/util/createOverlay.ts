@@ -1,5 +1,5 @@
+import type { ColorValue, P5 } from '@react-p5/core'
 import type { Color, Graphics } from 'p5'
-import type { ColorValue, P5 } from 'types/CustomP5'
 const createOverlay = (
   p5: P5,
   background: ColorValue = [255, 253, 252],

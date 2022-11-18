@@ -1,6 +1,6 @@
+import { ColorValue, P5 } from '@react-p5/core'
 import palettes from 'nice-color-palettes'
 import { Color } from 'p5'
-import { ColorValue, P5 } from 'types/CustomP5'
 
 class Agent {
   p5: P5

@@ -1,9 +1,9 @@
 ---
 to: src/pages/sketches/<%= name %>.tsx
 ---
-import SketchWrapper from 'components/SketchWrapper'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { ColorValue, Draw } from 'types/CustomP5'
+import { ColorValue, Draw } from '@react-p5/core'
 import signature from 'util/signature'
 
 const <%= h.changeCase.pascal(name) %>: NextPage = () => {
@@ -19,7 +19,7 @@ const <%= h.changeCase.pascal(name) %>: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       draw={draw}
       dimensions={dimensions}
       padding={padding}

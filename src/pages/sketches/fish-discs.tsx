@@ -1,7 +1,7 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, P5 } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import type { Vector } from 'p5'
-import { ColorValue, Draw, P5 } from 'types/CustomP5'
 import signature from 'util/signature'
 
 const width: number = 2048
@@ -13,7 +13,6 @@ const background: ColorValue = [255, 253, 252]
 const poissonDiscSampling = (p5: P5, radius: number, k: number) => {
   const n: number = 2
   const points: Vector[] = []
-  
 
   return points
 }
@@ -23,7 +22,7 @@ const draw: Draw = p5 => {
 }
 
 const FishDiscs: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     draw={draw}
     dimensions={dimensions}
     padding={padding}

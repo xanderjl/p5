@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { Draw, Setup, WindowResized } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { Draw, Setup, WindowResized } from 'types/CustomP5'
 import { setupDefaults } from 'util/defaults'
 
 const noiseMax = 3
@@ -52,7 +52,7 @@ const windowResized: WindowResized = p5 => {
 }
 
 const PerlinNoiseLoopsPartOne: NextPage = () => (
-  <SketchWrapper setup={setup} draw={draw} windowResized={windowResized} />
+  <Sketch setup={setup} draw={draw} windowResized={windowResized} />
 )
 
 export default PerlinNoiseLoopsPartOne

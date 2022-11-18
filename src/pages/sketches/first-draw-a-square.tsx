@@ -1,9 +1,9 @@
+import { ColorValue, Draw, KeyPressed, MouseClicked, P5 } from '@react-p5/core'
 import Rectangle from 'classes/Rectangle'
-import SketchWrapper from 'components/SketchWrapper'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import palettes from 'nice-color-palettes'
 import { useState } from 'react'
-import { ColorValue, Draw, KeyPressed, MouseClicked, P5 } from 'types/CustomP5'
 import signature from 'util/signature'
 
 const width: number = 2048
@@ -100,7 +100,7 @@ const draw: Draw = p5 => {
 const FirstDrawASquare: NextPage = () => {
   const [suffix, setSuffix] = useState<number>()
   const mouseClicked: MouseClicked = (p5, e) => {
-    if (e.shiftKey) {
+    if (e?.shiftKey) {
       seed--
     } else {
       seed++
@@ -114,7 +114,7 @@ const FirstDrawASquare: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       draw={draw}
       mouseClicked={mouseClicked}
       keyPressed={keyPressed}

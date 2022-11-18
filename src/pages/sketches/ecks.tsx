@@ -1,7 +1,7 @@
+import { ColorValue, Draw, P5 } from '@react-p5/core'
 import { convertSeed } from '@react-p5/utils'
-import SketchWrapper from 'components/SketchWrapper'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { ColorValue, Draw, P5 } from 'types/CustomP5'
 import signature from 'util/signature'
 
 type Line = (p5: P5) => {
@@ -97,7 +97,7 @@ const line: Line = p5 => {
 }
 
 const Ecks: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     draw={draw}
     dimensions={dimensions}
     padding={padding}

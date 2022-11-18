@@ -1,7 +1,7 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, Setup } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import type { Vector } from 'p5'
-import { ColorValue, Draw, Setup } from 'types/CustomP5'
 import { Mover4 } from 'types/Mover'
 import { setupDefaults } from 'util/defaults'
 
@@ -31,6 +31,6 @@ const draw: Draw = p5 => {
   })
 }
 
-const Noc_1_11: NextPage = () => <SketchWrapper setup={setup} draw={draw} />
+const Noc_1_11: NextPage = () => <Sketch setup={setup} draw={draw} />
 
 export default Noc_1_11

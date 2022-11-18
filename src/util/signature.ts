@@ -1,5 +1,5 @@
+import { ColorValue, P5 } from '@react-p5/core'
 import { Color, COLOR_MODE } from 'p5'
-import { ColorValue, P5 } from 'types/CustomP5'
 
 const signature = (
   p5: P5,

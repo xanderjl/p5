@@ -1,10 +1,10 @@
+import { ColorValue, Draw, Setup, WindowResized } from '@react-p5/core'
+import { UIValue } from '@react-p5/sketch'
 import { createGrain, createOverlay } from '@react-p5/utils'
-import SketchWrapper from 'components/SketchWrapper'
-import UI, { UIValue } from 'components/UI'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Graphics } from 'p5'
 import { useState } from 'react'
-import { ColorValue, Draw, Setup, WindowResized } from 'types/CustomP5'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
@@ -114,19 +114,17 @@ const KeepItWavyMorganDavy: NextPage = () => {
   }
 
   return (
-    <>
-      <UI values={values} />
-      <SketchWrapper
-        setup={setup}
-        draw={draw}
-        windowResized={windowResized}
-        dimensions={dimensions}
-        padding={padding}
-        background={background}
-        seed={seed}
-        suffix={suffix}
-      />
-    </>
+    <Sketch
+      setup={setup}
+      draw={draw}
+      windowResized={windowResized}
+      dimensions={dimensions}
+      padding={padding}
+      background={background}
+      seed={seed}
+      suffix={suffix}
+      UIValues={values}
+    />
   )
 }
 

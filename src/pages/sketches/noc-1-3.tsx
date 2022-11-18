@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { ColorValue, Draw } from 'types/CustomP5'
 
 const width: number = 640
 const height: number = 360
@@ -21,7 +21,7 @@ const draw: Draw = p5 => {
 }
 
 const Noc_1_3: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     draw={draw}
     dimensions={dimensions}
     padding={padding}

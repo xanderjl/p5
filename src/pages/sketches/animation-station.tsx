@@ -1,7 +1,7 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, Setup } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Color } from 'p5'
-import { ColorValue, Draw, Setup } from 'types/CustomP5'
 import signature from 'util/signature'
 
 const AnimationStation: NextPage = () => {
@@ -70,7 +70,7 @@ const AnimationStation: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       setup={setup}
       draw={draw}
       dimensions={dimensions}

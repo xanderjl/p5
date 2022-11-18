@@ -1,5 +1,5 @@
+import { ColorValue, P5 } from '@react-p5/core'
 import type { Color } from 'p5'
-import { ColorValue, P5 } from 'types/CustomP5'
 
 const linearGradient = (
   p5: P5,

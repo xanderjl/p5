@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { ColorValue, Draw } from 'types/CustomP5'
 
 const width: number = 2048
 const height: number = 2048
@@ -40,7 +40,7 @@ const draw: Draw = p5 => {
 }
 
 const FullStop: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     draw={draw}
     dimensions={dimensions}
     padding={padding}

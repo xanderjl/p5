@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, P5 } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { ColorValue, Draw, P5 } from 'types/CustomP5'
 
 const width: number = 2048
 const height: number = 2048
@@ -40,7 +40,7 @@ const drawSpiral = (p5: P5, x: number, y: number, r: number) => {
 }
 
 const Recursion_2: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     draw={draw}
     dimensions={dimensions}
     padding={padding}

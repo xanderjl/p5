@@ -1,8 +1,8 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { Draw, MouseClicked, P5, WindowResized } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { sample } from 'lodash'
 import { NextPage } from 'next'
 import palettes from 'nice-color-palettes'
-import { Draw, MouseClicked, P5, WindowResized } from 'types/CustomP5'
 import { windowResizedDefaults } from 'util/defaults'
 
 interface Point {
@@ -114,7 +114,7 @@ const mouseClicked: MouseClicked = p5 => {
 }
 
 const NoiseGrid: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     draw={draw}
     windowResized={windowResized}
     mouseClicked={mouseClicked}

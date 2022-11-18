@@ -1,8 +1,8 @@
+import { ColorValue, Draw } from '@react-p5/core'
 import { convertSeed } from '@react-p5/utils'
-import SketchWrapper from 'components/SketchWrapper'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Vector } from 'p5'
-import { ColorValue, Draw } from 'types/CustomP5'
 import { getDimensions } from 'util/canvasSizes'
 import signature from 'util/signature'
 
@@ -84,7 +84,7 @@ const Orb: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       draw={draw}
       dimensions={dimensions}
       padding={padding}

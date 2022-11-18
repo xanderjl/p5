@@ -1,7 +1,7 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, P5 } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { useState } from 'react'
-import { ColorValue, Draw, P5 } from 'types/CustomP5'
 import { getDimensions } from 'util/canvasSizes'
 import signature from 'util/signature'
 
@@ -86,7 +86,7 @@ const StochasticSearch: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       draw={draw}
       dimensions={dimensions}
       padding={padding}

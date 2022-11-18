@@ -1,8 +1,8 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { Draw, MouseClicked, P5, Setup, WindowResized } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import _ from 'lodash'
 import { NextPage } from 'next'
 import palettes from 'nice-color-palettes'
-import { Draw, MouseClicked, P5, Setup, WindowResized } from 'types/CustomP5'
 import { setupDefaults, windowResizedDefaults } from 'util/defaults'
 
 interface Point {
@@ -80,7 +80,7 @@ const mouseClicked: MouseClicked = p5 => {
 }
 
 const AsymmetricGrid: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     setup={setup}
     draw={draw}
     windowResized={windowResized}

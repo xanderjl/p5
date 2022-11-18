@@ -1,7 +1,7 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, MouseClicked, Setup } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import palettes from 'nice-color-palettes'
-import { ColorValue, Draw, MouseClicked, Setup } from 'types/CustomP5'
 
 const width: number = 2048
 const height: number = 2048
@@ -56,7 +56,7 @@ const draw: Draw = p5 => {
 }
 
 const mouseClicked: MouseClicked = (p5, e) => {
-  if (e.shiftKey) {
+  if (e?.shiftKey) {
     seed--
   } else {
     seed++
@@ -66,7 +66,7 @@ const mouseClicked: MouseClicked = (p5, e) => {
 }
 
 const Phyllotaxis: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     setup={setup}
     draw={draw}
     mouseClicked={mouseClicked}

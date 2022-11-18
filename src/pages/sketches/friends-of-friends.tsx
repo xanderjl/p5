@@ -1,8 +1,8 @@
+import { ColorValue, Draw, Setup } from '@react-p5/core'
 import { convertSeed } from '@react-p5/utils'
-import SketchWrapper from 'components/SketchWrapper'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { useState } from 'react'
-import { ColorValue, Draw, Setup } from 'types/CustomP5'
 import { getDimensions } from 'util/canvasSizes'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
@@ -81,7 +81,7 @@ const FriendsOfFriends: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       setup={setup}
       draw={draw}
       dimensions={dimensions}

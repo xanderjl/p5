@@ -1,7 +1,7 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, Setup, WindowResized } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { useState } from 'react'
-import { ColorValue, Draw, Setup, WindowResized } from 'types/CustomP5'
 import { getDimensions } from 'util/canvasSizes'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
@@ -67,7 +67,7 @@ const Rings: NextPage = () => {
   }
 
   return (
-    <SketchWrapper
+    <Sketch
       setup={setup}
       draw={draw}
       windowResized={windowResized}

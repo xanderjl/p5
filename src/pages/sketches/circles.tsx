@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { P5, Setup, WindowResized } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { P5, Setup, WindowResized } from 'types/CustomP5'
 
 interface Circle {
   x: number
@@ -89,7 +89,7 @@ const windowResized: WindowResized = p5 => {
 }
 
 const Circles: NextPage = () => (
-  <SketchWrapper setup={setup} windowResized={windowResized} />
+  <Sketch setup={setup} windowResized={windowResized} />
 )
 
 export default Circles

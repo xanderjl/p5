@@ -1,9 +1,9 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, P5, P5Function, Setup } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import palettes from 'nice-color-palettes'
 import { Color, Image } from 'p5'
 import paper from 'public/sketch-assets/paper-1.jpg'
-import { ColorValue, Draw, P5, P5Function, Setup } from 'types/CustomP5'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
@@ -102,7 +102,7 @@ const draw: Draw = p5 => {
 }
 
 const BackgroundImages: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     preload={preload}
     setup={setup}
     draw={draw}

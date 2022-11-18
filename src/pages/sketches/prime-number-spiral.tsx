@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { Draw, WindowResized } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { Draw, WindowResized } from 'types/CustomP5'
 import getIsPrime from 'util/getIsPrime'
 
 let x: number
@@ -71,7 +71,7 @@ const windowResized: WindowResized = p5 => {
 }
 
 const PrimeNumberSpiral: NextPage = () => (
-  <SketchWrapper draw={draw} windowResized={windowResized} />
+  <Sketch draw={draw} windowResized={windowResized} />
 )
 
 export default PrimeNumberSpiral

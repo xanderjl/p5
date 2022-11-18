@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { Draw } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { Draw } from 'types/CustomP5'
 
 let scale: number = 20
 let w: number = 1920
@@ -43,7 +43,7 @@ const draw: Draw = p5 => {
 }
 
 const TerrainGeneration: NextPage = () => (
-  <SketchWrapper draw={draw} renderer="webgl" />
+  <Sketch draw={draw} renderer='webgl' />
 )
 
 export default TerrainGeneration

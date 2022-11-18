@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { ColorValue, Draw, MouseClicked } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { ColorValue, Draw, MouseClicked } from 'types/CustomP5'
 
 const width: number = 2048
 const height: number = 2048
@@ -41,7 +41,7 @@ const mouseClicked: MouseClicked = p5 => {
 }
 
 const Rose: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     draw={draw}
     mouseClicked={mouseClicked}
     dimensions={dimensions}

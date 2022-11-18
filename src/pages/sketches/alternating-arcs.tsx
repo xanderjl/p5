@@ -1,8 +1,8 @@
+import { ColorValue, Draw, P5, Setup } from '@react-p5/core'
 import { linearGradient } from '@react-p5/utils'
-import SketchWrapper from 'components/SketchWrapper'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import type { Graphics } from 'p5'
-import { ColorValue, Draw, P5, Setup } from 'types/CustomP5'
 import signature from 'util/signature'
 
 const width: number = 2048
@@ -129,7 +129,7 @@ const draw: Draw = p5 => {
 }
 
 const AlternatingArcs: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     setup={setup}
     draw={draw}
     dimensions={dimensions}

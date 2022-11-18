@@ -1,7 +1,7 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { Draw, Setup, WindowResized } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import type { NextPage } from 'next'
 import type { Graphics } from 'p5'
-import { Draw, Setup, WindowResized } from 'types/CustomP5'
 
 let spacing: number
 let x = 0
@@ -50,7 +50,7 @@ const windowResized: WindowResized = p5 => {
 }
 
 const TenPrint: NextPage = () => (
-  <SketchWrapper setup={setup} draw={draw} windowResized={windowResized} />
+  <Sketch setup={setup} draw={draw} windowResized={windowResized} />
 )
 
 export default TenPrint

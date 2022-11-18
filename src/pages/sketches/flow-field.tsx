@@ -1,6 +1,6 @@
-import SketchWrapper from 'components/SketchWrapper'
+import { Draw, Setup } from '@react-p5/core'
+import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { Draw, Setup } from 'types/CustomP5'
 import { Particle } from 'types/Particle'
 
 const scale: number = 10
@@ -42,7 +42,7 @@ const draw: Draw = p5 => {
 }
 
 const FlowField: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     setup={setup}
     draw={draw}
     dimensions={dimensions}

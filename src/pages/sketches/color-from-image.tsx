@@ -1,7 +1,3 @@
-import SketchWrapper from 'components/SketchWrapper'
-import { NextPage } from 'next'
-import { Graphics, Image } from 'p5'
-import sourceImg from 'public/sketch-assets/source-gradient.jpg'
 import {
   ColorValue,
   Draw,
@@ -9,7 +5,11 @@ import {
   P5Function,
   Setup,
   WindowResized,
-} from 'types/CustomP5'
+} from '@react-p5/core'
+import Sketch from 'components/Sketch'
+import { NextPage } from 'next'
+import { Graphics, Image } from 'p5'
+import sourceImg from 'public/sketch-assets/source-gradient.jpg'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
@@ -72,7 +72,7 @@ const windowResized: WindowResized = p5 => {
 }
 
 const mouseClicked: MouseClicked = (p5, e) => {
-  if (e.shiftKey) {
+  if (e?.shiftKey) {
     seed--
   } else {
     seed++
@@ -81,7 +81,7 @@ const mouseClicked: MouseClicked = (p5, e) => {
 }
 
 const ColorFromImage: NextPage = () => (
-  <SketchWrapper
+  <Sketch
     preload={preload}
     setup={setup}
     draw={draw}

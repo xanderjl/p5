@@ -1,5 +1,5 @@
+import { ColorValue, P5 } from '@react-p5/core'
 import { Color, RENDERER } from 'p5'
-import { ColorValue, P5 } from 'types/CustomP5'
 
 interface Setup {
   p5: P5

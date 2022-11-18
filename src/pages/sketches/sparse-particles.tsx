@@ -1,6 +1,3 @@
-import SketchWrapper from 'components/SketchWrapper'
-import { NextPage } from 'next'
-import { useState } from 'react'
 import {
   ColorValue,
   Draw,
@@ -9,7 +6,10 @@ import {
   P5,
   Setup,
   WindowResized,
-} from 'types/CustomP5'
+} from '@react-p5/core'
+import Sketch from 'components/Sketch'
+import { NextPage } from 'next'
+import { useState } from 'react'
 import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
@@ -111,7 +111,7 @@ const SparseParticles: NextPage = () => {
   const [seed, setSeed] = useState(0)
 
   const mouseClicked: MouseClicked = (p5, e) => {
-    if (e.shiftKey) {
+    if (e?.shiftKey) {
       setSeed(seed - 1)
     } else {
       setSeed(seed + 1)
@@ -123,7 +123,7 @@ const SparseParticles: NextPage = () => {
   const keyPressed: KeyPressed = () => setSeed(seed - 1)
 
   return (
-    <SketchWrapper
+    <Sketch
       setup={setup}
       draw={draw}
       windowResized={windowResized}

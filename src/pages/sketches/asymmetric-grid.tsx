@@ -3,7 +3,6 @@ import Sketch from 'components/Sketch'
 import _ from 'lodash'
 import { NextPage } from 'next'
 import palettes from 'nice-color-palettes'
-import { setupDefaults, windowResizedDefaults } from 'util/defaults'
 
 interface Point {
   position: number[]
@@ -45,9 +44,8 @@ const createGrid = (p5: P5) => {
   return points
 }
 
-const setup: Setup = (p5, canvasParentRef) => {
+const setup: Setup = p5 => {
   p5.randomSeed(seed)
-  setupDefaults({ p5, canvasParentRef, dimensions, padding, background })
   points = createGrid(p5).filter(() => p5.random() > 0.5)
   margin = (p5.width - padding[0] * 2) * 0.125
 }
@@ -66,7 +64,6 @@ const draw: Draw = p5 => {
 }
 
 const windowResized: WindowResized = p5 => {
-  windowResizedDefaults({ p5, dimensions, padding, background, seed })
   points = []
   points = createGrid(p5).filter(() => p5.random() > 0.5)
   margin = (p5.width - padding[0] * 2) * 0.125
@@ -83,6 +80,7 @@ const AsymmetricGrid: NextPage = () => (
   <Sketch
     setup={setup}
     draw={draw}
+    dimensions={dimensions}
     windowResized={windowResized}
     mouseClicked={mouseClicked}
     width={width}

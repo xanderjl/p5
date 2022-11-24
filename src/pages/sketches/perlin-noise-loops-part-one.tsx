@@ -1,7 +1,6 @@
 import { Draw, Setup, WindowResized } from '@react-p5/core'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { setupDefaults } from 'util/defaults'
 
 const noiseMax = 3
 const delta = 0.2
@@ -10,13 +9,12 @@ let rMin: number
 let rMax: number
 let zoff = 0
 
-const setup: Setup = (p5, canvasParentRef) => {
+const setup: Setup = p5 => {
   bounds = Boolean(p5.windowWidth > p5.windowHeight)
     ? p5.windowHeight
     : p5.windowWidth
   rMin = bounds * 0.25
   rMax = bounds * 0.5
-  setupDefaults({ p5, canvasParentRef })
 }
 
 const draw: Draw = p5 => {

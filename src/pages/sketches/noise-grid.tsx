@@ -3,7 +3,6 @@ import Sketch from 'components/Sketch'
 import { sample } from 'lodash'
 import { NextPage } from 'next'
 import palettes from 'nice-color-palettes'
-import { windowResizedDefaults } from 'util/defaults'
 
 interface Point {
   color: string
@@ -80,8 +79,6 @@ const draw: Draw = p5 => {
 }
 
 const windowResized: WindowResized = p5 => {
-  windowResizedDefaults({ p5, dimensions, padding, background })
-
   p5.randomSeed(seed)
   p5.noiseSeed(seed)
   points = createGrid(p5).filter(() => p5.random() > 0.5)

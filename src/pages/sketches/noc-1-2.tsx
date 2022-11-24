@@ -2,7 +2,6 @@ import { Draw, Setup } from '@react-p5/core'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Vector } from 'p5'
-import { setupDefaults } from 'util/defaults'
 
 const width: number = 640
 const height: number = 260
@@ -12,10 +11,9 @@ const background: number[] = [255]
 let location: Vector
 let velocity: Vector
 
-const setup: Setup = (p5, canvasParentRef) => {
+const setup: Setup = p5 => {
   location = p5.createVector(100, 100)
   velocity = p5.createVector(2.5, 5)
-  setupDefaults({ p5, canvasParentRef, dimensions, padding, background })
 }
 
 const draw: Draw = p5 => {
@@ -34,6 +32,14 @@ const draw: Draw = p5 => {
   p5.ellipse(location.x, location.y, 16, 16)
 }
 
-const Noc_1_2: NextPage = () => <Sketch setup={setup} draw={draw} />
+const Noc_1_2: NextPage = () => (
+  <Sketch
+    setup={setup}
+    draw={draw}
+    dimensions={dimensions}
+    padding={padding}
+    background={background}
+  />
+)
 
 export default Noc_1_2

@@ -3,7 +3,6 @@ import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import type { Vector } from 'p5'
 import { Mover2 } from 'types/Mover'
-import { setupDefaults } from 'util/defaults'
 
 const width: number = 640
 const height: number = 360
@@ -14,11 +13,10 @@ let location: Vector
 let velocity: Vector
 let acceleration: Vector
 
-const setup: Setup = (p5, canvasParentRef) => {
+const setup: Setup = p5 => {
   location = p5.createVector(p5.width / 2, p5.height / 2)
   velocity = p5.createVector(0, 0)
   acceleration = p5.createVector(-0.001, 0.01)
-  setupDefaults({ p5, canvasParentRef, dimensions, padding, background })
 }
 
 const draw: Draw = p5 => {
@@ -31,6 +29,8 @@ const draw: Draw = p5 => {
   mover.display()
 }
 
-const Noc_1_8: NextPage = () => <Sketch setup={setup} draw={draw} />
+const Noc_1_8: NextPage = () => (
+  <Sketch setup={setup} draw={draw} dimensions={dimensions} padding={padding} />
+)
 
 export default Noc_1_8

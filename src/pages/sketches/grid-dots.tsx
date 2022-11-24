@@ -1,7 +1,6 @@
 import { Draw, WindowResized } from '@react-p5/core'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { windowResizedDefaults } from 'util/defaults'
 
 interface Point {
   position: number[]
@@ -9,6 +8,7 @@ interface Point {
 
 const width = 2048
 const height = 2048
+const dimensions = [width, height]
 const padding = [40]
 const background = [0]
 
@@ -49,7 +49,6 @@ const draw: Draw = p5 => {
 }
 
 const windowResized: WindowResized = p5 => {
-  windowResizedDefaults({ p5, width, height, padding })
   p5.background(background)
   points.forEach(({ position }) => {
     const [u, v] = position
@@ -66,8 +65,7 @@ const GridDots: NextPage = () => (
   <Sketch
     draw={draw}
     windowResized={windowResized}
-    width={width}
-    height={width}
+    dimensions={dimensions}
     padding={padding}
     background={background}
   />

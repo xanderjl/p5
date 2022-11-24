@@ -1,10 +1,9 @@
 import { ColorValue, Draw, Setup } from '@react-p5/core'
-import { convertSeed } from '@react-p5/utils'
+import { convertSeed, createGrid } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { useState } from 'react'
 import { getDimensions } from 'util/canvasSizes'
-import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
 const FriendsOfFriends: NextPage = () => {

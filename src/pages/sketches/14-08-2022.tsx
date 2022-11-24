@@ -2,13 +2,13 @@ import { ColorValue, Draw, P5, Setup, WindowResized } from '@react-p5/core'
 import {
   convertSeed,
   createGrain,
+  createGrid,
   createOverlay,
   linearGradient,
 } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Graphics } from 'p5'
-import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
 const phrase: string = 'degradation'

@@ -1,7 +1,7 @@
 import { Draw } from '@react-p5/core'
+import { createGrid } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import createGrid from 'util/createGrid'
 import { redGrid } from 'util/shapes'
 
 const width: number = 2048

@@ -1,9 +1,8 @@
 import { ColorValue, Draw, P5, Setup } from '@react-p5/core'
-import { convertSeed, createGrain } from '@react-p5/utils'
+import { convertSeed, createGrain, createGrid } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import type { Color, Graphics } from 'p5'
-import createGrid from 'util/createGrid'
 
 const CollaborationStation: NextPage = () => {
   const dimensions: number[] = [2048, 2048]

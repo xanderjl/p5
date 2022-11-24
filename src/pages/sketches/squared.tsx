@@ -1,8 +1,8 @@
 import { ColorValue, Draw, MouseClicked } from '@react-p5/core'
+import { createGrid } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Color } from 'p5'
-import createGrid from 'util/createGrid'
 
 const width: number = 2048
 const height: number = 2048

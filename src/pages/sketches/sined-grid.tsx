@@ -1,9 +1,8 @@
 import { ColorValue, Draw, MouseClicked, Setup } from '@react-p5/core'
-import { createGrain } from '@react-p5/utils'
+import { createGrain, createGrid } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Graphics } from 'p5'
-import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
 const width: number = 2048

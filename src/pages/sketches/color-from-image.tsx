@@ -6,11 +6,11 @@ import {
   Setup,
   WindowResized,
 } from '@react-p5/core'
+import { createGrid } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Graphics, Image } from 'p5'
 import sourceImg from 'public/sketch-assets/source-gradient.jpg'
-import createGrid from 'util/createGrid'
 import signature from 'util/signature'
 
 const width: number = 2048

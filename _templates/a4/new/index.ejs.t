@@ -1,9 +1,9 @@
 ---
 to: src/pages/sketches/<%= name %>.tsx
 ---
+import { ColorValue, Draw } from '@react-p5/core'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { ColorValue, Draw } from '@react-p5/core'
 import { getDimensions } from 'util/canvasSizes'
 import signature from 'util/signature'
 

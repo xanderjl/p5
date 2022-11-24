@@ -1,20 +1,15 @@
----
-to: src/pages/sketches/<%= name %>.tsx
----
 import { ColorValue, Draw } from '@react-p5/core'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
+import { getDimensions } from 'util/canvasSizes'
 import signature from 'util/signature'
 
-const <%= h.changeCase.pascal(name) %>: NextPage = () => {
-  const width: number = 2048
-  const height: number = 2048
-  const dimensions: number[] = [width, height]
+const Voronoi: NextPage = () => {
+  const dimensions: number[] = getDimensions('A4')
   const padding: number[] = [40]
   const background: ColorValue = [255, 253, 252]
 
   const draw: Draw = p5 => {
-
     signature(p5)
   }
 
@@ -28,4 +23,4 @@ const <%= h.changeCase.pascal(name) %>: NextPage = () => {
   )
 }
 
-export default <%= h.changeCase.pascal(name) %>
+export default Voronoi

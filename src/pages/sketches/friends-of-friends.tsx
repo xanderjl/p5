@@ -10,8 +10,8 @@ const FriendsOfFriends: NextPage = () => {
   const dimensions: number[] = getDimensions('A4')
   const padding: number[] = [40]
   const background: ColorValue = [255, 253, 252]
-  const phrase: string = 'Friend Name'
-  const handle: string = '@insta_handle'
+  const phrase: string = 'Rachelle   Younie'
+  const handle: string = '@rachelleyounie'
   const seed: number = convertSeed(phrase)
   let margin: number
   const [grid, setGrid] = useState<number[][]>([[0, 0]])

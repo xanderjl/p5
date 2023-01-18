@@ -4,12 +4,14 @@ import { NextPage } from 'next'
 import { getDimensions } from 'util/canvasSizes'
 import signature from 'util/signature'
 
-const Voronoi: NextPage = () => {
+const Blooming: NextPage = () => {
   const dimensions: number[] = getDimensions('A4')
   const padding: number[] = [40]
   const background: ColorValue = [255, 253, 252]
 
   const draw: Draw = p5 => {
+    p5.noLoop()
+
     signature(p5)
   }
 
@@ -19,8 +21,9 @@ const Voronoi: NextPage = () => {
       dimensions={dimensions}
       padding={padding}
       background={background}
+      renderSVG
     />
   )
 }
 
-export default Voronoi
+export default Blooming

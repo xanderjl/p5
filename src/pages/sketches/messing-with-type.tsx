@@ -5,15 +5,17 @@ import { Graphics } from 'p5'
 import { useState } from 'react'
 import signature from 'util/signature'
 
+type TileMethods = {
+  display: () => void
+}
+
 type Tile = (
   p5: P5,
   pg: Graphics,
   x: number,
   y: number,
   w: number
-) => {
-  display: () => void
-}
+) => TileMethods
 
 const createTile: Tile = (p5, pg, x, y, w) => {
   const img = p5.createImage(w, w)
@@ -23,6 +25,7 @@ const createTile: Tile = (p5, pg, x, y, w) => {
   const display = () => {
     p5.push()
     p5.translate(x, y)
+    p5.rotate(p5.mouseX * 0.01)
     p5.image(img, 0, 0)
     p5.pop()
   }
@@ -35,55 +38,84 @@ const MessingWithType: NextPage = () => {
   const height: number = 2048
   const dimensions: number[] = [width, height]
   const padding: number[] = [40]
-  const background: ColorValue = [255, 253, 252]
-  const tileRes: number = 10
-  const [pg, setPg] = useState<Graphics>()
-  const [tileSize, setTileSize] = useState<number>()
-  const [tiles, setTiles] = useState<Array<ReturnType<Tile>>>()
+  const background: ColorValue = [0]
+  const tileRes: number = 12
+  const [pg, setPg] = useState<Graphics | null>(null)
+  const [text, setText] = useState<string>('')
+  const [textSize, setTextSize] = useState<number>(0)
+  const [tileSize, setTileSize] = useState<number>(0)
+  const [tiles, setTiles] = useState<TileMethods[][] | null>(null)
 
   const setup: Setup = p5 => {
+    // define intial values
+    const text = 'NO'
+    const tileSize = p5.width / tileRes
+    const textSize = (p5.width * 0.33) / (text.length * 0.33)
     const pg = p5.createGraphics(p5.width, p5.height)
-    setPg(pg)
-    setTileSize(p5.width / tileRes)
 
+    // manipulate pg
     pg.textFont('Helvetica')
     pg.textAlign('center', 'center')
     pg.fill(255)
     pg.noStroke()
+    pg.textSize(textSize)
+    pg.text(text, pg.width * 0.5, pg.height * 0.5)
 
-    if (tileSize) {
-      const tiles = Array.from({ length: tileSize }, (_, row) =>
-        Array.from({ length: tileSize }, (_, col) => {
-          const x = p5.width / (row * tileSize)
-          const y = p5.width / (col * tileSize)
-          const tile = createTile(p5, pg, x, y, tileSize)
-          console.log({ x, y, tile })
+    // instantiate tiles
+    const tiles = Array.from({ length: tileRes }, (_, i) =>
+      Array.from({ length: tileRes }, (_, j) => {
+        const x = i * tileSize
+        const y = j * tileSize
 
-          return tile
-        })
-      )
+        return createTile(p5, pg, x, y, tileSize)
+      })
+    )
 
-      setTiles(tiles)
-    }
+    // set initial state
+    setPg(pg)
+    setTileSize(tileSize)
+    setText(text)
+    setTextSize(textSize)
+    setTiles(tiles)
   }
 
   const draw: Draw = p5 => {
-    if (pg) {
-      pg.background(0)
-      pg.textSize(p5.width * 0.4)
-      pg.text('NO', pg.width * 0.5, pg.height * 0.5)
+    p5.clear(0, 0, 0, 0)
+    p5.background(background)
 
-      p5.image(pg, 0, 0)
-    }
-
-    tiles?.map(tile => tile.display())
+    tiles?.map(arr =>
+      arr.map(tile => {
+        tile.display()
+      })
+    )
 
     signature(p5)
   }
 
   const windowResized: WindowResized = p5 => {
-    pg?.resizeCanvas(p5.width, p5.height)
+    const textSize = (p5.width * 0.4) / (text.length * 0.33)
+
+    if (pg) {
+      pg.resizeCanvas(p5.width, p5.height)
+      pg.text(text, pg.width * 0.5, pg.height * 0.5)
+      pg.textSize(textSize)
+
+      // instantiate tiles
+      const tiles = Array.from({ length: tileRes }, (_, i) =>
+        Array.from({ length: tileRes }, (_, j) => {
+          const x = i * tileSize
+          const y = j * tileSize
+
+          return createTile(p5, pg, x, y, tileSize)
+        })
+      )
+
+      setTiles(tiles)
+    }
+
+    // set state
     setTileSize(p5.width / tileRes)
+    setTextSize(textSize)
   }
 
   return (
@@ -92,7 +124,6 @@ const MessingWithType: NextPage = () => {
       draw={draw}
       dimensions={dimensions}
       padding={padding}
-      background={background}
       windowResized={windowResized}
     />
   )

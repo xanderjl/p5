@@ -1,37 +1,10 @@
-import { ColorValue, Draw, P5, Setup, WindowResized } from '@react-p5/core'
+import { ColorValue, Draw, Setup, WindowResized } from '@react-p5/core'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { Graphics } from 'p5'
 import { useState } from 'react'
+import { createTile, TileMethods } from 'util/createTile'
 import signature from 'util/signature'
-
-type TileMethods = {
-  display: () => void
-}
-
-type Tile = (
-  p5: P5,
-  pg: Graphics,
-  x: number,
-  y: number,
-  w: number
-) => TileMethods
-
-const createTile: Tile = (p5, pg, x, y, w) => {
-  const img = p5.createImage(w, w)
-
-  img.copy(pg, x, y, w, w, 0, 0, w, w)
-
-  const display = () => {
-    p5.push()
-    p5.translate(x, y)
-    p5.rotate(p5.mouseX * 0.01)
-    p5.image(img, 0, 0)
-    p5.pop()
-  }
-
-  return { display }
-}
 
 const MessingWithType: NextPage = () => {
   const width: number = 2048

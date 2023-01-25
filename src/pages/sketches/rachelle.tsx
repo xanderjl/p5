@@ -2,10 +2,8 @@ import { ColorValue, Draw, Setup, WindowResized } from '@react-p5/core'
 import { convertSeed } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
-import { Graphics } from 'p5'
 import { useState } from 'react'
 import { getDimensions } from 'util/canvasSizes'
-import { TileMethods } from 'util/createTile'
 import signature from 'util/signature'
 
 const Rachelle: NextPage = () => {
@@ -36,24 +34,28 @@ const Rachelle: NextPage = () => {
   const seed = convertSeed(poemString)
   const [coordinates, setCoordinates] = useState<number[][][] | null>(null)
   const [margin, setMargin] = useState<number>(0)
-  const [tileSize, setTileSize] = useState<number>(0)
-  const [tiles, setTiles] = useState<TileMethods[][] | null>(null)
-  const [pg, setPg] = useState<Graphics>()
 
   const setup: Setup = p5 => {
     const margin = p5.width * marginRatio
 
     const coordinates = poem.map(phrase =>
-      Array.from({ length: phrase.length }, () => [
-        p5.random(margin * 2, p5.width - margin * 2),
-        p5.random(margin * 2, p5.height - margin * 2),
-      ])
+      Array.from({ length: phrase.length }, () => {
+        const graphics = p5.createGraphics(p5.width, p5.height)
+
+        graphics.textAlign('center', 'center')
+        graphics.textSize((p5.width - margin * 2) * 0.05)
+        graphics.text(phrase, 0, 0)
+
+        return [
+          p5.random(margin * 2, p5.width - margin * 2),
+          p5.random(margin * 2, p5.height - margin * 2),
+        ]
+      })
     )
 
     // initialize state
     setMargin(margin)
     setCoordinates(coordinates)
-    setPg(p5.createGraphics(p5.width, p5.height))
   }
 
   const draw: Draw = p5 => {
@@ -64,7 +66,9 @@ const Rachelle: NextPage = () => {
 
     // mark starting coordinates
     coordinates?.forEach(phrase =>
-      phrase.forEach(([x, y]) => p5.circle(x, y, p5.width * 0.0025))
+      phrase.forEach(([x, y]) => {
+        p5.circle(x, y, p5.width * 0.0025)
+      })
     )
 
     // apply border

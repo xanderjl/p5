@@ -1,6 +1,5 @@
+import { P5 } from '@react-p5/core'
 import type { Vector } from 'p5'
-
-import { P5 } from './CustomP5'
 
 export class Mover {
   p5: P5

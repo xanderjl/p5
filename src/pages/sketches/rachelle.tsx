@@ -1,4 +1,4 @@
-import { ColorValue, Draw, P5, Setup } from '@react-p5/core'
+import { ColorValue, Draw, Setup, WindowResized } from '@react-p5/core'
 import { convertSeed } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
@@ -32,22 +32,61 @@ const Rachelle: NextPage = () => {
     `"I hope that I was able to help you`,
   ]
   const poemString = poem.join()
+  const marginRatio = 0.05
   const seed = convertSeed(poemString)
+  const [coordinates, setCoordinates] = useState<number[][][] | null>(null)
+  const [margin, setMargin] = useState<number>(0)
   const [tileSize, setTileSize] = useState<number>(0)
   const [tiles, setTiles] = useState<TileMethods[][] | null>(null)
   const [pg, setPg] = useState<Graphics>()
 
   const setup: Setup = p5 => {
+    const margin = p5.width * marginRatio
+
+    const coordinates = poem.map(phrase =>
+      Array.from({ length: phrase.length }, () => [
+        p5.random(margin * 2, p5.width - margin * 2),
+        p5.random(margin * 2, p5.height - margin * 2),
+      ])
+    )
+
+    // initialize state
+    setMargin(margin)
+    setCoordinates(coordinates)
     setPg(p5.createGraphics(p5.width, p5.height))
   }
 
   const draw: Draw = p5 => {
+    p5.noLoop()
+
     p5.background(background)
     p5.noFill()
 
-    const margin = p5.width * 0.05
+    // mark starting coordinates
+    coordinates?.forEach(phrase =>
+      phrase.forEach(([x, y]) => p5.circle(x, y, p5.width * 0.0025))
+    )
+
+    // apply border
+    p5.rect(margin, margin, p5.width - margin * 2, p5.height - margin * 2)
 
     signature(p5)
+  }
+
+  const windowResized: WindowResized = p5 => {
+    const margin = p5.width * marginRatio
+
+    const coordinates = poem.map(phrase =>
+      Array.from({ length: phrase.length }, () => [
+        p5.random(margin * 2, p5.width - margin * 2),
+        p5.random(margin * 2, p5.height - margin * 2),
+      ])
+    )
+
+    // update state
+    setMargin(margin)
+    setCoordinates(coordinates)
+    setPg(p5.createGraphics(p5.width, p5.height))
   }
 
   return (
@@ -55,9 +94,10 @@ const Rachelle: NextPage = () => {
       seed={seed}
       setup={setup}
       draw={draw}
+      windowResized={windowResized}
       dimensions={dimensions}
       padding={padding}
-      background={background}
+      renderSVG
     />
   )
 }

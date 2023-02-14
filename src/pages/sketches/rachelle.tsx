@@ -10,6 +10,7 @@ const Rachelle: NextPage = () => {
   const dimensions: number[] = getDimensions('A4')
   const padding: number[] = [40]
   const background: ColorValue = [255, 253, 252]
+  const test: [number, number, string][] = [[0, 0, 'frick']]
   const poem: string[] = [
     `We went to the coffee shop, where`,
     `I walked up and introduced myself, I was afraid that he might run away`,
@@ -32,25 +33,20 @@ const Rachelle: NextPage = () => {
   const poemString = poem.join()
   const marginRatio = 0.05
   const seed = convertSeed(poemString)
-  const [coordinates, setCoordinates] = useState<number[][][] | null>(null)
+  const [coordinates, setCoordinates] = useState<
+    (number | string)[][][] | null
+  >(null)
   const [margin, setMargin] = useState<number>(0)
 
   const setup: Setup = p5 => {
     const margin = p5.width * marginRatio
 
     const coordinates = poem.map(phrase =>
-      Array.from({ length: phrase.length }, () => {
-        const graphics = p5.createGraphics(p5.width, p5.height)
-
-        graphics.textAlign('center', 'center')
-        graphics.textSize((p5.width - margin * 2) * 0.05)
-        graphics.text(phrase, 0, 0)
-
-        return [
-          p5.random(margin * 2, p5.width - margin * 2),
-          p5.random(margin * 2, p5.height - margin * 2),
-        ]
-      })
+      Array.from({ length: phrase.length }, () => [
+        p5.random(margin * 2, p5.width - margin * 2),
+        p5.random(margin * 2, p5.height - margin * 2),
+        phrase,
+      ])
     )
 
     // initialize state
@@ -66,8 +62,11 @@ const Rachelle: NextPage = () => {
 
     // mark starting coordinates
     coordinates?.forEach(phrase =>
-      phrase.forEach(([x, y]) => {
-        p5.circle(x, y, p5.width * 0.0025)
+      phrase.forEach(([x, y, s]) => {
+        // const sMod = p5.width / s.length
+        const d = p5.width * 0.0025
+
+        p5.circle(x as number, y as number, d)
       })
     )
 
@@ -84,13 +83,13 @@ const Rachelle: NextPage = () => {
       Array.from({ length: phrase.length }, () => [
         p5.random(margin * 2, p5.width - margin * 2),
         p5.random(margin * 2, p5.height - margin * 2),
+        phrase,
       ])
     )
 
     // update state
     setMargin(margin)
     setCoordinates(coordinates)
-    setPg(p5.createGraphics(p5.width, p5.height))
   }
 
   return (

@@ -1,9 +1,33 @@
-import { ColorValue, Draw } from '@react-p5/core'
+import { ColorValue, Draw, P5 } from '@react-p5/core'
 import { convertSeed } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { getDimensions } from 'util/canvasSizes'
 import signature from 'util/signature'
+
+const drawText = (p5: P5, string: string, xStart: number, yStart?: number) => {
+  let a = 0
+  let freq = 10
+  const inc = p5.TWO_PI / 25.0
+  let range = p5.width * p5.map(p5.noise(freq), 0, 1, 0.025, 0.075)
+
+  Array.from(string, (char: string, i: number) => {
+    const x = xStart + p5.width * i * 0.02
+    const y = p5.map(
+      p5.noise(Math.sin(a) * freq),
+      0,
+      1,
+      (yStart ?? xStart) - range,
+      (yStart ?? xStart) + range
+    )
+
+    p5.text(char, x, y)
+
+    a = a + inc
+    freq = freq + inc * 10
+    range = range + inc * 2
+  })
+}
 
 const Valentines_2023: NextPage = () => {
   const dimensions: number[] = getDimensions('A4')
@@ -48,8 +72,30 @@ const Valentines_2023: NextPage = () => {
   `
   const myLove: string = "I'll love you forever, always."
   const seed = convertSeed(seedPhrase)
+  const length = 15
 
   const draw: Draw = p5 => {
+    p5.frameRate(1)
+    p5.clear(0, 0, 0, 0)
+    p5.background(background)
+
+    const margin = p5.width * 0.05
+    const textSize = p5.width * 0.025
+
+    p5.textFont('Helvetica')
+    p5.textSize(textSize)
+    p5.textAlign('center', 'center')
+    Array.from({ length }, (_, i) => {
+      const y = margin * 3 + i * 30
+      p5.textSize(p5.width * 0.025 * ((i + 1) * 0.5))
+      drawText(p5, myLove, p5.width * 0.25, y)
+    })
+
+    p5.push()
+    p5.noFill()
+    p5.rect(margin, margin, p5.width - margin * 2, p5.height - margin * 2)
+    p5.pop()
+
     signature(p5)
   }
 
@@ -60,6 +106,7 @@ const Valentines_2023: NextPage = () => {
       dimensions={dimensions}
       padding={padding}
       background={background}
+      renderSVG
     />
   )
 }

@@ -72,7 +72,7 @@ const Valentines_2023: NextPage = () => {
   `
   const myLove: string = "I'll love you forever, always."
   const seed = convertSeed(seedPhrase)
-  const length = 15
+  const length = 20
 
   const draw: Draw = p5 => {
     p5.frameRate(1)
@@ -80,15 +80,21 @@ const Valentines_2023: NextPage = () => {
     p5.background(background)
 
     const margin = p5.width * 0.05
-    const textSize = p5.width * 0.025
 
     p5.textFont('Helvetica')
-    p5.textSize(textSize)
     p5.textAlign('center', 'center')
+
     Array.from({ length }, (_, i) => {
-      const y = margin * 3 + i * 30
-      p5.textSize(p5.width * 0.025 * ((i + 1) * 0.5))
-      drawText(p5, myLove, p5.width * 0.25, y)
+      const even = i % 2 === 0
+      const color = even ? 'red' : 'blue'
+      const textSize = p5.width * 0.025 * (i + 1)
+      const offset = textSize + (i + 1) * 20
+      const x = p5.width * 0.5
+      const y = margin * 2 + offset
+
+      p5.fill(color)
+      p5.textSize(textSize)
+      p5.text(myLove, x, y)
     })
 
     p5.push()

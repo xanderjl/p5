@@ -1,5 +1,5 @@
 import { ColorValue, Draw } from '@react-p5/core'
-import { UIValue } from '@react-p5/sketch'
+// import { UIValue } from '@react-p5/sketch'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { useState } from 'react'
@@ -11,14 +11,14 @@ const SinesAndLines: NextPage = () => {
   const padding: number[] = [40]
   const background: ColorValue = [255, 253, 252]
   const [seed, setSeed] = useState<number>(0)
-  const values: UIValue[] = [
-    {
-      label: 'Seed',
-      value: seed,
-      setValue: setSeed,
-      max: 100000,
-    },
-  ]
+  // const values: UIValue[] = [
+  //   {
+  //     label: 'Seed',
+  //     value: seed,
+  //     setValue: setSeed,
+  //     max: 100000,
+  //   },
+  // ]
 
   const draw: Draw = p5 => {
     p5.clear(0, 0, 0, 0)
@@ -39,7 +39,7 @@ const SinesAndLines: NextPage = () => {
       seed={seed}
       renderSVG
       noLoop
-      UIValues={values}
+      // UIValues={values}
     />
   )
 }

@@ -1,5 +1,5 @@
 import { ColorValue, Draw, P5, Setup } from '@react-p5/core'
-import { UIValue } from '@react-p5/sketch'
+// import { UIValue } from '@react-p5/sketch'
 import { convertSeed, createGrain } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
@@ -20,32 +20,32 @@ const OnThe_30thDay: NextPage = () => {
   const [nStr, setNStr] = useState<number>(40)
   const [grain, setGrain] = useState<Graphics>()
   let margin: number
-  const values: UIValue[] = [
-    {
-      label: 'Seed',
-      value: seed,
-      setValue: setSeed,
-      max: 5000,
-    },
-    {
-      label: 'Array Length',
-      value: length,
-      setValue: setLength,
-      max: 500,
-    },
-    {
-      label: 'Noise Scale',
-      value: nScl,
-      setValue: setNScl,
-      max: 5000,
-    },
-    {
-      label: 'Noise Strength',
-      value: nStr,
-      setValue: setNStr,
-      max: 1000,
-    },
-  ]
+  // const values: UIValue[] = [
+  //   {
+  //     label: 'Seed',
+  //     value: seed,
+  //     setValue: setSeed,
+  //     max: 5000,
+  //   },
+  //   {
+  //     label: 'Array Length',
+  //     value: length,
+  //     setValue: setLength,
+  //     max: 500,
+  //   },
+  //   {
+  //     label: 'Noise Scale',
+  //     value: nScl,
+  //     setValue: setNScl,
+  //     max: 5000,
+  //   },
+  //   {
+  //     label: 'Noise Strength',
+  //     value: nStr,
+  //     setValue: setNStr,
+  //     max: 1000,
+  //   },
+  // ]
 
   const particle = (
     p5: P5,
@@ -154,7 +154,7 @@ const OnThe_30thDay: NextPage = () => {
       background={background}
       seed={seed}
       suffix={seed}
-      UIValues={values}
+      // UIValues={values}
     />
   )
 }

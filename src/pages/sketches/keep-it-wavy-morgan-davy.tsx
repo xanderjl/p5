@@ -1,5 +1,5 @@
 import { ColorValue, Draw, Setup, WindowResized } from '@react-p5/core'
-import { UIValue } from '@react-p5/sketch'
+// import { UIValue } from '@react-p5/sketch'
 import { createGrain, createGrid, createOverlay } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
@@ -23,37 +23,37 @@ const KeepItWavyMorganDavy: NextPage = () => {
   const [nStr, setNStr] = useState<number>(40)
   const [speed, setSpeed] = useState<number>(100)
   const suffix: string = `seed:${seed},nScl:${nScl},nStr:${nStr},speed:${speed}`
-  const values: UIValue[] = [
-    {
-      label: 'Seed',
-      value: seed,
-      setValue: setSeed,
-    },
-    {
-      label: 'Grid Density',
-      value: gridDensity,
-      setValue: setGridDensity,
-      max: 100,
-    },
-    {
-      label: 'Noise Scale',
-      value: nScl,
-      setValue: setNScl,
-      max: 4000,
-    },
-    {
-      label: 'Noise Strength',
-      value: nStr,
-      setValue: setNStr,
-      max: 500,
-    },
-    {
-      label: 'Speed',
-      value: speed,
-      setValue: setSpeed,
-      max: 1000,
-    },
-  ]
+  // const values: UIValue[] = [
+  //   {
+  //     label: 'Seed',
+  //     value: seed,
+  //     setValue: setSeed,
+  //   },
+  //   {
+  //     label: 'Grid Density',
+  //     value: gridDensity,
+  //     setValue: setGridDensity,
+  //     max: 100,
+  //   },
+  //   {
+  //     label: 'Noise Scale',
+  //     value: nScl,
+  //     setValue: setNScl,
+  //     max: 4000,
+  //   },
+  //   {
+  //     label: 'Noise Strength',
+  //     value: nStr,
+  //     setValue: setNStr,
+  //     max: 500,
+  //   },
+  //   {
+  //     label: 'Speed',
+  //     value: speed,
+  //     setValue: setSpeed,
+  //     max: 1000,
+  //   },
+  // ]
 
   const setup: Setup = p5 => {
     margin = p5.width * 0.1
@@ -122,7 +122,7 @@ const KeepItWavyMorganDavy: NextPage = () => {
       background={background}
       seed={seed}
       suffix={suffix}
-      UIValues={values}
+      // UIValues={values}
     />
   )
 }

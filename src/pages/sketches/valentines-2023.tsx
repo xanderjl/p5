@@ -84,18 +84,36 @@ const Valentines_2023: NextPage = () => {
     p5.textFont('Helvetica')
     p5.textAlign('center', 'center')
 
+    p5.push()
     Array.from({ length }, (_, i) => {
       const even = i % 2 === 0
-      const color = even ? 'red' : 'blue'
       const textSize = p5.width * 0.025 * (i + 1)
       const offset = textSize + (i + 1) * 20
       const x = p5.width * 0.5
       const y = margin * 2 + offset
+      const strokeWeight = i * 0.3
+      p5.strokeWeight(strokeWeight)
 
-      p5.fill(color)
+      if (even) {
+        p5.strokeWeight(1)
+        p5.stroke('red')
+        p5.fill('red')
+      } else {
+        p5.noFill()
+        p5.stroke('blue')
+      }
+
       p5.textSize(textSize)
       p5.text(myLove, x, y)
     })
+    p5.pop()
+
+    p5.push()
+    p5.noFill()
+    p5.stroke(background)
+    p5.strokeWeight(margin * 2)
+    p5.rect(0, 0, p5.width, p5.height)
+    p5.pop()
 
     p5.push()
     p5.noFill()

@@ -1,5 +1,4 @@
 import { ColorValue, Draw, Setup, WindowResized } from '@react-p5/core'
-import { UIValue } from '@react-p5/sketch'
 import { convertSeed, createGrid } from '@react-p5/utils'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
@@ -21,17 +20,9 @@ const BubbleRoses: NextPage = () => {
   // const phrase: string = `dune`
   // const phrase: string = `random`
   const phrase: string = `corn`
-  const [seed, setSeed] = useState<number>(convertSeed(phrase))
+  const seed = convertSeed(phrase)
   const [grid, setGrid] = useState<number[][]>([[0, 0]])
   const suffix: string = `phrase:${phrase}_seed:${seed}`
-  const values: UIValue[] = [
-    {
-      label: 'seed',
-      value: seed,
-      setValue: setSeed,
-      max: 10000,
-    },
-  ]
 
   const setup: Setup = p5 => {
     margin = p5.width * 0.075
@@ -119,7 +110,6 @@ const BubbleRoses: NextPage = () => {
       padding={padding}
       seed={seed}
       suffix={suffix}
-      UIValues={values}
       renderSVG
       noLoop
     />

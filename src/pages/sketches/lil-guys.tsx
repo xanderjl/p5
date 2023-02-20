@@ -1,5 +1,5 @@
 import { ColorValue, Draw, P5 } from '@react-p5/core'
-import { UIValue } from '@react-p5/sketch'
+// import { UIValue } from '@react-p5/sketch'
 import Sketch from 'components/Sketch'
 import { NextPage } from 'next'
 import { useState } from 'react'
@@ -18,44 +18,44 @@ const LilGuys: NextPage = () => {
   const [radius, setRadius] = useState<number>(300)
   const [resolution, setResolution] = useState<number>(360)
   const [rings, setRings] = useState<number>(10)
-  const values: UIValue[] = [
-    {
-      label: 'Seed',
-      value: seed,
-      setValue: setSeed,
-      max: 3000,
-    },
-    {
-      label: 'Noise Scale',
-      value: nScl,
-      setValue: setNScl,
-      max: 6000,
-    },
-    {
-      label: 'Noise Strength',
-      value: nStr,
-      setValue: setNStr,
-      max: 2000,
-    },
-    {
-      label: 'Resolution',
-      value: resolution,
-      setValue: setResolution,
-      max: 3600,
-    },
-    {
-      label: 'Radius',
-      value: radius,
-      setValue: setRadius,
-      max: width * 0.5,
-    },
-    {
-      label: 'Rings',
-      value: rings,
-      setValue: setRings,
-      max: 100,
-    },
-  ]
+  // const values: UIValue[] = [
+  //   {
+  //     label: 'Seed',
+  //     value: seed,
+  //     setValue: setSeed,
+  //     max: 3000,
+  //   },
+  //   {
+  //     label: 'Noise Scale',
+  //     value: nScl,
+  //     setValue: setNScl,
+  //     max: 6000,
+  //   },
+  //   {
+  //     label: 'Noise Strength',
+  //     value: nStr,
+  //     setValue: setNStr,
+  //     max: 2000,
+  //   },
+  //   {
+  //     label: 'Resolution',
+  //     value: resolution,
+  //     setValue: setResolution,
+  //     max: 3600,
+  //   },
+  //   {
+  //     label: 'Radius',
+  //     value: radius,
+  //     setValue: setRadius,
+  //     max: width * 0.5,
+  //   },
+  //   {
+  //     label: 'Rings',
+  //     value: rings,
+  //     setValue: setRings,
+  //     max: 100,
+  //   },
+  // ]
 
   const lilGuy = (
     p5: P5,
@@ -106,7 +106,7 @@ const LilGuys: NextPage = () => {
       padding={padding}
       background={background}
       seed={seed}
-      UIValues={values}
+      // UIValues={values}
       renderSVG
       noLoop
     />

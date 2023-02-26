@@ -9,7 +9,7 @@ const HorizontalLines: NextPage = () => {
   const dimensions: number[] = getDimensions('A4')
   const padding: number[] = [40]
   const background: ColorValue = [255, 253, 252]
-  const numLines = 100
+  const numLines = 200
   const seed = convertSeed('Breath of the weath')
 
   const draw: Draw = p5 => {

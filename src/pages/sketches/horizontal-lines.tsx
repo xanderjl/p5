@@ -13,6 +13,8 @@ const HorizontalLines: NextPage = () => {
   const seed = convertSeed('Breath of the weath')
 
   const draw: Draw = p5 => {
+    p5.clear(0, 0, 0, 0)
+
     const margin = p5.width * 0.05
     p5.background(background)
 
@@ -44,7 +46,13 @@ const HorizontalLines: NextPage = () => {
   }
 
   return (
-    <Sketch seed={seed} draw={draw} dimensions={dimensions} padding={padding} />
+    <Sketch
+      seed={seed}
+      draw={draw}
+      dimensions={dimensions}
+      padding={padding}
+      renderSVG
+    />
   )
 }
 

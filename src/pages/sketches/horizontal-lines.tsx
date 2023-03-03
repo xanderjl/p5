@@ -9,7 +9,7 @@ const HorizontalLines: NextPage = () => {
   const dimensions: number[] = getDimensions('A4')
   const padding: number[] = [40]
   const background: ColorValue = [255, 253, 252]
-  const numLines = 200
+  const numLines = 250
   const seed = convertSeed('Breath of the weath')
 
   const draw: Draw = p5 => {
@@ -23,8 +23,8 @@ const HorizontalLines: NextPage = () => {
     Array.from({ length: numLines }, (_, i) => {
       const x1 = margin
       const x2 =
-        margin + p5.map(p5.noise(i), 0, 1, p5.width * 0.66, p5.noise(p5.width))
-      const x3 = x2 + p5.map(p5.noise(i), 0, 1, p5.width * 0.05, p5.width * 0.5)
+        margin + p5.map(p5.noise(i), 0, 1, p5.width * 0.25, p5.width * 0.45)
+      const x3 = p5.map(p5.noise(i), 0, 1, p5.width * 0.55, p5.width * 0.75)
       const x4 = p5.width - margin
       const y = margin + ((p5.height - margin * 2) / numLines) * (i + 1)
 

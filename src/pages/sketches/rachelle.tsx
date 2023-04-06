@@ -10,7 +10,6 @@ const Rachelle: NextPage = () => {
   const dimensions: number[] = getDimensions('A4')
   const padding: number[] = [40]
   const background: ColorValue = [255, 253, 252]
-  const test: [number, number, string][] = [[0, 0, 'frick']]
   const poem: string[] = [
     `We went to the coffee shop, where`,
     `I walked up and introduced myself, I was afraid that he might run away`,
